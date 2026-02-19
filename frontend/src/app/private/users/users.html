@@ -1,0 +1,134 @@
+<p-table
+  #dt
+  [columns]="columnsDefs"
+  [value]="data()"
+  [lazy]="true"
+  (onLazyLoad)="loadFromServer($event)"
+  [paginator]="true"
+  [rows]="settings.rowsPerPage"
+  [totalRecords]="totalRecords()"
+  [sortField]="settings.defaultSort ? settings.defaultSort.field : ''"
+  [sortOrder]="settings.defaultSort ? settings.defaultSort.order : 1"
+  sortMode="multiple"
+>
+  @if (settings.globalFilter) {
+    <ng-template pTemplate="caption">
+      <div class="p-d-flex p-jc-end">
+        <p-iconfield>
+          <p-inputicon class="pi pi-search" />
+          <input
+            type="text"
+            pInputText
+            size="50"
+            placeholder="Search by id, username or lastname"
+            (input)="dt.filterGlobal($any($event.target).value, 'contains')"
+          />
+        </p-iconfield>
+      </div>
+    </ng-template>
+  }
+
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      @for (col of columns; track $index) {
+        <th [pSortableColumn]="col.field" [pSortableColumnDisabled]="col.sortable === false">
+          {{ col.header }}
+          @if (col.sortable) {
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          }
+        </th>
+      }
+    </tr>
+    <tr>
+      @for (col of columns; track $index) {
+        <th>
+          @if (col.searchable && col.type === 'string') {
+            <p-columnFilter
+              type="text"
+              [field]="col.field"
+              display="menu"
+              matchMode="contains"
+            ></p-columnFilter>
+          }
+          @if (col.searchable && col.type === 'number') {
+            <p-columnFilter type="numeric" [field]="col.field" display="row"></p-columnFilter>
+          }
+          @if (col.searchable && col.type === 'decimal') {
+            <p-columnFilter
+              type="numeric"
+              [minFractionDigits]="2"
+              [maxFractionDigits]="2"
+              [field]="col.field"
+              display="row"
+            ></p-columnFilter>
+          }
+          @if (col.searchable && col.type === 'date') {
+            <p-columnFilter
+              type="date"
+              [field]="col.field"
+              display="row"
+              matchMode="is"
+            ></p-columnFilter>
+          }
+          @if (col.searchable && col.type === 'boolean') {
+            <p-columnFilter
+              type="boolean"
+              [field]="col.field"
+              display="row"
+              matchMode="equals"
+            ></p-columnFilter>
+          }
+          @if (col.searchable && col.type === 'multiSelect') {
+            <p-columnFilter
+              [field]="col.field"
+              matchMode="in"
+              display="menu"
+              [showMatchModes]="false"
+              [showOperator]="false"
+              [showAddButton]="false"
+            >
+              <ng-template pTemplate="header">
+                <div class="px-3 pt-3 pb-0">
+                  <span class="font-bold">Picker</span>
+                </div>
+              </ng-template>
+              <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                <p-multiSelect
+                  [options]="usernames"
+                  placeholder="Any"
+                  (onChange)="filter($event.value)"
+                >
+                  <ng-template let-option pTemplate="item">
+                    <div>
+                      <span class="ml-1">{{ option }}</span>
+                    </div>
+                  </ng-template>
+                </p-multiSelect>
+              </ng-template>
+            </p-columnFilter>
+          }
+        </th>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-rowData let-columns="columns">
+    <tr>
+      @for (col of columns; track $index) {
+        <td>
+          {{ rowData[col.field] }}
+        </td>
+      }
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="emptymessage" let-columns>
+    <tr>
+      <td [attr.colspan]="columns.length">
+        {{ settings.emptyMessage }}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<router-outlet></router-outlet>

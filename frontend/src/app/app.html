@@ -1,0 +1,15 @@
+<p-blockUI [blocked]="uiBlocked()">
+  @if (uiBlocked()) {
+    <div class="flex align-items-center justify-content-center w-full h-full">
+      <p-progressSpinner
+        [style]="{ width: '10em', height: '10em' }"
+        strokeWidth="4"
+        animationDuration="1s"
+      ></p-progressSpinner>
+    </div>
+  }
+</p-blockUI>
+
+<p-toast position="top-right"></p-toast>
+
+<router-outlet />

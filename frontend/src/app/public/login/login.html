@@ -1,0 +1,45 @@
+<div class="flex align-items-center justify-content-center w-full h-full">
+  <form #userForm="ngForm" (ngSubmit)="submitLogin()" novalidate class="w-11 md:w-6">
+    <p-panel header="Connect">
+      <div class="formgrid">
+        <div class="field">
+          <input
+            pInputText
+            type="text"
+            name="username"
+            id="username"
+            [(ngModel)]="loginObject.username"
+            class="w-full"
+            placeholder="Email"
+            required
+          />
+        </div>
+        <div class="field">
+          <p-password
+            [(ngModel)]="loginObject.password"
+            [toggleMask]="true"
+            autocomplete="on"
+            [feedback]="false"
+            class="w-full"
+            name="password"
+            [inputStyle]="{ width: '100%' }"
+            required
+          />
+        </div>
+      </div>
+
+      <ng-template pTemplate="footer">
+        <div class="text-right">
+          <p-button
+            pRipple
+            type="submit"
+            severity="success"
+            [raised]="true"
+            label="Login"
+            [disabled]="!userForm.form.valid"
+          ></p-button>
+        </div>
+      </ng-template>
+    </p-panel>
+  </form>
+</div>
