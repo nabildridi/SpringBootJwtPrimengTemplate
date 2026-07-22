@@ -75,7 +75,6 @@ export class Users implements OnInit {
   ];
 
   settings = {
-    url: '/paginate',
     rowsPerPage: 20,
     globalFilter: true,
     emptyMessage: 'No records found',
@@ -93,6 +92,8 @@ export class Users implements OnInit {
   }
 
   loadFromServer(event: TableLazyLoadEvent) {
+    event.globalFilter = ['username', 'lastname'];
+
     this.appHttpService
       .topic(HttpTopics.Users)
       .add('paginate')
