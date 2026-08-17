@@ -1,4 +1,4 @@
-package org.nd.primeng;
+package org.nd.template;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

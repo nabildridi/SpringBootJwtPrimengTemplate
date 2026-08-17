@@ -1,8 +1,8 @@
-package org.nd.primeng.repositories;
+package org.nd.template.repositories;
 
 import java.util.Optional;
 
-import org.nd.primeng.model.User;
+import org.nd.template.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

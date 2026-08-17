@@ -1,8 +1,8 @@
-package org.nd.primeng.model;
+package org.nd.template.model;
 
 import java.time.LocalDateTime;
 
-import org.nd.primeng.enums.Role;
+import org.nd.template.enums.Role;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

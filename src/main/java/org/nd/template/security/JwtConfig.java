@@ -1,4 +1,4 @@
-package org.nd.primeng.security;
+package org.nd.template.security;
 
 import javax.crypto.spec.SecretKeySpec;
 

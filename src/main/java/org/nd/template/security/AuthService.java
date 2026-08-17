@@ -1,4 +1,4 @@
-package org.nd.primeng.security;
+package org.nd.template.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

@@ -102,8 +102,7 @@ export class Users implements OnInit {
         next: (json: any) => {
           if (json) {
             this.data.set(json['content']);
-            console.log(json.page.totalElements);
-            this.totalRecords.set(json.page.totalElements);
+            this.totalRecords.set(json.totalElements);
           }
         },
         error: (e) => {},

@@ -1,9 +1,9 @@
-package org.nd.primeng.controller;
+package org.nd.template.controller;
 
 import java.util.Optional;
 
-import org.nd.primeng.security.AuthService;
-import org.nd.primeng.utils.JsonUtil;
+import org.nd.template.security.AuthService;
+import org.nd.template.utils.JsonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ObjectNode;
 
 @RestController
 @RequestMapping("/rest/public/auth")

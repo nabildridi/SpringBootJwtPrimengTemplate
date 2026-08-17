@@ -1,7 +1,7 @@
-package org.nd.primeng.controller;
+package org.nd.template.controller;
 
-import org.nd.primeng.model.User;
-import org.nd.primeng.services.UsersService;
+import org.nd.template.model.User;
+import org.nd.template.services.UsersService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

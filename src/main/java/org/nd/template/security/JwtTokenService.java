@@ -1,4 +1,4 @@
-package org.nd.primeng.security;
+package org.nd.template.security;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

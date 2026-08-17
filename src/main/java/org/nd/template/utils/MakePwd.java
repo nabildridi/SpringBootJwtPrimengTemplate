@@ -1,4 +1,4 @@
-package org.nd.primeng.utils;
+package org.nd.template.utils;
 
 public class MakePwd {
 

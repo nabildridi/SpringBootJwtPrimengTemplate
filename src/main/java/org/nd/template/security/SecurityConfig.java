@@ -1,4 +1,4 @@
-package org.nd.primeng.security;
+package org.nd.template.security;
 
 import org.nd.primeng.filter.PrimengTurkraftFilter;
 import org.springframework.beans.factory.annotation.Autowired;

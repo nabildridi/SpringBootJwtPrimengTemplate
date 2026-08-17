@@ -1,13 +1,12 @@
-package org.nd.primeng.utils;
+package org.nd.template.utils;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
 
 public class JsonUtil {
 
@@ -20,7 +19,7 @@ public class JsonUtil {
 		try {
 			node = mapper.readTree(payload.getBytes(StandardCharsets.UTF_8));
 			path = "/" + path.replaceAll("\\.", "/");
-			String value = node.at(path).asText();
+			String value = node.at(path).asString();
 			return Optional.of(value);
 
 		} catch (Exception e) {
@@ -32,7 +31,7 @@ public class JsonUtil {
 
 		try {
 			path = "/" + path.replaceAll("\\.", "/");
-			String value = payload.at(path).asText();
+			String value = payload.at(path).asString();
 			return Optional.of(value);
 
 		} catch (Exception e) {
@@ -48,7 +47,7 @@ public class JsonUtil {
 			node = mapper.readTree(payload.getBytes(StandardCharsets.UTF_8));
 			path = "/" + path.replaceAll("\\.", "/");
 			return Optional.of(node.at(path));
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return Optional.empty();
 		}
 	}
@@ -60,7 +59,7 @@ public class JsonUtil {
 			};
 			return mapper.readValue(array.toPrettyString(), typeReference);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -71,7 +70,7 @@ public class JsonUtil {
 			String prettyJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(object);
 			return prettyJson;
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
@@ -83,7 +82,7 @@ public class JsonUtil {
 		try {
 			node = mapper.readTree(payload.getBytes(StandardCharsets.UTF_8));
 			return node.toString();
-		} catch (IOException e) {
+		} catch (Exception e) {
 			return "";
 		}
 	}
