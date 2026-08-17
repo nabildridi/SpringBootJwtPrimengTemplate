@@ -1,6 +1,5 @@
 package org.nd.template.security;
 
-import org.nd.primeng.filter.PrimengTurkraftFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -32,8 +29,7 @@ public class SecurityConfig {
 				.authorizeHttpRequests(auth -> auth.requestMatchers("/rest/public/**", "/assets/**", "/h2-console/**").permitAll()
 						.requestMatchers("/rest/private/**").authenticated())
 				// besides thoes exceptions all the requests need authentication
-				.oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()))
-				.build();
+				.oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults())).build();
 	}
 
 	@Bean
