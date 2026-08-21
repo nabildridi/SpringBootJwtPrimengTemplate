@@ -1,6 +1,6 @@
-import { effect, Injectable } from '@angular/core';
-import { MessageService } from 'primeng/api';
+import { Injectable } from '@angular/core';
 import { SignalsService } from '../signals/signals.service';
+import { MessageService } from '@openng/optimus-ui/api';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +8,7 @@ import { SignalsService } from '../signals/signals.service';
 export class ToastService {
   constructor(
     private messageService: MessageService,
-    private signalsService: SignalsService
+    private signalsService: SignalsService,
   ) {}
 
   public showMesssage(severity: any, title: any, message: any) {

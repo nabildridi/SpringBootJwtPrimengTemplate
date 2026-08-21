@@ -2,11 +2,12 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeuix/themes/aura';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { ConfirmationService, MessageService } from 'primeng/api';
 import { LoadingInterceptorService } from './services/interceptors/loading-interceptor.service';
+
+import { provideOptimus } from '@openng/optimus-ui/config';
+import Aura from '@openng/optimus-ui-themes/aura';
+import { ConfirmationService, MessageService } from '@openng/optimus-ui/api';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     MessageService,
     ConfirmationService,
-    providePrimeNG({
+    provideOptimus({
       theme: {
         preset: Aura,
       },

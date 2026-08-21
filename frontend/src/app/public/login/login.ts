@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage/storage.service';
 import { HttpTopics } from '../../enums/http-topics';
 import { FormsModule } from '@angular/forms';
-import { PanelModule } from 'primeng/panel';
-import { ButtonModule } from 'primeng/button';
-import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext';
+import { PanelModule } from '@openng/optimus-ui/panel';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { PasswordModule } from '@openng/optimus-ui/password';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
 
 export class LoginObject {
   username!: string;

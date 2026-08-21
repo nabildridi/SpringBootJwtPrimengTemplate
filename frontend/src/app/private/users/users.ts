@@ -4,12 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
-import { IconField } from 'primeng/iconfield';
-import { InputIcon } from 'primeng/inputicon';
-import { InputTextModule } from 'primeng/inputtext';
-import { MultiSelectModule } from 'primeng/multiselect';
-import { TableLazyLoadEvent, TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
+import { TableLazyLoadEvent, TableModule } from '@openng/optimus-ui/table';
+import { ButtonModule } from '@openng/optimus-ui/button';
+import { InputTextModule } from '@openng/optimus-ui/inputtext';
+import { MultiSelectModule } from '@openng/optimus-ui/multiselect';
+import { IconField } from '@openng/optimus-ui/iconfield';
+import { InputIcon } from '@openng/optimus-ui/inputicon';
 
 @Component({
   selector: 'app-users',
@@ -92,7 +92,7 @@ export class Users implements OnInit {
   }
 
   loadFromServer(event: TableLazyLoadEvent) {
-    event.globalFilter = ['username', 'lastname'];
+    event.globalFilter = ['id', 'username', 'lastname'];
 
     this.appHttpService
       .topic(HttpTopics.Users)
