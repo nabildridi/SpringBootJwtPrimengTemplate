@@ -2,11 +2,14 @@ package org.nd.template.utils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
+import tools.jackson.databind.node.ObjectNode;
+import static java.util.Map.entry;
 
 public class JsonUtil {
 
@@ -85,6 +88,20 @@ public class JsonUtil {
 		} catch (Exception e) {
 			return "";
 		}
+	}
+	
+	public static ObjectNode getResponse(Object ...params) {
+		
+		
+		ObjectNode response = mapper.createObjectNode();
+		
+		for (int i = 0; i < params.length - 1; i += 2) {
+		    String key = (String) params[i];
+		    Object value = params[i + 1];
+		    response.putPOJO(key, value);
+		}
+		
+		return response;
 	}
 
 }

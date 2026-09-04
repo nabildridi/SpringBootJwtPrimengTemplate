@@ -37,9 +37,7 @@ public class AuthenticationController {
 
 		String jwtToken = authService.getToken(username.orElse(null), password.orElse(null));
 
-		ObjectNode response = mapper.createObjectNode();
-		response.put("token", jwtToken);
-		response.put("username", username.orElse(null));
+		ObjectNode response = JsonUtil.getResponse("token", jwtToken,"username", username.orElse(null));
 
 		return ResponseEntity.ok(response);
 
