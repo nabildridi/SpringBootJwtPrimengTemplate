@@ -9,6 +9,9 @@ import tools.jackson.core.type.TypeReference;
 import tools.jackson.databind.JsonNode;
 import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ObjectNode;
+import tools.jackson.databind.util.JSONWrappedObject;
+import tools.jackson.databind.util.RawValue;
+
 import static java.util.Map.entry;
 
 public class JsonUtil {
@@ -95,10 +98,24 @@ public class JsonUtil {
 		
 		ObjectNode response = mapper.createObjectNode();
 		
+		
+		
 		for (int i = 0; i < params.length - 1; i += 2) {
 		    String key = (String) params[i];
 		    Object value = params[i + 1];
-		    response.putPOJO(key, value);
+		    
+		    switch (value) {
+	        case String s  -> response.put(key, s);
+	        case Integer x -> response.put(key, x);  
+	        case Boolean b -> response.put(key, b);
+	        case Double d -> response.put(key, d);
+	        case Float f -> response.put(key, f);
+	        case Long l -> response.put(key, l);
+	        case null      -> response.putNull(key);                      
+	        default        -> response.putPOJO(key, value);
+	    };
+	    
+		    
 		}
 		
 		return response;
