@@ -24,11 +24,7 @@
                 "input": "public"
               }
             ],
-            "styles": [
-              "node_modules/@openng/icons/openng-icons.css",
-              "node_modules/primeflex/primeflex.css",
-              "src/styles.css"
-            ]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {

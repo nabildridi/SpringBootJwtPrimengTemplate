@@ -7,7 +7,29 @@ import { LoadingInterceptorService } from './services/interceptors/loading-inter
 
 import { provideOptimus } from '@openng/optimus-ui/config';
 import Aura from '@openng/optimus-ui-themes/aura';
+import Lara from '@openng/optimus-ui-themes/lara';
+import Nora from '@openng/optimus-ui-themes/nora';
+import Material from '@openng/optimus-ui-themes/material';
 import { ConfirmationService, MessageService } from '@openng/optimus-ui/api';
+import { definePreset } from '@openng/optimus-ui-themes';
+
+export const AppPreset = definePreset(Lara, {
+  semantic: {
+    primary: {
+      50: '#f5f7ff',
+      100: '#e1e7ff',
+      200: '#cbd5ff',
+      300: '#a3b4ff',
+      400: '#748aff',
+      500: '#4f5eff', // <-- Your core primary brand color
+      600: '#3d42ff',
+      700: '#312eff',
+      800: '#2826cc',
+      900: '#2424a3',
+      950: '#15145c',
+    },
+  },
+});
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,7 +40,7 @@ export const appConfig: ApplicationConfig = {
     ConfirmationService,
     provideOptimus({
       theme: {
-        preset: Aura,
+        preset: AppPreset,
       },
     }),
     provideHttpClient(withInterceptorsFromDi()),
