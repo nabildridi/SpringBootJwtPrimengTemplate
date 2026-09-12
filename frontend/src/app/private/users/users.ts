@@ -14,7 +14,6 @@ import { InputIcon } from '@openng/optimus-ui/inputicon';
 @Component({
   selector: 'app-users',
   imports: [
-    RouterOutlet,
     TableModule,
     ButtonModule,
     InputTextModule,

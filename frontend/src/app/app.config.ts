@@ -41,6 +41,9 @@ export const appConfig: ApplicationConfig = {
     provideOptimus({
       theme: {
         preset: AppPreset,
+        options: {
+          darkModeSelector: '.dark',
+        },
       },
     }),
     provideHttpClient(withInterceptorsFromDi()),
