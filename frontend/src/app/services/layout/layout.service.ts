@@ -1,4 +1,5 @@
-import { Injectable, effect, signal, computed, WritableSignal } from '@angular/core';
+import { HostListener, Injectable, signal, WritableSignal } from '@angular/core';
+import { RmNgDeviceDetectionService, DeviceInfo } from 'rm-ng-device-detection';
 
 @Injectable({
   providedIn: 'root',
@@ -6,6 +7,10 @@ import { Injectable, effect, signal, computed, WritableSignal } from '@angular/c
 export class LayoutService {
   darkTheme: WritableSignal<boolean> = signal(false);
   menuState: WritableSignal<boolean> = signal(false);
+  asideState: WritableSignal<boolean> = signal(false);
+  screenWidth: WritableSignal<number> = signal(0);
+
+  constructor(private deviceService: RmNgDeviceDetectionService) {}
 
   toggleDarkMode(): void {
     this.darkTheme.set(!this.darkTheme());
@@ -17,6 +22,11 @@ export class LayoutService {
   }
 
   onMenuToggle() {
-    this.menuState.set(!this.menuState());
+    console.log(this.screenWidth());
+    if (this.screenWidth() < 991) {
+      this.menuState.set(!this.menuState());
+    } else {
+      this.asideState.set(!this.asideState());
+    }
   }
 }

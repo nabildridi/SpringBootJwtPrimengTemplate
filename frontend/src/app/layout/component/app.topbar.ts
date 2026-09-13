@@ -38,7 +38,7 @@ import { ButtonModule } from '@openng/optimus-ui/button';
 export class AppTopbar {
   items!: MenuItem[];
 
-  layoutService = inject(LayoutService);
+  constructor(public layoutService: LayoutService) {}
 
   openDrawer() {
     this.layoutService.onMenuToggle();
