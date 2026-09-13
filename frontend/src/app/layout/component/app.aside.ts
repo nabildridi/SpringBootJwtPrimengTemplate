@@ -8,7 +8,7 @@ import { NgClass } from '@angular/common';
   template: `
     <aside
       class="flex flex-col bg-slate-900 text-slate-300 transition-all duration-300 ease-in-out border-r border-slate-800"
-      [ngClass]="layoutService.asideState() ? 'w-0' : 'w-64'"
+      [ngClass]="layoutService.asideState() ? 'w-64' : 'w-0'"
     >
       <!-- Header -->
       <div class="h-16 flex items-center justify-between px-4 border-b border-slate-800 shrink-0">

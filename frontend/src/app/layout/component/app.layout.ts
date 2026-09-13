@@ -42,5 +42,13 @@ export class AppLayout {
   onResize(event: Event) {
     this.deviceService.updateScreenInfo();
     this.layoutService.screenWidth.set(this.deviceService.width);
+
+    if (this.deviceService.width < 991) {
+      this.layoutService.asideState.set(false);
+      this.layoutService.menuState.set(false);
+    } else {
+      this.layoutService.menuState.set(false);
+      this.layoutService.asideState.set(true);
+    }
   }
 }

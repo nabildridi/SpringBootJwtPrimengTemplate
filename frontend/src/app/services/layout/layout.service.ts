@@ -22,10 +22,11 @@ export class LayoutService {
   }
 
   onMenuToggle() {
-    console.log(this.screenWidth());
     if (this.screenWidth() < 991) {
+      this.asideState.set(false);
       this.menuState.set(!this.menuState());
     } else {
+      this.menuState.set(false);
       this.asideState.set(!this.asideState());
     }
   }
