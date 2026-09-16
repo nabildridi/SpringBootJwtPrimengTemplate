@@ -4,6 +4,7 @@ import { Login } from './public/login/login';
 import { NotFound } from './public/not-found/not-found';
 import { Landing } from './public/landing/landing';
 import { AppLayout } from './layout/component/app.layout';
+import { Bobo } from './private/bobo/bobo';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,7 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'users', component: Users },
+      { path: 'bobo', component: Bobo },
     ],
   },
 

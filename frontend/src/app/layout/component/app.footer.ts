@@ -1,12 +1,12 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-    standalone: true,
-    selector: 'app-footer',
-    changeDetection: ChangeDetectionStrategy.Eager,
-    template: `<div class="layout-footer">
-        SPARKED by
-        <a href="https://optimus.openng.org" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">Optimus UI</a>
-    </div>`
+  selector: 'app-footer',
+
+  template: ` <div
+    class="bottom-0 z-10 flex h-12 w-full items-center justify-center bg-slate-900 text-xs text-slate-400"
+  >
+    <p>2026 Your Company. All rights reserved.</p>
+  </div>`,
 })
 export class AppFooter {}

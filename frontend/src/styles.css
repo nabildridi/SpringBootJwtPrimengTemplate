@@ -2,11 +2,6 @@
 @import 'tailwindcss';
 @import '@openng/icons/openng-icons.css';
 
-html,
 body {
-  height: 100%;
-}
-body {
-  margin: 0;
   font-family: Roboto, sans-serif;
 }

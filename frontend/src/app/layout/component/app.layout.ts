@@ -18,16 +18,19 @@ import { RmNgDeviceDetectionService } from 'rm-ng-device-detection';
 @Component({
   selector: 'app-layout',
   imports: [AppTopbar, AppSidebar, RouterModule, AppFooter, AppAside],
-  template: `<div>
+  template: `<div class="flex h-screen flex-col overflow-hidden bg-gray-100 w-full">
     <app-topbar />
     <app-sidebar />
-    <div class="flex">
+
+    <div class="flex w-full overflow-hidden h-full">
       <app-aside></app-aside>
-      <div class="flex w-full">
-        <router-outlet />
+      <div class="flex flex-col overflow-y-auto">
+        <main class="flex-1   p-6">
+          <router-outlet />
+        </main>
+        <app-footer />
       </div>
     </div>
-    <app-footer />
   </div> `,
 })
 export class AppLayout {

@@ -1,17 +1,19 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { LayoutService } from '../../services/layout/layout.service';
 import { DrawerModule } from '@openng/optimus-ui/drawer';
+import { AppMenu } from './app.menu';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [DrawerModule],
+  styles: `
+    :host ::ng-deep .p-drawer {
+      background-color: #0f172b;
+    }
+  `,
+  imports: [DrawerModule, AppMenu],
   template: `
-    <p-drawer [(visible)]="layoutService.menuState" header="Drawer">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat.
-      </p>
+    <p-drawer [(visible)]="layoutService.menuState" [closable]="false">
+      <app-menu></app-menu>
     </p-drawer>
   `,
 })
