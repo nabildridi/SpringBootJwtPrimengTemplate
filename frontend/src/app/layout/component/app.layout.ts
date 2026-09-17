@@ -1,12 +1,5 @@
-import {
-  Component,
-  computed,
-  effect,
-  inject,
-  ChangeDetectionStrategy,
-  HostListener,
-} from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, HostListener } from '@angular/core';
+
 import { RouterModule } from '@angular/router';
 import { AppTopbar } from './app.topbar';
 import { AppSidebar } from './app.sidebar';
@@ -24,8 +17,8 @@ import { RmNgDeviceDetectionService } from 'rm-ng-device-detection';
 
     <div class="flex w-full overflow-hidden h-full">
       <app-aside></app-aside>
-      <div class="flex flex-col overflow-y-auto">
-        <main class="flex-1   p-6">
+      <div class="flex flex-1 h-full flex-col overflow-y-auto">
+        <main class="p-6">
           <router-outlet />
         </main>
         <app-footer />

@@ -6,16 +6,13 @@ import { ToolbarModule } from '@openng/optimus-ui/toolbar';
 
 @Component({
   selector: 'app-topbar',
-  imports: [ButtonModule],
-  template: ` <header
-    class="border-b border-slate-800 bg-slate-900/80 backdrop-blur sticky top-0 z-50"
-  >
-    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2 font-bold text-xl text-white tracking-wide">
+  imports: [ButtonModule, ToolbarModule],
+  template: ` <header class="pl-1 pr-1 sticky">
+    <p-toolbar>
+      <ng-template #start>
         <p-button (click)="openDrawer()" icon="pi pi-bars" />
-      </div>
-
-      <div class="flex items-center gap-4">
+      </ng-template>
+      <ng-template #end>
         <button type="button" class="layout-topbar-action" (click)="toggleDarkMode()">
           <i
             [class]="{
@@ -25,8 +22,8 @@ import { ToolbarModule } from '@openng/optimus-ui/toolbar';
             }"
           ></i>
         </button>
-      </div>
-    </div>
+      </ng-template>
+    </p-toolbar>
   </header>`,
 })
 export class AppTopbar {
