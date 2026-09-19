@@ -32,6 +32,14 @@ export class AppLayout {
     public layoutService: LayoutService,
   ) {
     this.layoutService.screenWidth.set(this.deviceService.width);
+
+    if (this.deviceService.width < 991) {
+      this.layoutService.asideState.set(false);
+      this.layoutService.menuState.set(true);
+    } else {
+      this.layoutService.menuState.set(false);
+      this.layoutService.asideState.set(true);
+    }
   }
 
   @HostListener('window:resize', ['$event'])

@@ -19,40 +19,27 @@ import { CommonModule } from '@angular/common';
   template: `
     <!-- Brand Logo / Title -->
     <div
-      class="h-16 flex items-center px-6 border-b border-slate-800 text-white font-bold text-lg tracking-wide"
+      class="h-16 flex justify-center items-center w-full  border-b border-slate-800 text-white font-bold text-lg "
     >
-      <svg
-        class="w-6 h-6 mr-3 text-indigo-500"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 10V3L4 14h7v7l9-11h-7z"
-        />
-      </svg>
-      AppBrand
+      <div class="flex">AppBrand</div>
     </div>
 
     <!-- Navigation Links -->
-    <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
+    <nav class="flex-1 px-1 space-y-1 overflow-y-auto">
       @for (item of menuItems; track $index) {
         <a
           [routerLink]="item.routerLink"
-          class="flex items-center px-4 py-3 text-white  rounded-lg"
+          class="flex items-center px-3 py-3 text-white  rounded-lg"
           routerLinkActive
           #rlRef="routerLinkActive"
           [ngClass]="
             rlRef.isActive
               ? 'text-white bg-indigo-600 group'
-              : ' hover:bg-slate-800 hover:text-white transition-colors'
+              : ' hover:bg-amber-600 hover:text-white transition-colors'
           "
           [routerLinkActiveOptions]="{ exact: true }"
         >
-          <span class="w-5 h-5 mr-3" [class]="item.icon"></span>
+          <span class="w-5 h-5 mr-2" [class]="item.icon"></span>
           {{ item.label }}
         </a>
       }

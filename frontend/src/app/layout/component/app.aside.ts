@@ -9,8 +9,12 @@ import { AppMenu } from './app.menu';
   imports: [AppMenu, CommonModule],
   template: `
     <aside
-      class=" flex-shrink-0 h-full overflow-y-auto bg-slate-800 text-slate-200"
-      [ngClass]="layoutService.asideState() ? 'w-64' : 'w-0'"
+      class=" flex-shrink-0  h-full overflow-y-auto bg-slate-800 text-slate-200"
+      [ngClass]="
+        layoutService.asideState()
+          ? 'w-full'
+          : 'w-0 hidden transition-all duration-300 ease-in-out transition-discrete not-peer-has-checked:opacity-0 peer-has-checked:block'
+      "
     >
       <app-menu></app-menu>
     </aside>
