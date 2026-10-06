@@ -43,6 +43,10 @@ export const appConfig: ApplicationConfig = {
         preset: AppPreset,
         options: {
           darkModeSelector: '.dark',
+                    cssLayer: {
+            name: 'optimus',
+            order: 'theme, base, optimus',
+          },
         },
       },
     }),
