@@ -10,40 +10,30 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-menu',
   imports: [CommonModule, DrawerModule, MenuModule, RouterLink, RouterModule],
-  styles: `
-    :host ::ng-deep .p-menu {
-      background-color: #0f172b;
-      border: 1px #0f172b;
-    }
-  `,
   template: `
-    <!-- Brand Logo / Title -->
-    <div
-      class="h-16 flex justify-center items-center w-full  border-b border-slate-800 text-white font-bold text-lg "
-    >
-      <div class="flex">AppBrand</div>
-    </div>
-
     <!-- Navigation Links -->
-    <nav class="flex-1 px-1 space-y-1 overflow-y-auto">
+    <ul class="menu w-full grow">
       @for (item of menuItems; track $index) {
-        <a
-          [routerLink]="item.routerLink"
-          class="flex items-center px-3 py-3 text-white  rounded-lg"
-          routerLinkActive
-          #rlRef="routerLinkActive"
-          [ngClass]="
-            rlRef.isActive
-              ? 'text-white bg-indigo-600 group'
-              : ' hover:bg-amber-600 hover:text-white transition-colors'
-          "
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <span class="w-5 h-5 mr-2" [class]="item.icon"></span>
-          {{ item.label }}
-        </a>
+        <li class="px-1 py-2">
+          <a
+            [routerLink]="item.routerLink"
+            class="flex   rounded-lg is-drawer-close:tooltip is-drawer-close:tooltip-right"
+            routerLinkActive
+            #rlRef="routerLinkActive"
+            active
+            [ngClass]="
+              rlRef.isActive
+                ? 'text-white bg-indigo-600 group'
+                : ' hover:bg-amber-600 hover:text-white transition-colors'
+            "
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <i [class]="item.icon" class="text-black dark:text-white"></i>
+            <span class="is-drawer-close:hidden text-black dark:text-white">{{ item.label }}</span>
+          </a>
+        </li>
       }
-    </nav>
+    </ul>
   `,
 })
 export class AppMenu {

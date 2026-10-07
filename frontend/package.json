@@ -37,6 +37,7 @@
     "@openng/icons": "1.0.0",
     "rm-ng-device-detection": "5.0.1",
     "@openng/optimus-ui-tailwindcss": "2.0.2",
+    "daisyui": "5.7.47"
   },
   "devDependencies": {
     "@angular/build": "^22.1.8",
