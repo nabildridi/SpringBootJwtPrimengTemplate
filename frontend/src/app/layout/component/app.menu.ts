@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
         <li class="px-1 py-2">
           <a
             [routerLink]="item.routerLink"
-            class="flex   rounded-lg is-drawer-close:tooltip is-drawer-close:tooltip-right"
+            class="flex rounded-lg is-drawer-close:tooltip is-drawer-close:tooltip-right"
             routerLinkActive
             #rlRef="routerLinkActive"
             active

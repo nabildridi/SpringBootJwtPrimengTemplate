@@ -12,7 +12,7 @@ import { ButtonModule } from '@openng/optimus-ui/button';
           <label
             for="my-drawer-4"
             aria-label="open sidebar"
-            class="btn btn-square btn-ghost drawer-button"
+            class="daisy-btn btn-square btn-ghost drawer-button"
           >
             <!-- Sidebar toggle icon -->
             <i class="pi pi-bars text-black dark:text-white"></i>
@@ -20,7 +20,7 @@ import { ButtonModule } from '@openng/optimus-ui/button';
           <div class="px-4">Template</div>
         </div>
         <div class="flex">
-          <button class="btn btn-circle" (click)="toggleDarkMode()">
+          <button class="daisy-btn btn-circle" (click)="toggleDarkMode()">
             <i
               [class]="{
                 pi: true,

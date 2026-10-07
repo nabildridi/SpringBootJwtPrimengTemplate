@@ -12,3 +12,7 @@ body {
   font-family: Outfit;
   background-color: #f1f5f9;
 }
+
+@utility daisy-btn {
+  @apply btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl;
+}
