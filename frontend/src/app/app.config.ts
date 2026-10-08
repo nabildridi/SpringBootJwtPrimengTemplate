@@ -16,17 +16,27 @@ import { definePreset } from '@openng/optimus-ui-themes';
 export const AppPreset = definePreset(Lara, {
   semantic: {
     primary: {
-      50: '#f5f7ff',
-      100: '#e1e7ff',
-      200: '#cbd5ff',
-      300: '#a3b4ff',
-      400: '#748aff',
-      500: '#4f5eff', // <-- Your core primary brand color
-      600: '#3d42ff',
-      700: '#312eff',
-      800: '#2826cc',
-      900: '#2424a3',
-      950: '#15145c',
+      50: '#F2F5FA', // Lightest shade
+      100: '#C2CFE5',
+      200: '#91A8D0',
+      300: '#6182BB',
+      400: '#305BA6',
+      500: '#003591', // Your Brand Blue - this is the star of the show
+      600: '#002D7B', // Hover state - slightly darker
+      700: '#002566', // Active/Pressed state - even darker
+      800: '#001D50',
+      900: '#00153A',
+      950: '#000D24', // Darkest shade
+    },
+    colorScheme: {
+      light: {
+        primary: {
+          color: '{primary.500}', // Default button color
+          contrastColor: '#ffffff', // White text on blue buttons (because accessibility matters!)
+          hoverColor: '{primary.600}', // What happens when you hover
+          activeColor: '{primary.700}', // What happens when you click
+        },
+      },
     },
   },
 });
@@ -43,7 +53,7 @@ export const appConfig: ApplicationConfig = {
         preset: AppPreset,
         options: {
           darkModeSelector: '.dark',
-                    cssLayer: {
+          cssLayer: {
             name: 'optimus',
             order: 'theme, base, optimus',
           },

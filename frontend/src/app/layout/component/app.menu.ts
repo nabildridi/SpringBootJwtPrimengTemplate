@@ -1,39 +1,33 @@
 import { Component, effect, inject } from '@angular/core';
-import { LayoutService } from '../../services/layout/layout.service';
 import { DrawerModule } from '@openng/optimus-ui/drawer';
 import { MenuModule } from '@openng/optimus-ui/menu';
 import { MenuItem } from '@openng/optimus-ui/api';
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { AppFooter } from './app.footer';
 
 @Component({
   selector: 'app-menu',
-  imports: [CommonModule, DrawerModule, MenuModule, RouterLink, RouterModule],
+  imports: [CommonModule, DrawerModule, MenuModule, RouterLink, RouterModule, AppFooter],
   template: `
     <!-- Navigation Links -->
-    <ul class="menu w-full grow">
+    <ul class="menu w-full grow mt-8">
       @for (item of menuItems; track $index) {
-        <li class="px-1 py-2">
+        <li class="py-2">
           <a
             [routerLink]="item.routerLink"
-            class="flex rounded-lg is-drawer-close:tooltip is-drawer-close:tooltip-right"
+            class="nav-link"
             routerLinkActive
-            #rlRef="routerLinkActive"
-            active
-            [ngClass]="
-              rlRef.isActive
-                ? 'text-white bg-indigo-600 group'
-                : ' hover:bg-amber-600 hover:text-white transition-colors'
-            "
-            [routerLinkActiveOptions]="{ exact: true }"
+            ariaCurrentWhenActive="page"
           >
-            <i [class]="item.icon" class="text-black dark:text-white"></i>
-            <span class="is-drawer-close:hidden text-black dark:text-white">{{ item.label }}</span>
+            <i [class]="item.icon"></i>
+            <span class="is-drawer-close:hidden">{{ item.label }}</span>
           </a>
         </li>
       }
     </ul>
+    <app-footer></app-footer>
   `,
 })
 export class AppMenu {
@@ -79,5 +73,5 @@ export class AppMenu {
     },
   ];
 
-  constructor(public layoutService: LayoutService) {}
+  constructor() {}
 }

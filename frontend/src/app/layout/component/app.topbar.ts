@@ -6,7 +6,7 @@ import { ButtonModule } from '@openng/optimus-ui/button';
   selector: 'app-topbar',
   imports: [ButtonModule],
   template: ` <!-- Navbar -->
-    <nav class="navbar w-full bg-base-300 dark:bg-gray-800 dark:text-white">
+    <nav class="navbar shrink-0 w-full bg-base-300 dark:bg-zinc-500 dark:text-white">
       <div class="flex w-full justify-between content-center">
         <div class="flex items-center">
           <label

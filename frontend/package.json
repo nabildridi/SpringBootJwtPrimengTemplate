@@ -35,7 +35,6 @@
     "@openng/optimus-ui": "2.0.2",
     "@openng/optimus-ui-themes": "2.0.2",
     "@openng/icons": "1.0.0",
-    "rm-ng-device-detection": "5.0.1",
     "@openng/optimus-ui-tailwindcss": "2.0.2",
     "daisyui": "5.7.47"
   },
