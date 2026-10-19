@@ -1,1 +1,6 @@
-
+<gd-data-grid
+  [rowData]="data()"
+  [columnDefs]="columnDefs"
+  [theme]="layoutService.darkTheme() ? 'dark' : 'light'"
+  density="compact"
+/>
