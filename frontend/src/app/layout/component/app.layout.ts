@@ -2,11 +2,11 @@ import { Component, HostListener } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { AppTopbar } from './app.topbar';
-import { MenuItem } from '@openng/optimus-ui/api';
+import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterModule, AppTopbar],
+  imports: [RouterModule, AppTopbar, TuiIcon],
   template: `
     <div
       class="flex overflow-hidden w-screen h-screen dark:bg-gray-700 bg-gray-100 drawer lg:drawer-open"
@@ -30,7 +30,7 @@ import { MenuItem } from '@openng/optimus-ui/api';
                   routerLinkActive
                   ariaCurrentWhenActive="page"
                 >
-                  <i [class]="item.icon"></i>
+                  <tui-icon [icon]="'@tui.' + item.icon"></tui-icon>
                   <span class="is-drawer-close:hidden">{{ item.label }}</span>
                 </a>
               </li>
@@ -49,48 +49,47 @@ import { MenuItem } from '@openng/optimus-ui/api';
         </main>
       </div>
     </div>
-
   `,
 })
 export class AppLayout {
-  menuItems: MenuItem[] = [
+  menuItems: any[] = [
     {
       label: 'private-menu.menu1',
-      icon: 'pi pi-user',
+      icon: 'user',
       routerLink: '/private/users',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
       label: 'private-menu.menu2',
-      icon: 'pi pi-tag',
+      icon: 'tag',
       routerLink: '/private/bobo',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
       label: 'private-menu.menu3',
-      icon: 'pi pi-qrcode',
+      icon: 'qr-code',
       routerLink: '/private/users',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
       label: 'private-menu.menu5',
-      icon: 'pi pi-facebook',
+      icon: 'pencil',
       routerLink: '/private/users',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
       label: 'private-menu.menu4',
-      icon: 'pi pi-sign-out',
+      icon: 'log-out',
       command: () => {},
     },
 
     {
       label: 'private-menu.link1',
-      icon: 'pi pi-book',
+      icon: 'book',
       command: () => {},
     },
   ];

@@ -4,26 +4,12 @@ import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
-import { TableLazyLoadEvent, TableModule } from '@openng/optimus-ui/table';
-import { ButtonModule } from '@openng/optimus-ui/button';
-import { InputTextModule } from '@openng/optimus-ui/inputtext';
-import { MultiSelectModule } from '@openng/optimus-ui/multiselect';
-import { IconField } from '@openng/optimus-ui/iconfield';
-import { InputIcon } from '@openng/optimus-ui/inputicon';
 
 @Component({
   selector: 'app-users',
-  imports: [
-    TableModule,
-    ButtonModule,
-    InputTextModule,
-    MultiSelectModule,
-    IconField,
-    InputIcon,
-    CommonModule,
-  ],
+  imports: [CommonModule],
   templateUrl: './users.html',
-  styleUrl: './users.scss',
+  styleUrl: './users.css',
 })
 export class Users implements OnInit {
   columnsDefs = [
@@ -88,23 +74,5 @@ export class Users implements OnInit {
 
   ngOnInit() {
     this.usernames = ['Dexter Dridi', 'Aggi', 'Kai'];
-  }
-
-  loadFromServer(event: TableLazyLoadEvent) {
-    event.globalFilter = ['id', 'username', 'lastname'];
-
-    this.appHttpService
-      .topic(HttpTopics.Users)
-      .add('paginate')
-      .post(event)
-      .subscribe({
-        next: (json: any) => {
-          if (json) {
-            this.data.set(json['content']);
-            this.totalRecords.set(json.totalElements);
-          }
-        },
-        error: (e) => {},
-      });
   }
 }

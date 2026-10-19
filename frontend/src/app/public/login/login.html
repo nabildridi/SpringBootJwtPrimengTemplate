@@ -10,46 +10,40 @@
     <form #userForm="ngForm" (ngSubmit)="submitLogin()" novalidate class="space-y-5">
       <!-- Email Input -->
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1"
-          >Email Address</label
-        >
-        <input
-          pInputText
-          type="text"
-          name="email"
-          id="email"
-          [(ngModel)]="loginObject.username"
-          class="w-full"
-          placeholder="Email"
-          required
-        />
+        <tui-textfield>
+          <label tuiLabel>Email Address</label>
+          <input
+            tuiInput
+            type="text"
+            name="email"
+            [(ngModel)]="loginObject.username"
+            class="w-full"
+            required
+          />
+        </tui-textfield>
       </div>
 
       <!-- Password Input -->
       <div>
-        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-        <p-password
-          [(ngModel)]="loginObject.password"
-          [toggleMask]="true"
-          autocomplete="on"
-          [feedback]="false"
-          class="w-full"
-          name="password"
-          [inputStyle]="{ width: '100%' }"
-          required
-        />
+        <tui-textfield>
+          <label tuiLabel>Password</label>
+          <input
+            tuiInput
+            type="password"
+            name="password1"
+            class="w-full"
+            [(ngModel)]="loginObject.password"
+            required
+          />
+          <tui-icon tuiPassword />
+        </tui-textfield>
       </div>
 
       <!-- Submit Button -->
       <div>
-        <p-button
-          pRipple
-          type="submit"
-          styleClass="w-full"
-          [raised]="true"
-          label="Sign in"
-          [disabled]="!userForm.form.valid"
-        ></p-button>
+        <button class="daisy-btn btn-primary w-full" [disabled]="!userForm.form.valid">
+          Sign in
+        </button>
       </div>
     </form>
   </div>

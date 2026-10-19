@@ -1,30 +1,21 @@
 import { Injectable } from '@angular/core';
-import { SignalsService } from '../signals/signals.service';
-import { MessageService } from '@openng/optimus-ui/api';
+import { TuiNotificationService } from '@taiga-ui/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(
-    private messageService: MessageService,
-    private signalsService: SignalsService,
-  ) {}
+  constructor(private tuiNotificationService: TuiNotificationService) {}
 
   public showMesssage(severity: any, title: any, message: any) {
-    this.messageService.add({
-      severity: severity,
-      summary: title,
-      detail: message,
-      life: 3000,
-    });
+    this.tuiNotificationService.open(message, { label: title, appearance: severity }).subscribe();
   }
 
   public showSuccess(message: any) {
-    this.showMesssage('success', 'success', message);
+    this.showMesssage('positive', 'Success', message);
   }
 
   public showError(message: any) {
-    this.showMesssage('error', 'error', message);
+    this.showMesssage('secondary-destructive', 'Error', message);
   }
 }

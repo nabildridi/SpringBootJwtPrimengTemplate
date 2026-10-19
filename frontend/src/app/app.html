@@ -1,15 +1,12 @@
-<p-blockUI [blocked]="uiBlocked()">
-  @if (uiBlocked()) {
-    <div class="flex items-center justify-center h-full w-full">
-      <p-progressSpinner
-        [style]="{ width: '10em', height: '10em' }"
-        strokeWidth="4"
-        animationDuration="1s"
-      ></p-progressSpinner>
-    </div>
-  }
-</p-blockUI>
+<tui-root>
+  <ngx-spinner
+    bdColor="rgba(0,0,0,0.8)"
+    size="large"
+    color="#81bdc5"
+    type="ball-grid-pulse"
+    [fullScreen]="true"
+    [zIndex]="99999"
+  ></ngx-spinner>
 
-<p-toast position="top-right"></p-toast>
-
-<router-outlet />
+  <router-outlet />
+</tui-root>

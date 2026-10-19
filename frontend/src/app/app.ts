@@ -1,22 +1,24 @@
+import { TuiRoot } from '@taiga-ui/core';
 import { Component, effect, signal, WritableSignal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AppHttpService } from './services/http/app-http.service';
 import { SignalsService } from './services/signals/signals.service';
 import { CommonModule } from '@angular/common';
-import { BlockUIModule } from '@openng/optimus-ui/blockui';
-import { ProgressSpinnerModule } from '@openng/optimus-ui/progressspinner';
-import { ToastModule } from '@openng/optimus-ui/toast';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule, BlockUIModule, ProgressSpinnerModule, ToastModule],
+  imports: [RouterOutlet, CommonModule, TuiRoot, NgxSpinnerModule],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
 export class App {
   uiBlocked: WritableSignal<boolean> = signal(false);
 
-  constructor(private signalsService: SignalsService) {
+  constructor(
+    private signalsService: SignalsService,
+    private ngxSpinnerService: NgxSpinnerService,
+  ) {
     effect(() => {
       this.update(this.signalsService.pendingRequests());
     });
@@ -28,6 +30,12 @@ export class App {
 
     if (httpCount == 0 && this.uiBlocked() == true) {
       this.uiBlocked.set(false);
+    }
+
+    if (this.uiBlocked() == true) {
+      this.ngxSpinnerService.show();
+    } else {
+      this.ngxSpinnerService.hide();
     }
   }
 }

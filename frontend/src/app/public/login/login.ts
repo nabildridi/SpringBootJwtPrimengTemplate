@@ -6,10 +6,11 @@ import { Router } from '@angular/router';
 import { StorageService } from '../../services/storage/storage.service';
 import { HttpTopics } from '../../enums/http-topics';
 import { FormsModule } from '@angular/forms';
-import { PanelModule } from '@openng/optimus-ui/panel';
-import { ButtonModule } from '@openng/optimus-ui/button';
-import { PasswordModule } from '@openng/optimus-ui/password';
-import { InputTextModule } from '@openng/optimus-ui/inputtext';
+
+import { TuiIcon } from '@taiga-ui/core';
+
+import { TuiInput } from '@taiga-ui/core';
+import { TuiPassword } from '@taiga-ui/kit';
 
 export class LoginObject {
   username!: string;
@@ -18,7 +19,7 @@ export class LoginObject {
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, FormsModule, PanelModule, ButtonModule, PasswordModule, InputTextModule],
+  imports: [CommonModule, FormsModule, TuiIcon, TuiInput, TuiPassword],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })

@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { LayoutService } from '../../services/layout/layout.service';
-import { ButtonModule } from '@openng/optimus-ui/button';
+
+import { TuiIcon } from '@taiga-ui/core';
 
 @Component({
   selector: 'app-topbar',
-  imports: [ButtonModule],
+  imports: [TuiIcon],
   template: ` <!-- Navbar -->
     <nav class="navbar shrink-0 w-full bg-base-300 dark:bg-zinc-500 dark:text-white">
       <div class="flex w-full justify-between content-center">
@@ -15,19 +16,13 @@ import { ButtonModule } from '@openng/optimus-ui/button';
             class="daisy-btn btn-square btn-ghost drawer-button"
           >
             <!-- Sidebar toggle icon -->
-            <i class="pi pi-bars text-black dark:text-white"></i>
+            <tui-icon icon="@tui.menu" class="text-black dark:text-white"></tui-icon>
           </label>
           <div class="px-4">Template</div>
         </div>
         <div class="flex">
           <button class="daisy-btn btn-circle" (click)="toggleDarkMode()">
-            <i
-              [class]="{
-                pi: true,
-                'pi-moon': layoutService.darkTheme(),
-                'pi-sun': !layoutService.darkTheme(),
-              }"
-            ></i>
+            <tui-icon [icon]="layoutService.darkTheme() ? '@tui.sun' : '@tui.moon'" />
           </button>
         </div>
       </div>
