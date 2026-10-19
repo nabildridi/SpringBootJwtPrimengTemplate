@@ -2,11 +2,11 @@ import { Component, HostListener } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { AppTopbar } from './app.topbar';
-import { AppMenu } from './app.menu';
+import { MenuItem } from '@openng/optimus-ui/api';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterModule, AppMenu, AppTopbar],
+  imports: [RouterModule, AppTopbar],
   template: `
     <div
       class="flex overflow-hidden w-screen h-screen dark:bg-gray-700 bg-gray-100 drawer lg:drawer-open"
@@ -20,7 +20,22 @@ import { AppMenu } from './app.menu';
           class="flex min-h-full flex-col items-start bg-base-300 dark:bg-zinc-500 is-drawer-close:w-14 is-drawer-open:w-64"
         >
           <!-- Sidebar content here -->
-          <app-menu></app-menu>
+          <!-- Navigation Links -->
+          <ul class="menu w-full grow mt-8">
+            @for (item of menuItems; track $index) {
+              <li class="py-2">
+                <a
+                  [routerLink]="item.routerLink"
+                  class="nav-link"
+                  routerLinkActive
+                  ariaCurrentWhenActive="page"
+                >
+                  <i [class]="item.icon"></i>
+                  <span class="is-drawer-close:hidden">{{ item.label }}</span>
+                </a>
+              </li>
+            }
+          </ul>
         </div>
       </div>
 
@@ -34,8 +49,50 @@ import { AppMenu } from './app.menu';
         </main>
       </div>
     </div>
+
   `,
 })
 export class AppLayout {
+  menuItems: MenuItem[] = [
+    {
+      label: 'private-menu.menu1',
+      icon: 'pi pi-user',
+      routerLink: '/private/users',
+      routerLinkActiveOptions: { exact: true },
+    },
+
+    {
+      label: 'private-menu.menu2',
+      icon: 'pi pi-tag',
+      routerLink: '/private/bobo',
+      routerLinkActiveOptions: { exact: true },
+    },
+
+    {
+      label: 'private-menu.menu3',
+      icon: 'pi pi-qrcode',
+      routerLink: '/private/users',
+      routerLinkActiveOptions: { exact: true },
+    },
+
+    {
+      label: 'private-menu.menu5',
+      icon: 'pi pi-facebook',
+      routerLink: '/private/users',
+      routerLinkActiveOptions: { exact: true },
+    },
+
+    {
+      label: 'private-menu.menu4',
+      icon: 'pi pi-sign-out',
+      command: () => {},
+    },
+
+    {
+      label: 'private-menu.link1',
+      icon: 'pi pi-book',
+      command: () => {},
+    },
+  ];
   constructor() {}
 }

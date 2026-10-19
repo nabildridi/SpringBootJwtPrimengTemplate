@@ -30,6 +30,7 @@ public class AuthenticationController {
 	@PostMapping("/token")
 	public ResponseEntity<?> authenticate(@RequestBody String payload) {
 
+
 		Optional<String> username = JsonUtil.getString(payload, "username");
 		Optional<String> password = JsonUtil.getString(payload, "password");
 

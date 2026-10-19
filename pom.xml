@@ -12,16 +12,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<maven.compiler.target>25</maven.compiler.target>
-		<maven.compiler.source>25</maven.compiler.source>
-		<java.version>25</java.version>
+		<maven.compiler.target>27</maven.compiler.target>
+		<maven.compiler.source>27</maven.compiler.source>
+		<java.version>27</java.version>
 	</properties>
 
 	<dependencies>

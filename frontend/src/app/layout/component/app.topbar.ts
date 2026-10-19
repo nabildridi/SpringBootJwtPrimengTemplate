@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { LayoutService } from '../../services/layout/layout.service';
 import { ButtonModule } from '@openng/optimus-ui/button';
 
