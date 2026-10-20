@@ -2,46 +2,32 @@
   <div class="bg-white dark:bg-gray-600 p-8 rounded-2xl shadow-lg w-full max-w-md">
     <!-- Header -->
     <div class="text-center mb-8">
-      <h2 class="text-3xl font-bold ">Template Application</h2>
-      <p class="text-sm  mt-2">Please enter your details to sign in</p>
+      <h2 class="text-3xl font-bold">Template Application</h2>
+      <p class="text-sm mt-2">Please enter your details to sign in</p>
     </div>
 
     <!-- Login Form -->
-    <form #userForm="ngForm" (ngSubmit)="submitLogin()" novalidate class="space-y-5">
+    <form (submit)="submitLogin($event)" class="space-y-5">
       <!-- Email Input -->
       <div>
-        <tui-textfield>
+        <tui-textfield iconStart="@tui.user">
           <label tuiLabel>Email Address</label>
-          <input
-            tuiInput
-            type="text"
-            name="email"
-            [(ngModel)]="loginObject.username"
-            class="w-full"
-            required
-          />
+          <input tuiInput type="text" [formField]="loginForm.username" class="w-full" />
         </tui-textfield>
       </div>
 
       <!-- Password Input -->
       <div>
-        <tui-textfield>
+        <tui-textfield iconStart="@tui.key">
           <label tuiLabel>Password</label>
-          <input
-            tuiInput
-            type="password"
-            name="password1"
-            class="w-full"
-            [(ngModel)]="loginObject.password"
-            required
-          />
+          <input tuiInput type="password" class="w-full" [formField]="loginForm.password" />
           <tui-icon tuiPassword />
         </tui-textfield>
       </div>
 
       <!-- Submit Button -->
       <div>
-        <button class="daisy-btn btn-primary w-full" [disabled]="!userForm.form.valid">
+        <button class="daisy-btn btn-primary w-full" [disabled]="loginForm().invalid()">
           <tui-icon icon="@tui.user-round-key"></tui-icon>
           Sign in
         </button>

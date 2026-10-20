@@ -1,39 +1,49 @@
-<table
-  tuiTable
-  class="table"
-  [columns]="columns"
-  [direction]="(direction$ | async) ?? -1"
-  [tuiSortBy]="sortKey$ | async"
-  (tuiSortChange)="change($event)"
->
-  <thead>
-    <tr tuiThGroup>
-      <th tuiTh tuiSortable *tuiHead="'id'" [requiredSort]="true">id</th>
-      <th tuiTh tuiSortable *tuiHead="'username'" [requiredSort]="true">username</th>
-      <th tuiTh tuiSortable *tuiHead="'accessdate'" [requiredSort]="true">accessdate</th>
-    </tr>
-  </thead>
-  <tbody tuiTbody>
-    @for (item of data(); track $index) {
-      <tr tuiTr>
-        <td tuiTd *tuiCell="'id'">{{ item.id }}</td>
-        <td tuiTd *tuiCell="'username'">{{ item.username }}</td>
-        <td tuiTd *tuiCell="'accessdate'">{{ item.accessdate }}</td>
-      </tr>
-    }
-  </tbody>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <div class="card-title">
+      <tui-textfield iconStart="@tui.search">
+        <label tuiLabel>Rechercher</label>
+        <input tuiInput [(ngModel)]="filterValue" (keyup)="onFilter($event)" />
+      </tui-textfield>
+    </div>
 
-  <tfoot>
-    <tr>
-      <td [colSpan]="columns.length">
-        <tui-table-pagination
-          class="tui-space_top-2"
-          [page]="(page$ | async) || 0"
-          [total]="(total$ | async) || 0"
-          [size]="(size$ | async) || 10"
-          (paginationChange)="onPagination($event)"
-        />
-      </td>
-    </tr>
-  </tfoot>
-</table>
+    <table
+      tuiTable
+      [columns]="columns"
+      [direction]="directionSignal()"
+      [tuiSortBy]="sortKeySignal()"
+      (tuiSortChange)="onSort($event)"
+    >
+      <thead>
+        <tr tuiThGroup>
+          <th tuiTh tuiSortable *tuiHead="'id'" [requiredSort]="true">id</th>
+          <th tuiTh tuiSortable *tuiHead="'username'" [requiredSort]="true">username</th>
+          <th tuiTh tuiSortable *tuiHead="'accessdate'" [requiredSort]="true">accessdate</th>
+        </tr>
+      </thead>
+      <tbody tuiTbody>
+        @for (item of data(); track $index) {
+          <tr tuiTr>
+            <td tuiTd *tuiCell="'id'">{{ item.id }}</td>
+            <td tuiTd *tuiCell="'username'">{{ item.username }}</td>
+            <td tuiTd *tuiCell="'accessdate'">{{ item.accessdate }}</td>
+          </tr>
+        }
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td [colSpan]="columns.length">
+            <tui-table-pagination
+              class="tui-space_top-2"
+              [page]="pageSignal()"
+              [total]="totalSignal()"
+              [size]="sizeSignal()"
+              (paginationChange)="onPagination($event)"
+            />
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

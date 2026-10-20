@@ -21,9 +21,9 @@ import { TuiIcon } from '@taiga-ui/core';
         >
           <!-- Sidebar content here -->
           <!-- Navigation Links -->
-          <ul class="menu w-full grow mt-8">
+          <ul class="menu w-full grow mt-8 content-center">
             @for (item of menuItems; track $index) {
-              <li class="py-2">
+              <li class="py-2 ">
                 <a
                   [routerLink]="item.routerLink"
                   class="nav-link"
@@ -54,43 +54,24 @@ import { TuiIcon } from '@taiga-ui/core';
 export class AppLayout {
   menuItems: any[] = [
     {
-      label: 'private-menu.menu1',
+      label: 'Users',
       icon: 'user',
       routerLink: '/private/users',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
-      label: 'private-menu.menu2',
+      label: 'table without pagination',
       icon: 'tag',
       routerLink: '/private/bobo',
       routerLinkActiveOptions: { exact: true },
     },
 
     {
-      label: 'private-menu.menu3',
+      label: 'Daisy table',
       icon: 'qr-code',
-      routerLink: '/private/users',
+      routerLink: '/private/daisy',
       routerLinkActiveOptions: { exact: true },
-    },
-
-    {
-      label: 'private-menu.menu5',
-      icon: 'pencil',
-      routerLink: '/private/users',
-      routerLinkActiveOptions: { exact: true },
-    },
-
-    {
-      label: 'private-menu.menu4',
-      icon: 'log-out',
-      command: () => {},
-    },
-
-    {
-      label: 'private-menu.link1',
-      icon: 'book',
-      command: () => {},
     },
   ];
   constructor() {}
