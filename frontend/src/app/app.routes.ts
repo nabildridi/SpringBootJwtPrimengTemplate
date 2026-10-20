@@ -5,17 +5,15 @@ import { NotFound } from './public/not-found/not-found';
 import { Landing } from './public/landing/landing';
 import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
-import { DaisyTable } from './private/daisy-table/daisy-table';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'daisy', pathMatch: 'full' },
+      { path: '', redirectTo: 'bobo', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
-      { path: 'daisy', component: DaisyTable },
     ],
   },
 
