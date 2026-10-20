@@ -1,6 +1,39 @@
-<gd-data-grid
-  [rowData]="data()"
-  [columnDefs]="columnDefs"
-  [theme]="layoutService.darkTheme() ? 'dark' : 'light'"
-  density="compact"
-/>
+<table
+  tuiTable
+  class="table"
+  [columns]="columns"
+  [direction]="(direction$ | async) ?? -1"
+  [tuiSortBy]="sortKey$ | async"
+  (tuiSortChange)="change($event)"
+>
+  <thead>
+    <tr tuiThGroup>
+      <th tuiTh tuiSortable *tuiHead="'id'" [requiredSort]="true">id</th>
+      <th tuiTh tuiSortable *tuiHead="'username'" [requiredSort]="true">username</th>
+      <th tuiTh tuiSortable *tuiHead="'accessdate'" [requiredSort]="true">accessdate</th>
+    </tr>
+  </thead>
+  <tbody tuiTbody>
+    @for (item of data(); track $index) {
+      <tr tuiTr>
+        <td tuiTd *tuiCell="'id'">{{ item.id }}</td>
+        <td tuiTd *tuiCell="'username'">{{ item.username }}</td>
+        <td tuiTd *tuiCell="'accessdate'">{{ item.accessdate }}</td>
+      </tr>
+    }
+  </tbody>
+
+  <tfoot>
+    <tr>
+      <td [colSpan]="columns.length">
+        <tui-table-pagination
+          class="tui-space_top-2"
+          [page]="(page$ | async) || 0"
+          [total]="(total$ | async) || 0"
+          [size]="(size$ | async) || 10"
+          (paginationChange)="onPagination($event)"
+        />
+      </td>
+    </tr>
+  </tfoot>
+</table>

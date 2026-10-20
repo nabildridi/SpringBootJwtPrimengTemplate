@@ -5,6 +5,7 @@ import { SignalsService } from './services/signals/signals.service';
 import { CommonModule } from '@angular/common';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { LayoutService } from './services/layout/layout.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,9 @@ export class App {
   constructor(
     private signalsService: SignalsService,
     private ngxSpinnerService: NgxSpinnerService,
+    private layoutService : LayoutService
   ) {
+    layoutService.init();
     effect(() => {
       this.update(this.signalsService.pendingRequests());
     });

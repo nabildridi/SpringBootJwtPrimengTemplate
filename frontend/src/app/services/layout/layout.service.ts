@@ -1,16 +1,40 @@
-import { HostListener, Injectable, signal, WritableSignal } from '@angular/core';
+import {  inject, Injectable, signal, WritableSignal } from '@angular/core';
+import {TUI_DARK_MODE} from '@taiga-ui/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LayoutService {
-  darkTheme: WritableSignal<boolean> = signal(false);
+  
+  public darkMode = inject(TUI_DARK_MODE);
 
-  constructor() {}
+  constructor() {
+    
+  }
+
+  init(){
+    this.darkMode.reset();
+    const element = document.querySelector('html');
+    
+    if(this.darkMode() == true){
+    element?.classList.add('dark');
+    document.querySelector('html')?.setAttribute('data-theme', 'night')
+    }else{
+    element?.classList.remove('dark');
+    document.querySelector('html')?.setAttribute('data-theme', 'corporate')
+    }
+  }
+  
 
   toggleDarkMode(): void {
-    this.darkTheme.set(!this.darkTheme());
+    this.darkMode.update((dark) => !dark);
     const element = document.querySelector('html');
     element?.classList.toggle('dark');
+
+    if(this.darkMode() == true){
+    document.querySelector('html')?.setAttribute('data-theme', 'night')
+    }else{
+    document.querySelector('html')?.setAttribute('data-theme', 'corporate')
+    }
   }
 }

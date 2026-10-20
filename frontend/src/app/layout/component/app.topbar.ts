@@ -22,7 +22,7 @@ import { TuiIcon } from '@taiga-ui/core';
         </div>
         <div class="flex">
           <button class="daisy-btn btn-circle" (click)="toggleDarkMode()">
-            <tui-icon [icon]="layoutService.darkTheme() ? '@tui.sun' : '@tui.moon'" />
+            <tui-icon [icon]="layoutService.darkMode() ? '@tui.sun' : '@tui.moon'" />
           </button>
         </div>
       </div>

@@ -1,7 +1,6 @@
 package org.nd.template.controller;
 
 import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 import org.nd.template.security.AuthService;
 import org.nd.template.utils.JsonUtil;
@@ -30,12 +29,6 @@ public class AuthenticationController {
 
 	@PostMapping("/token")
 	public ResponseEntity<?> authenticate(@RequestBody String payload) {
-
-		try {
-			TimeUnit.SECONDS.sleep(5);
-		} catch (InterruptedException ie) {
-			Thread.currentThread().interrupt();
-		}
 
 		Optional<String> username = JsonUtil.getString(payload, "username");
 		Optional<String> password = JsonUtil.getString(payload, "password");
