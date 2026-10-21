@@ -19,9 +19,9 @@ interface LoginData {
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, TuiIcon, TuiInput, TuiPassword, FormField],
+  imports: [TuiIcon, TuiInput, TuiPassword, FormField],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
+  styleUrl: './login.css',
 })
 export class Login implements OnInit {
   loginModel = signal<LoginData>({

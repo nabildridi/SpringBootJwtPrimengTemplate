@@ -5,15 +5,17 @@ import { NotFound } from './public/not-found/not-found';
 import { Landing } from './public/landing/landing';
 import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
+import { ComponentTester } from './private/component-tester/component-tester';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'bobo', pathMatch: 'full' },
+      { path: '', redirectTo: 'tester', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
+      { path: 'tester', component: ComponentTester },
     ],
   },
 

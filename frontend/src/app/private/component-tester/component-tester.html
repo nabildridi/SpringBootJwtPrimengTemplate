@@ -1,0 +1,57 @@
+<div class="flex items-center justify-center">
+  <div class="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold">Template Application</h2>
+      <p class="text-sm mt-2">Please enter your details to sign in</p>
+    </div>
+
+    <!-- Login Form -->
+    <form (submit)="submitLogin($event)" class="space-y-5">
+      <!-- Email Input -->
+      <div>
+        <tui-textfield iconStart="@tui.user">
+          <label tuiLabel>Email Address</label>
+          <input tuiInput type="text" [formField]="loginForm.username" class="w-full" />
+        </tui-textfield>
+      </div>
+
+      <!-- Password Input -->
+      <div>
+        <app-password-generator
+          label="Password"
+          [formField]="loginForm.password"
+        ></app-password-generator>
+      </div>
+
+      <div>
+        <app-country-select
+          label="Pays de production"
+          [formField]="loginForm.country"
+        ></app-country-select>
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button class="daisy-btn btn-primary w-full" [disabled]="loginForm().invalid()">
+          <tui-icon icon="@tui.user-round-key"></tui-icon>
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Sign-up link -->
+<p class="text-center mt-8">
+  New here?
+  <a
+    href="#"
+    class="font-bold bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent relative group"
+  >
+    Create an account
+    <span
+      class="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-orange-400 to-rose-400 group-hover:w-full transition-all duration-300"
+    ></span>
+  </a>
+</p>
