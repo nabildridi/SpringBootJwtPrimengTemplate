@@ -6,16 +6,22 @@ import { Landing } from './public/landing/landing';
 import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
 import { ComponentTester } from './private/component-tester/component-tester';
+import { StepperTester } from './private/stepper-tester/stepper-tester';
+import { ProductStepOne } from './private/product-steps/product-step-one/product-step-one';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'tester', pathMatch: 'full' },
+      { path: '', redirectTo: 'stepper', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'tester', component: ComponentTester },
+      {
+        path: 'stepper',
+        component: StepperTester,
+      },
     ],
   },
 

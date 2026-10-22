@@ -1,0 +1,50 @@
+<div class="flex w-full justify-center">
+  <ul class="steps steps-horizontal text-2xl">
+    <li
+      class="step"
+      [class.step-primary]="stepNumber() >= 1 && stepOneForm().valid()"
+      [class.step-error]="stepOneForm().invalid()"
+      (click)="goTo(1)"
+    >
+      Mon produit
+    </li>
+    <li
+      class="step"
+      [class.step-primary]="stepNumber() >= 2 && stepTwoForm().valid()"
+      [class.step-error]="stepTwoForm().invalid()"
+      (click)="goTo(2)"
+    >
+      Données nutritionnelles
+    </li>
+    <li
+      class="step"
+      [class.step-primary]="stepNumber() >= 3 && stepNumber3Valid()"
+      [class.step-error]="!stepNumber3Valid()"
+      (click)="goTo(3)"
+    >
+      Ingrédients
+    </li>
+    <li
+      class="step"
+      [class.step-primary]="stepNumber() >= 4 && stepNumber4Valid()"
+      [class.step-error]="!stepNumber4Valid()"
+      (click)="goTo(4)"
+    >
+      Emballage
+    </li>
+  </ul>
+</div>
+
+<div class="w-full mt-8">
+  <form (submit)="submitData($event)" class="space-y-5">
+    @if (stepNumber() == 1) {
+      <app-product-step-one [stepOneForm]="stepOneForm"></app-product-step-one>
+    }
+
+    @if (stepNumber() == 2) {
+      <app-product-step-two [stepTwoForm]="stepTwoForm"></app-product-step-two>
+    }
+
+    <button class="daisy-btn" type="submit">Vérifier</button>
+  </form>
+</div>

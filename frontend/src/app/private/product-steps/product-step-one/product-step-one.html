@@ -1,0 +1,27 @@
+<div class="card w-full bg-base-100 shadow-lg">
+  <div class="card-body">
+    <h2 class="card-title text-2xl">Mon Produit</h2>
+    <div class="divider"></div>
+    <tui-accordion>
+      <button tuiAccordion>Mon Step 1 formulaire</button>
+      <tui-expand [expanded]="true">
+        <div>
+          <tui-textfield>
+            <label tuiLabel>userId</label>
+            <input tuiInput type="text" [formField]="stepOneForm().userId" class="w-full" />
+          </tui-textfield>
+        </div>
+        <div>
+          <tui-textfield>
+            <label tuiLabel>profileId</label>
+            <input tuiInput type="text" [formField]="stepOneForm().profileId" class="w-full" />
+          </tui-textfield>
+        </div>
+      </tui-expand>
+    </tui-accordion>
+
+    <div class="justify-end card-actions">
+      <button class="btn btn-primary">Buy Now</button>
+    </div>
+  </div>
+</div>
