@@ -21,5 +21,6 @@ layer(base);
 }
 
 @utility nav-link {
-  @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-500 aria-[current=page]:bg-indigo-50 aria-[current=page]:text-indigo-700 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-white dark:aria-[current=page]:bg-indigo-500/15 dark:aria-[current=page]:text-indigo-300;
+  @apply flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-slate-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-500   hover:bg-slate-100 hover:text-slate-900  dark:hover:bg-slate-800 dark:hover:text-white  aria-[current=page]:bg-indigo-50 aria-[current=page]:border  aria-[current=page]:text-indigo-700  dark:text-slate-200  dark:aria-[current=page]:text-indigo-200  dark:aria-[current=page]:bg-indigo-300/15
+  border shadow hover:shadow-lg;
 }

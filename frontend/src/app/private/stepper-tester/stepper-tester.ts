@@ -4,8 +4,10 @@ import { Produit } from '../../model/produit';
 import { email, form, required } from '@angular/forms/signals';
 import { ProductStepTwo } from '../product-steps/product-step-two/product-step-two';
 
+import { TuiIcon } from '@taiga-ui/core';
+
 @Component({
-  imports: [ProductStepOne, ProductStepTwo],
+  imports: [ProductStepOne, ProductStepTwo, TuiIcon],
   selector: 'app-stepper-tester',
   styleUrl: './stepper-tester.css',
   templateUrl: './stepper-tester.html',
