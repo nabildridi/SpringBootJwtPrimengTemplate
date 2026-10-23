@@ -1,12 +1,14 @@
+import { Intervenant } from './intervenant';
+
 export class Produit {
   id!: string;
   originalImage!: any;
   resizedImage!: any;
-  userId: string = '';
-  profileId: string = '';
-  marqueId: string = '';
+  userId!: string;
+  profileId!: string;
+  marqueId!: string;
   createdAt!: Date;
-  nom: string = '';
+  nom!: string;
   paysProd!: string;
   regProd!: string;
   prodNature!: string;
@@ -77,6 +79,7 @@ export class Produit {
   ecoscore!: string;
   showEcoscore!: boolean;
   viewCounter!: number;
+  intervenants!: Intervenant[];
   minerals!: number[];
   ppbMinerals!: number[];
   stockageConservation!: string;

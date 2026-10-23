@@ -1,0 +1,132 @@
+<form (submit)="submitData($event)" class="space-y-5">
+  <div class="card w-full bg-base-100 shadow-lg">
+    <div class="card-body">
+      <h2 class="card-title text-2xl">Ma marque</h2>
+      <div class="divider"></div>
+
+      <tui-accordion class="shadow-lg">
+        <button tuiAccordion>Informations</button>
+        <tui-expand [expanded]="true">
+          <div class="grid grid-cols-2 gap-4">
+            <tui-textfield>
+              <label tuiLabel>name</label>
+              <input tuiInput type="text" [formField]="pageForm.name" class="w-full" />
+            </tui-textfield>
+
+            <tui-textfield>
+              <label tuiLabel>address</label>
+              <input tuiInput type="text" [formField]="pageForm.address" class="w-full" />
+            </tui-textfield>
+
+            <tui-textfield>
+              <label tuiLabel>city</label>
+              <input tuiInput type="text" [formField]="pageForm.city" class="w-full" />
+            </tui-textfield>
+
+            <tui-textfield>
+              <label tuiLabel>zipCode</label>
+              <input tuiInput type="text" [formField]="pageForm.zipCode" class="w-full" />
+            </tui-textfield>
+
+            <app-country-select
+              label="Pays d'origine"
+              [formField]="pageForm.country"
+            ></app-country-select>
+
+            <tui-textfield>
+              <label tuiLabel>site</label>
+              <input tuiInput type="text" [formField]="pageForm.site" class="w-full" />
+            </tui-textfield>
+          </div>
+        </tui-expand>
+      </tui-accordion>
+
+      <!-- Logo -->
+      <tui-accordion class="shadow-lg">
+        <button tuiAccordion>Logo</button>
+        <tui-expand [expanded]="true">
+          <div class="flex justify-around">
+            <div class="flex w-full">
+              <label tuiInputFiles>
+                <input accept="image/*" tuiInputFiles name="logoImage" [(ngModel)]="logoImage" />
+              </label>
+
+              <tui-files class="tui-space_top-1">
+                @if (logoImage) {
+                  <tui-file size="l" [file]="logoImage" (remove)="removeFile()" />
+                }
+              </tui-files>
+            </div>
+            <div class="flex w-full justify-center">
+              <div class="card bg-base-100 card-xs shadow-sm">
+                <div class="card-body">
+                  <h2 class="card-title">Logo actuel</h2>
+                  @if (formObject.resizedLogo) {
+                    <div class="w-64 h-64 relative group" (click)="togglePreview()">
+                      <img
+                        [src]="'data:image/png;base64,' + formObject.resizedLogo"
+                        class="h-64 w-64 object-none"
+                      />
+                      <div
+                        class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 bottom-0 flex justify-center items-end text-xl bg-gray-200 text-black font-semibold"
+                      >
+                        Enlarge
+                      </div>
+                    </div>
+
+                    <div class="justify-end card-actions">
+                      <button type="button" class="daisy-btn btn-primary" (click)="deleteLogo()">
+                        Supprimer le logo
+                      </button>
+                    </div>
+
+                    <ng-template [(tuiPreviewDialog)]="previewOpened">
+                      <tui-preview>
+                        <button
+                          iconStart="@tui.x"
+                          tuiIconButton
+                          tuiPreviewAction
+                          type="button"
+                          (click)="togglePreview()"
+                        >
+                          Close
+                        </button>
+
+                        <img
+                          alt="preview"
+                          [src]="'data:image/png;base64,' + formObject.resizedLogo"
+                        />
+                      </tui-preview>
+                    </ng-template>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="flex w-full justify-center items-center">
+              <label tuiLabel>
+                <input [formField]="pageForm.showLogoFiche" tuiSwitch type="checkbox" />
+                Afficher le logo dans la fiche
+              </label>
+            </div>
+          </div>
+        </tui-expand>
+      </tui-accordion>
+
+      <!-- Logo -->
+      <tui-accordion class="shadow-lg">
+        <button tuiAccordion>Présentation</button>
+        <tui-expand [expanded]="true">
+          <quill-editor
+            [formField]="pageForm.presentation"
+            name="presentation"
+            class="h-96 w-full"
+          ></quill-editor>
+        </tui-expand>
+      </tui-accordion>
+
+      <div class="justify-end card-actions">
+        <button type="submit" class="daisy-btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</form>

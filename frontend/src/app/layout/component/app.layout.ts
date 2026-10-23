@@ -17,22 +17,23 @@ import { TuiIcon } from '@taiga-ui/core';
       <div class="drawer-side is-drawer-close:overflow-visible ">
         <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
         <div
-          class="flex min-h-full flex-col items-start bg-base-300 dark:bg-zinc-500 is-drawer-close:w-14 is-drawer-open:w-64"
+          class="flex min-h-full flex-col items-start bg-base-300 dark:bg-zinc-500 is-drawer-close:w-16 is-drawer-open:w-64"
         >
           <!-- Sidebar content here -->
           <!-- Navigation Links -->
           <ul class="menu w-full grow mt-8 content-center">
             @for (item of menuItems; track $index) {
               <li class="py-2 ">
-                <a
+                <button
                   [routerLink]="item.routerLink"
-                  class="nav-link"
+                  class="btn btn-primary justify-start"
                   routerLinkActive
-                  ariaCurrentWhenActive="page"
+                  #rla="routerLinkActive"
+                  [class]="rla.isActive ? 'btn-active' : 'btn-soft'"
                 >
                   <tui-icon [icon]="'@tui.' + item.icon"></tui-icon>
                   <span class="is-drawer-close:hidden">{{ item.label }}</span>
-                </a>
+                </button>
               </li>
             }
           </ul>
@@ -68,9 +69,21 @@ export class AppLayout {
     },
 
     {
-      label: 'Daisy table',
+      label: 'Components Tester',
       icon: 'qr-code',
-      routerLink: '/private/daisy',
+      routerLink: '/private/tester',
+      routerLinkActiveOptions: { exact: true },
+    },
+    {
+      label: 'Stepper with MultiForms',
+      icon: 'qr-code',
+      routerLink: '/private/stepper',
+      routerLinkActiveOptions: { exact: true },
+    },
+    {
+      label: 'Marques form',
+      icon: 'qr-code',
+      routerLink: '/private/marques',
       routerLinkActiveOptions: { exact: true },
     },
   ];
