@@ -21,18 +21,28 @@ import { TuiIcon } from '@taiga-ui/core';
         >
           <!-- Sidebar content here -->
           <!-- Navigation Links -->
-          <ul class="menu w-full grow mt-8 content-center">
+          <ul class="menu w-full grow mt-16 content-center">
             @for (item of menuItems; track $index) {
               <li class="py-2 ">
                 <button
                   [routerLink]="item.routerLink"
-                  class="btn btn-primary justify-start"
+                  class="btn btn-accent justify-start is-drawer-close:hidden"
                   routerLinkActive
                   #rla="routerLinkActive"
                   [class]="rla.isActive ? 'btn-active' : 'btn-soft'"
                 >
                   <tui-icon [icon]="'@tui.' + item.icon"></tui-icon>
-                  <span class="is-drawer-close:hidden">{{ item.label }}</span>
+                  {{ item.label }}
+                </button>
+
+                <button
+                  class="btn btn-square btn-accent is-drawer-open:hidden"
+                  [routerLink]="item.routerLink"
+                  routerLinkActive
+                  #rla="routerLinkActive"
+                  [class]="rla.isActive ? 'btn-active' : 'btn-ghost'"
+                >
+                  <tui-icon [icon]="'@tui.' + item.icon"></tui-icon>
                 </button>
               </li>
             }

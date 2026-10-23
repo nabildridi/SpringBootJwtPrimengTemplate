@@ -14,6 +14,8 @@ import { email, form, FormField, required } from '@angular/forms/signals';
 import { PasswordGenerator } from '../../shared/password-generator/password-generator';
 import { CountrySelect } from '../../shared/country.select';
 
+import { TuiAccordion } from '@taiga-ui/kit';
+
 interface LoginData {
   username: string;
   password: string;
@@ -21,7 +23,15 @@ interface LoginData {
 }
 
 @Component({
-  imports: [TuiIcon, TuiInput, TuiPassword, FormField, PasswordGenerator, CountrySelect],
+  imports: [
+    TuiIcon,
+    TuiInput,
+    TuiPassword,
+    FormField,
+    PasswordGenerator,
+    CountrySelect,
+    TuiAccordion,
+  ],
   selector: 'app-component-tester',
   styleUrl: './component-tester.css',
   templateUrl: './component-tester.html',

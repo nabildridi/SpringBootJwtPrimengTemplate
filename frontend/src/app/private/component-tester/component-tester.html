@@ -55,3 +55,20 @@
     ></span>
   </a>
 </p>
+
+<div class="collapse bg-base-200 peer">
+  <input type="checkbox" />
+  <div class="collapse-title text-xl font-medium">
+    <div class="flex justify-between">
+      <div class="flex">Click to open/close</div>
+      <div class="flex">
+        <i data-lucide="menu"></i>
+        <tui-icon icon="@tui.chevron-up" class="peer-has-[:checked]:text-red-600"></tui-icon>
+        <tui-icon icon="@tui.chevron-down" class="peer-has-[:checked]:hidden"></tui-icon>
+      </div>
+    </div>
+  </div>
+  <div class="collapse-content">
+    <p>hello</p>
+  </div>
+</div>
