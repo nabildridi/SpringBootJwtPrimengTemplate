@@ -1,5 +1,5 @@
 export class Intervenant {
-  interventionMethod!: string;
-  intervenantName!: string;
-  intervenantPays!: string;
+  interventionMethod: string = '';
+  intervenantName: string = '';
+  intervenantPays: string = '';
 }

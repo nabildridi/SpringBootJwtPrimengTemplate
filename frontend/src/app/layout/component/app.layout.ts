@@ -96,6 +96,12 @@ export class AppLayout {
       routerLink: '/private/marques',
       routerLinkActiveOptions: { exact: true },
     },
+    {
+      label: 'form-array-tester',
+      icon: 'qr-code',
+      routerLink: '/private/form-array-tester',
+      routerLinkActiveOptions: { exact: true },
+    },
   ];
   constructor() {}
 }

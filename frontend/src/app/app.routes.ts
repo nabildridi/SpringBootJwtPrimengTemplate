@@ -9,13 +9,14 @@ import { ComponentTester } from './private/component-tester/component-tester';
 import { StepperTester } from './private/stepper-tester/stepper-tester';
 import { ProductStepOne } from './private/product-steps/product-step-one/product-step-one';
 import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
+import { FormArrayTester } from './private/form-array-tester/form-array-tester';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'marques', pathMatch: 'full' },
+      { path: '', redirectTo: 'form-array-tester', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'tester', component: ComponentTester },
@@ -26,6 +27,10 @@ export const routes: Routes = [
       {
         path: 'marques',
         component: MarquesAddUpdate,
+      },
+      {
+        path: 'form-array-tester',
+        component: FormArrayTester,
       },
     ],
   },

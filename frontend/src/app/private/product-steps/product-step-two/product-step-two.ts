@@ -3,6 +3,7 @@ import { FieldTree, FormField } from '@angular/forms/signals';
 import { TuiAccordion } from '@taiga-ui/kit';
 import { Produit } from '../../../model/produit';
 import { TuiInput } from '@taiga-ui/core';
+import { Intervenant } from '../../../model/intervenant';
 
 @Component({
   imports: [TuiAccordion, TuiInput, FormField],
