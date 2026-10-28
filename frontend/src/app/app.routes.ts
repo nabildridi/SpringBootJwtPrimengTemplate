@@ -8,15 +8,15 @@ import { Bobo } from './private/bobo/bobo';
 import { ComponentTester } from './private/component-tester/component-tester';
 import { StepperTester } from './private/stepper-tester/stepper-tester';
 import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
-import { TristateControl } from './shared/tristate-control/tristate-control';
 import { ButtonSelect } from './shared/button-select/button-select';
+import { FilteredDropdown } from './private/filtered-dropdown/filtered-dropdown';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'button-select', pathMatch: 'full' },
+      { path: '', redirectTo: 'filtered-list', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'tester', component: ComponentTester },
@@ -31,6 +31,10 @@ export const routes: Routes = [
       {
         path: 'button-select',
         component: ButtonSelect,
+      },
+      {
+        path: 'filtered-list',
+        component: FilteredDropdown,
       },
     ],
   },

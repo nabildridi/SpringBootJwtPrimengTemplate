@@ -1,0 +1,18 @@
+<div>
+  <select class="select" [(ngModel)]="selectedValue">
+    <label class="input mb-2">
+      <input type="text" autocomplete="off" [(ngModel)]="term" (keyup)="filter()" />
+      <tui-icon icon="@tui.search" />
+    </label>
+
+    @for (item of countries(); track $index) {
+      <option [value]="item.value">
+        <i [class]="'fi fi-' + item.value.toLowerCase()"></i> {{ item.label }}
+      </option>
+    }
+  </select>
+</div>
+
+<div>
+  <button class="daisy-btn" (click)="showResult()">test</button>
+</div>
