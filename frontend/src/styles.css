@@ -18,7 +18,7 @@ layer(base);
 }
 
 @utility daisy-btn {
-  @apply btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl;
+  @apply btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl rounded-xl bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
 @utility nav-link {

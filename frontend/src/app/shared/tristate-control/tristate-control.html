@@ -1,0 +1,26 @@
+<div class="join join-horizontal">
+  <button
+    type="button"
+    class="btn join-item aria-pressed:bg-primary border border-base-300"
+    [aria-pressed]="value() == true ? 'true' : 'false'"
+    (click)="setValue(true)"
+  >
+    {{ trueLabel() }}
+  </button>
+  <button
+    type="button"
+    class="btn join-item aria-pressed:bg-primary border border-base-300"
+    [aria-pressed]="value() == false ? 'true' : 'false'"
+    (click)="setValue(false)"
+  >
+    {{ falseLabel() }}
+  </button>
+  <button
+    type="button"
+    class="btn join-item aria-pressed:bg-primary border border-base-300"
+    [aria-pressed]="value() == null ? 'true' : 'false'"
+    (click)="setValue(null)"
+  >
+    {{ nullLabel() }}
+  </button>
+</div>

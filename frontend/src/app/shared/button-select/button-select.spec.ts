@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormArrayTester } from './form-array-tester';
+import { ButtonSelect } from './button-select';
 
-describe('FormArrayTester', () => {
-  let component: FormArrayTester;
-  let fixture: ComponentFixture<FormArrayTester>;
+describe('ButtonSelect', () => {
+  let component: ButtonSelect;
+  let fixture: ComponentFixture<ButtonSelect>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [FormArrayTester],
+      imports: [ButtonSelect],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(FormArrayTester);
+    fixture = TestBed.createComponent(ButtonSelect);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

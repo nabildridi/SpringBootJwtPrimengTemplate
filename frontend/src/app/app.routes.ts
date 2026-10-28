@@ -7,16 +7,16 @@ import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
 import { ComponentTester } from './private/component-tester/component-tester';
 import { StepperTester } from './private/stepper-tester/stepper-tester';
-import { ProductStepOne } from './private/product-steps/product-step-one/product-step-one';
 import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
-import { FormArrayTester } from './private/form-array-tester/form-array-tester';
+import { TristateControl } from './shared/tristate-control/tristate-control';
+import { ButtonSelect } from './shared/button-select/button-select';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'form-array-tester', pathMatch: 'full' },
+      { path: '', redirectTo: 'button-select', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'tester', component: ComponentTester },
@@ -29,8 +29,8 @@ export const routes: Routes = [
         component: MarquesAddUpdate,
       },
       {
-        path: 'form-array-tester',
-        component: FormArrayTester,
+        path: 'button-select',
+        component: ButtonSelect,
       },
     ],
   },

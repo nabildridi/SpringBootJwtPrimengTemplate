@@ -31,6 +31,15 @@
         ></app-country-select>
       </div>
 
+      <div>
+        <app-tristate-control
+          [formField]="loginForm.active"
+          trueLabel="Oui"
+          falseLabel="Non"
+          nullLabel="Non communiqué"
+        ></app-tristate-control>
+      </div>
+
       <!-- Submit Button -->
       <div>
         <button class="daisy-btn btn-primary w-full" [disabled]="loginForm().invalid()">

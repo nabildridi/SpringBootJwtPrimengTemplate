@@ -15,11 +15,15 @@ import { PasswordGenerator } from '../../shared/password-generator/password-gene
 import { CountrySelect } from '../../shared/country.select';
 
 import { TuiAccordion } from '@taiga-ui/kit';
+import { TristateControl } from '../../shared/tristate-control/tristate-control';
+
+export type TriState = boolean | null;
 
 interface LoginData {
   username: string;
   password: string;
   country: string;
+  active: TriState;
 }
 
 @Component({
@@ -31,6 +35,7 @@ interface LoginData {
     PasswordGenerator,
     CountrySelect,
     TuiAccordion,
+    TristateControl,
   ],
   selector: 'app-component-tester',
   styleUrl: './component-tester.css',
@@ -41,6 +46,7 @@ export class ComponentTester implements OnInit {
     username: '',
     password: '',
     country: '',
+    active: null,
   });
 
   loginForm = form(this.loginModel, (fieldPath) => {
