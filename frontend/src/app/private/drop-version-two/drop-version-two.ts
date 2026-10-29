@@ -14,6 +14,7 @@ export class DropVersionTwo {
   countries = signal<any[]>([]);
   selectedValue: string = '';
   opened: boolean = false;
+  selectedItem: any = null;
 
   term: string = '';
 
@@ -40,5 +41,20 @@ export class DropVersionTwo {
 
   showResult() {
     console.log(this.selectedValue);
+  }
+
+  selectItem(item: any) {
+    this.selectedItem = item;
+    this.selectedValue = item.value;
+    this.opened = false;
+  }
+
+  reset() {
+    this.selectedItem = null;
+    this.selectedValue = '';
+  }
+
+  resetSearch() {
+    this.term = '';
   }
 }
