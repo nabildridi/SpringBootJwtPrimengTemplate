@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { MarquesAddUpdate } from './marques-add-update';
+import { DropVersionTwo } from './drop-version-two';
 
-describe('MarquesAddUpdate', () => {
-  let component: MarquesAddUpdate;
-  let fixture: ComponentFixture<MarquesAddUpdate>;
+describe('DropVersionTwo', () => {
+  let component: DropVersionTwo;
+  let fixture: ComponentFixture<DropVersionTwo>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MarquesAddUpdate],
+      imports: [DropVersionTwo],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MarquesAddUpdate);
+    fixture = TestBed.createComponent(DropVersionTwo);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

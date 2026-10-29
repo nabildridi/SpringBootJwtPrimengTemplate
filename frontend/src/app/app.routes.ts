@@ -7,16 +7,15 @@ import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
 import { ComponentTester } from './private/component-tester/component-tester';
 import { StepperTester } from './private/stepper-tester/stepper-tester';
-import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
-import { ButtonSelect } from './shared/button-select/button-select';
 import { FilteredDropdown } from './private/filtered-dropdown/filtered-dropdown';
+import { DropVersionTwo } from './private/drop-version-two/drop-version-two';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'filtered-list', pathMatch: 'full' },
+      { path: '', redirectTo: 'filtered-list-v2', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'tester', component: ComponentTester },
@@ -25,16 +24,12 @@ export const routes: Routes = [
         component: StepperTester,
       },
       {
-        path: 'marques',
-        component: MarquesAddUpdate,
-      },
-      {
-        path: 'button-select',
-        component: ButtonSelect,
-      },
-      {
         path: 'filtered-list',
         component: FilteredDropdown,
+      },
+      {
+        path: 'filtered-list-v2',
+        component: DropVersionTwo,
       },
     ],
   },

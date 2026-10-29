@@ -91,15 +91,15 @@ export class AppLayout {
       routerLinkActiveOptions: { exact: true },
     },
     {
-      label: 'Marques form',
+      label: 'filtered-list',
       icon: 'qr-code',
-      routerLink: '/private/marques',
+      routerLink: '/private/filtered-list',
       routerLinkActiveOptions: { exact: true },
     },
     {
-      label: 'form-array-tester',
+      label: 'filtered-list-v2',
       icon: 'qr-code',
-      routerLink: '/private/form-array-tester',
+      routerLink: '/private/filtered-list-v2',
       routerLinkActiveOptions: { exact: true },
     },
   ];

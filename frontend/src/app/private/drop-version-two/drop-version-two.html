@@ -1,0 +1,64 @@
+<div class="w-full max-w-xs mx-auto">
+  <div class="space-y-1">
+    <div class="relative">
+      <span class="inline-block w-full rounded-md shadow-sm" (click)="opened = !opened">
+        <button
+          type="button"
+          aria-haspopup="listbox"
+          :aria-expanded="open"
+          aria-labelledby="assigned-to-label"
+          class="cursor-default relative w-full rounded-md border border-gray-300 bg-white pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+        >
+          <div class="flex items-center space-x-3">
+            <i class="fi fi-tn"></i>
+            <span class="block truncate">Tom Cook</span>
+          </div>
+          <span class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+            <tui-icon [icon]="opened ? '@tui.chevron-down' : '@tui.chevron-up'" />
+          </span>
+        </button>
+      </span>
+      <div class="absolute mt-1 w-full rounded-md bg-white shadow-lg" [class.hidden]="!opened">
+        <label class="input mb-2">
+          <input type="text" autocomplete="off" [(ngModel)]="term" (keyup)="filter()" />
+          <tui-icon icon="@tui.search" />
+        </label>
+
+        <ul
+          tabindex="-1"
+          role="listbox"
+          aria-labelledby="assigned-to-label"
+          :aria-activedescendant="activeDescendant"
+          class="max-h-56 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none sm:text-sm sm:leading-5"
+        >
+          @for (item of countries(); track $index) {
+            <li
+              id="assigned-to-option-1"
+              role="option"
+              class="text-gray-900 cursor-default select-none relative py-2 pl-4 pr-9"
+            >
+              <div class="flex items-center space-x-3">
+                <i [class]="'fi fi-' + item.value.toLowerCase()"></i>
+                <span class="font-normal block truncate">
+                  {{ item.label }}
+                </span>
+              </div>
+              <span
+                class="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600"
+                style="display: none"
+              >
+                <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  ></path>
+                </svg>
+              </span>
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
