@@ -7,7 +7,6 @@ import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
 import { ComponentTester } from './private/component-tester/component-tester';
 import { StepperTester } from './private/stepper-tester/stepper-tester';
-import { FilteredDropdown } from './private/filtered-dropdown/filtered-dropdown';
 import { DropVersionTwo } from './private/drop-version-two/drop-version-two';
 
 export const routes: Routes = [
@@ -22,10 +21,6 @@ export const routes: Routes = [
       {
         path: 'stepper',
         component: StepperTester,
-      },
-      {
-        path: 'filtered-list',
-        component: FilteredDropdown,
       },
       {
         path: 'filtered-list-v2',

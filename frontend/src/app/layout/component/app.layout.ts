@@ -80,25 +80,19 @@ export class AppLayout {
 
     {
       label: 'Components Tester',
-      icon: 'qr-code',
+      icon: 'test-tube-diagonal',
       routerLink: '/private/tester',
       routerLinkActiveOptions: { exact: true },
     },
     {
       label: 'Stepper with MultiForms',
-      icon: 'qr-code',
+      icon: 'door-stairwell',
       routerLink: '/private/stepper',
       routerLinkActiveOptions: { exact: true },
     },
     {
       label: 'filtered-list',
-      icon: 'qr-code',
-      routerLink: '/private/filtered-list',
-      routerLinkActiveOptions: { exact: true },
-    },
-    {
-      label: 'filtered-list-v2',
-      icon: 'qr-code',
+      icon: 'list',
       routerLink: '/private/filtered-list-v2',
       routerLinkActiveOptions: { exact: true },
     },

@@ -3,58 +3,34 @@ import { environment } from '../../../environments/environment';
 import { TuiIcon } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
 import * as lod from 'lodash';
+import { form, required, FormField } from '@angular/forms/signals';
+import { FilteredDropdown } from '../../shared/filtered-dropdown/filtered-dropdown';
+
+interface PageData {
+  country: string | null;
+}
 
 @Component({
-  imports: [FormsModule, TuiIcon],
+  imports: [FormsModule, TuiIcon, FormField, FilteredDropdown],
   selector: 'app-drop-version-two',
   styleUrl: './drop-version-two.css',
   templateUrl: './drop-version-two.html',
 })
 export class DropVersionTwo {
-  countries = signal<any[]>([]);
-  selectedValue: string = '';
-  opened: boolean = false;
-  selectedItem: any = null;
+  pageModel = signal<PageData>({
+    country: null,
+  });
 
-  term: string = '';
+  pageForm = form(this.pageModel, (fieldPath) => {
+    required(fieldPath.country);
+  });
 
-  constructor() {
-    this.countries.set(environment.countries);
-  }
+  constructor() {}
 
-  filter() {
-    if (this.term != null && this.term.length > 0) {
-      this.search(this.term);
-    } else {
-      this.countries.set(environment.countries);
-    }
-  }
+  submitLogin(event: Event) {
+    event.preventDefault();
+    const credentials = this.pageModel();
 
-  search(toSearch: string) {
-    this.countries.set(environment.countries);
-    this.countries.set(
-      lod.filter(this.countries(), function (o) {
-        return o.label.toLowerCase().includes(toSearch);
-      }),
-    );
-  }
-
-  showResult() {
-    console.log(this.selectedValue);
-  }
-
-  selectItem(item: any) {
-    this.selectedItem = item;
-    this.selectedValue = item.value;
-    this.opened = false;
-  }
-
-  reset() {
-    this.selectedItem = null;
-    this.selectedValue = '';
-  }
-
-  resetSearch() {
-    this.term = '';
+    console.log(credentials);
   }
 }
