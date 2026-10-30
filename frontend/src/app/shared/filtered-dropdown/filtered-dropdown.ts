@@ -1,12 +1,12 @@
 import { Component, ElementRef, input, model, signal, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { TuiIcon, TuiInput } from '@taiga-ui/core';
+import { TuiDataList, TuiDropdown, TuiIcon, TuiInput } from '@taiga-ui/core';
 import * as lod from 'lodash';
 import { FormValueControl } from '@angular/forms/signals';
-import { TuiActiveZone } from '@taiga-ui/cdk';
+import { TuiActiveZone, TuiObscured } from '@taiga-ui/cdk';
 
 @Component({
-  imports: [TuiIcon, TuiInput, TuiActiveZone],
+  imports: [TuiIcon, TuiInput, TuiActiveZone, TuiDataList, TuiDropdown, TuiObscured],
   selector: 'app-filtered-dropdown',
   styleUrl: './filtered-dropdown.css',
   templateUrl: './filtered-dropdown.html',
@@ -64,7 +64,7 @@ export class FilteredDropdown implements FormValueControl<string | null> {
     }
   }
 
-  toggle() {
+  toggle(event: Event) {
     this.opened.update((value) => !value);
   }
 }

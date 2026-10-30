@@ -1,9 +1,16 @@
 <div class="relative active-zone" (tuiActiveZoneChange)="onZone($event)">
-  <span class="w-full rounded-md shadow-sm" (click)="toggle()">
-    <tui-textfield [tuiTextfieldCleaner]="false" [invalid]="invalid()">
+  <span class="w-full rounded-md shadow-sm">
+    <tui-textfield
+      [tuiTextfieldCleaner]="false"
+      [invalid]="invalid()"
+      [tuiDropdown]="dropdownContent"
+      [attr.aria-expanded]="opened()"
+      [tuiDropdownManual]="opened()"
+      (click)="toggle($event)"
+    >
       <label tuiLabel>Pays</label>
 
-      <input tuiInput [value]="selectedItem ? selectedItem.label : ''" />
+      <input tuiInput [value]="selectedItem ? selectedItem.label : ''" [readonly]="true" />
 
       @if (selectedItem) {
         <i [class]="'fi fi-' + selectedItem.value"></i>
@@ -17,15 +24,10 @@
     </tui-textfield>
   </span>
 
-  <div
-    class="absolute mt-1 z-9999 w-full rounded-md bg-base-100 shadow-lg"
-    popover
-    [class.hidden]="!opened()"
-  >
-    <label class="input input-primary w-full">
+  <ng-template #dropdownContent>
+    <tui-textfield>
       <input
-        type="text"
-        autocomplete="off"
+        tuiInput
         class="w-full"
         [value]="term"
         (input)="term = $event.target.value"
@@ -33,25 +35,24 @@
       />
       <tui-icon icon="@tui.x" class="cursor-pointer" (click)="resetSearch()" />
       <tui-icon icon="@tui.search" />
-    </label>
+    </tui-textfield>
+    <ul>
+      <tui-data-list emptyContent="&nbsp;">
+        @for (item of countries(); track $index) {
+          <li
+            (click)="selectItem(item)"
+            role="option"
+            class="cursor-pointer py-2 pl-4 pr-9 hover:bg-primary"
+          >
+            <div class="flex items-center space-x-3">
+              <i [class]="'fi fi-' + item.value.toLowerCase()"></i>
+              {{ item.label }}
+            </div>
 
-    <ul
-      class="max-h-56 rounded-md py-1 text-base leading-6 shadow-xs overflow-auto focus:outline-none"
-    >
-      @for (item of countries(); track $index) {
-        <li
-          (click)="selectItem(item)"
-          role="option"
-          class="cursor-default select-none relative py-2 pl-4 pr-9 hover:bg-primary"
-        >
-          <div class="flex items-center space-x-3">
-            <i [class]="'fi fi-' + item.value.toLowerCase()"></i>
-            {{ item.label }}
-          </div>
-
-          <tui-icon [icon]="item.value == value() ? '@tui.check' : ''" />
-        </li>
-      }
+            <tui-icon [icon]="item.value == value() ? '@tui.check' : ''" />
+          </li>
+        }
+      </tui-data-list>
     </ul>
-  </div>
+  </ng-template>
 </div>
