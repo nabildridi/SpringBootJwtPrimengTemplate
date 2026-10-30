@@ -1,29 +1,27 @@
-<div class="relative">
-  <span
-    class="inline-block w-full rounded-md shadow-sm"
-    [class]="invalid() ? 'border-2 border-error' : ''"
-    (click)="opened = !opened"
-  >
-    <button
-      type="button"
-      class="cursor-pointer relative w-full rounded-md border border-gray-300 pl-3 pr-10 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition ease-in-out duration-150"
-    >
-      <div class="flex items-center space-x-3">
-        @if (selectedItem) {
-          <i [class]="'fi fi-' + selectedItem.value"></i>
-          <span class="block truncate">{{ selectedItem.label }}</span>
-        } @else {
-          <span class="block truncate">&nbsp;</span>
-        }
-      </div>
+<div class="relative active-zone" (tuiActiveZoneChange)="onZone($event)">
+  <span class="w-full rounded-md shadow-sm" (click)="toggle()">
+    <tui-textfield [tuiTextfieldCleaner]="false" [invalid]="invalid()">
+      <label tuiLabel>Pays</label>
 
-      <span class="absolute inset-y-0 right-0 flex items-center pr-2">
-        <span (click)="reset()"><tui-icon [icon]="selectedItem ? '@tui.x' : ''" /></span>
-        <tui-icon [icon]="opened ? '@tui.chevron-down' : '@tui.chevron-up'" />
-      </span>
-    </button>
+      <input tuiInput [value]="selectedItem ? selectedItem.label : ''" />
+
+      @if (selectedItem) {
+        <i [class]="'fi fi-' + selectedItem.value"></i>
+      }
+
+      @if (value()) {
+        <tui-icon icon="@tui.x" (click)="reset()" />
+      }
+
+      <tui-icon [icon]="opened() ? '@tui.chevron-down' : '@tui.chevron-up'" />
+    </tui-textfield>
   </span>
-  <div class="absolute mt-1 w-full rounded-md bg-base-100 shadow-lg" [class.hidden]="!opened">
+
+  <div
+    class="absolute mt-1 z-9999 w-full rounded-md bg-base-100 shadow-lg"
+    popover
+    [class.hidden]="!opened()"
+  >
     <label class="input input-primary w-full">
       <input
         type="text"
@@ -48,13 +46,10 @@
         >
           <div class="flex items-center space-x-3">
             <i [class]="'fi fi-' + item.value.toLowerCase()"></i>
-            <span class="font-normal block truncate">
-              {{ item.label }}
-            </span>
+            {{ item.label }}
           </div>
-          <span class="absolute inset-y-0 right-0 flex items-center pr-4">
-            <tui-icon [icon]="item.value == value() ? '@tui.check' : ''" />
-          </span>
+
+          <tui-icon [icon]="item.value == value() ? '@tui.check' : ''" />
         </li>
       }
     </ul>

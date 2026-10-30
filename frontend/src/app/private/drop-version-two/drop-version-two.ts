@@ -1,9 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { TuiIcon } from '@taiga-ui/core';
 import { FormsModule } from '@angular/forms';
-import * as lod from 'lodash';
 import { form, required, FormField } from '@angular/forms/signals';
+import { TuiAccordion } from '@taiga-ui/kit';
 import { FilteredDropdown } from '../../shared/filtered-dropdown/filtered-dropdown';
 
 interface PageData {
@@ -11,7 +10,7 @@ interface PageData {
 }
 
 @Component({
-  imports: [FormsModule, TuiIcon, FormField, FilteredDropdown],
+  imports: [FormsModule, TuiIcon, FormField, FilteredDropdown, TuiAccordion],
   selector: 'app-drop-version-two',
   styleUrl: './drop-version-two.css',
   templateUrl: './drop-version-two.html',

@@ -1,11 +1,12 @@
-import { Component, input, model, signal } from '@angular/core';
+import { Component, ElementRef, input, model, signal, ViewChild } from '@angular/core';
 import { environment } from '../../../environments/environment';
-import { TuiIcon } from '@taiga-ui/core';
+import { TuiIcon, TuiInput } from '@taiga-ui/core';
 import * as lod from 'lodash';
 import { FormValueControl } from '@angular/forms/signals';
+import { TuiActiveZone } from '@taiga-ui/cdk';
 
 @Component({
-  imports: [TuiIcon],
+  imports: [TuiIcon, TuiInput, TuiActiveZone],
   selector: 'app-filtered-dropdown',
   styleUrl: './filtered-dropdown.css',
   templateUrl: './filtered-dropdown.html',
@@ -15,9 +16,8 @@ export class FilteredDropdown implements FormValueControl<string | null> {
   invalid = input<boolean>(false);
 
   countries = signal<any[]>([]);
-  opened: boolean = false;
+  opened = signal<boolean>(false);
   selectedItem: any = null;
-
   term: string = '';
 
   constructor() {
@@ -44,17 +44,27 @@ export class FilteredDropdown implements FormValueControl<string | null> {
   selectItem(item: any) {
     this.selectedItem = item;
     this.value.set(item.value);
-    this.opened = false;
+    this.opened.set(false);
   }
 
   reset() {
     this.selectedItem = null;
     this.value.set(null);
-    this.opened = false;
+    this.opened.set(false);
   }
 
   resetSearch() {
     this.term = '';
     this.countries.set(environment.countries);
+  }
+
+  protected onZone(activeZoning: boolean): void {
+    if (!activeZoning) {
+      this.opened.set(false);
+    }
+  }
+
+  toggle() {
+    this.opened.update((value) => !value);
   }
 }

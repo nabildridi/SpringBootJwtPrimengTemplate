@@ -1,5 +1,11 @@
 <form (submit)="submitLogin($event)" class="space-y-5">
-  <app-filtered-dropdown [formField]="pageForm.country"></app-filtered-dropdown>
+  <tui-accordion>
+    <button tuiAccordion>Taiga UI cdk</button>
+    <tui-expand>
+      <app-filtered-dropdown [formField]="pageForm.country"></app-filtered-dropdown>
+    </tui-expand>
+  </tui-accordion>
+
   <button class="daisy-btn btn-primary" type="submit" [disabled]="pageForm().invalid()">
     Submit
   </button>
