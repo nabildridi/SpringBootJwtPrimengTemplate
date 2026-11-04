@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgpButton } from 'ng-primitives/button';
 import { NgpInput } from 'ng-primitives/input';
 import { CountrySelect } from './shared/country.select';
+import { NgpPassword, NgpPasswordInput, NgpPasswordToggle } from 'ng-primitives/password';
 
 export class LoginObject {
   username!: string;
@@ -13,7 +14,17 @@ export class LoginObject {
 }
 
 @Component({
-  imports: [RouterOutlet, FormField, FormsModule, NgpButton, NgpInput, CountrySelect],
+  imports: [
+    RouterOutlet,
+    FormField,
+    FormsModule,
+    NgpButton,
+    NgpInput,
+    CountrySelect,
+    NgpPassword,
+    NgpPasswordInput,
+    NgpPasswordToggle,
+  ],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
