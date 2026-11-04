@@ -23,7 +23,7 @@ import {
     NgpSelectPortal,
   ],
   template: `
-    <div class="input w-full">
+    <div class="input w-full" [attr.data-invalid]="invalid() ? '' : null">
       <div
         [(ngpSelectValue)]="value"
         (ngpSelectOpenChange)="onOpen($event)"
@@ -50,24 +50,27 @@ import {
             ></i>
           </div>
         </div>
-        <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full mt-2">
-          <label class="input w-full">
+        <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full">
+          <label class="input w-full m-1">
             <input
               [value]="term()"
               (input)="filter($event)"
               ngpSelectInput
               aria-labelledby="select-search-label"
-              class="grow"
             />
             <i class="bx bx-search"></i>
           </label>
-          <div class="h-52 overflow-y-auto bg-base-200 w-full" ngpSelectList aria-label="Options">
+          <div
+            class="max-h-52 overflow-y-auto bg-base-200 w-full"
+            ngpSelectList
+            aria-label="Options"
+          >
             @for (option of countries(); track $index) {
               <div
                 [ngpSelectOptionValue]="option.value"
                 ngpSelectOption
                 (click)="selectItem(option)"
-                class="hover:bg-primary"
+                class="content-center"
               >
                 <i [class]="'fi fi-' + option.value"></i>
                 {{ option.label }}
@@ -84,132 +87,7 @@ import {
       </div>
     </div>
   `,
-  styles: `
-    .select-field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .select-label {
-      font-size: 13px;
-      font-weight: 510;
-      letter-spacing: -0.011em;
-      color: var(--ngp-text-secondary);
-    }
-    [ngpSelect] {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-radius: 0.5rem;
-      border: none;
-      background-color: var(--ngp-background);
-      box-shadow: var(--ngp-input-shadow);
-      box-sizing: border-box;
-    }
-    [ngpSelect][data-focus] {
-      outline: 2px solid var(--ngp-focus-ring);
-      outline-offset: 2px;
-    }
-    .select-value,
-    .select-placeholder {
-      display: flex;
-      align-items: center;
-      flex: 1;
-      padding: 0 16px;
-      background-color: transparent;
-      color: var(--ngp-text-primary);
-      font-family: inherit;
-      font-size: 14px;
-      height: 100%;
-    }
-    .select-placeholder {
-      color: var(--ngp-text-secondary);
-    }
-    /* Search field pinned at the top of the dropdown */
-
-    [ngpSelectDropdown] {
-      background-color: var(--ngp-background);
-      border: 1px solid var(--ngp-border);
-      padding: 0;
-      border-radius: 0.75rem;
-      outline: none;
-      position: absolute;
-      overflow: hidden;
-      animation: select-input-show 0.1s ease-out;
-      width: var(--ngp-select-width);
-      box-shadow: var(--ngp-shadow-lg);
-      box-sizing: border-box;
-      margin-top: 4px;
-      z-index: 1001;
-    }
-    [ngpSelectDropdown][data-exit] {
-      animation: select-input-hide 0.1s ease-out;
-    }
-    .select-scrollable {
-      max-height: 200px;
-      overflow-y: auto;
-      padding: 0.25rem;
-    }
-    [ngpSelectOption] {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.375rem 0.75rem;
-      cursor: pointer;
-      border-radius: 0.5rem;
-      width: 100%;
-      height: 2.125rem;
-      font-size: 14px;
-      color: var(--ngp-text-primary);
-      box-sizing: border-box;
-    }
-    [ngpSelectOption][data-hover] {
-       bg-primary;
-    }
-    [ngpSelectOption][data-press] {
-      background-color: var(--ngp-background-active);
-    }
-    [ngpSelectOption][data-active] {
-      background-color: var(--ngp-background-active);
-    }
-    [ngpSelectOption][data-selected] {
-      color: var(--ngp-primary);
-      font-weight: 510;
-    }
-    .empty-message:empty {
-      display: none;
-    }
-    .empty-message {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0.5rem;
-      color: var(--ngp-text-secondary);
-      font-size: 14px;
-      font-weight: 510;
-      text-align: center;
-    }
-    @keyframes select-input-show {
-      0% {
-        opacity: 0;
-        transform: translateY(-10px) scale(0.9);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-    @keyframes select-input-hide {
-      0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-      100% {
-        opacity: 0;
-        transform: translateY(-10px) scale(0.9);
-      }
-    }
-  `,
+  styleUrl: './country-select.css',
 })
 export class CountrySelect implements FormValueControl<string | null>, OnInit {
   value = model<string | null>(null);
