@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap')
+layer(base);
+
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes:
+    corporate --default,
+    business --prefersdark;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+* {
+  font-family: 'Outfit';
+}
+
+[data-invalid] {
+  @apply border-2 border-error;
+}
