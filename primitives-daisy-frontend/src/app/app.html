@@ -15,7 +15,16 @@
     ></n-country-select>
   </div>
 
-  <n-table [data]="countries()"></n-table>
+  <n-table
+    [data]="data()"
+    [lazy]="true"
+    [pageLength]="pageLength"
+    (onLazyLoad)="lazyLoadFunc($event)"
+    [totalRecords]="totalRecords"
+    sortField="id"
+    [sortOrder]="-1"
+    [colsDefs]="{}"
+  ></n-table>
 
   <button ngpButton type="submit" [disabled]="loginForm().invalid()" class="btn btn-primary mt-8">
     Submit

@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import {
   NgpPagination,
   NgpPaginationButton,
@@ -142,5 +142,16 @@ import {
 })
 export class DaisyTable {
   data = input.required<any[]>();
+  lazy = input<boolean>(false);
+  pageLength = input.required<number>();
+  totalRecords = input.required<number>();
+  sortField = input<string>('');
+  sortOrder = input<number>(0);
+  colsDefs = input.required<any>();
+  onLazyLoad = output<any>();
+
   page = signal<number>(1);
+
+
+  this.valueChanged.emit(7);
 }
