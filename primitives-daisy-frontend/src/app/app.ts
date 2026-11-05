@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { email, form, FormField, required } from '@angular/forms/signals';
 import { FormsModule } from '@angular/forms';
@@ -7,9 +7,9 @@ import { CountrySelect } from './shared/country.select';
 import { DaisyTextInput } from './shared/text-input';
 import { DaisyPasswordInput } from './shared/password-input';
 import { environment } from '../environments/environment';
-import { DaisyTable } from './shared/custom-table';
 import { AppHttpService } from './services/http/app-http.service';
 import { HttpTopics } from './enums/http-topics';
+import { DatatableComponent, PageEvent, TableColumn } from '@siemens/ngx-datatable';
 
 export class LoginObject {
   username!: string;
@@ -26,18 +26,13 @@ export class LoginObject {
     CountrySelect,
     DaisyTextInput,
     DaisyPasswordInput,
-    DaisyTable,
+    DatatableComponent,
   ],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
-  styles: `
-    :host {
-      display: contents;
-    }
-  `,
 })
-export class App {
+export class App implements OnInit {
   loginModel = signal<LoginObject>({
     username: '',
     password: '',
@@ -53,7 +48,19 @@ export class App {
 
   data = signal<any[]>([]);
 
+  columns = [
+    { prop: 'value', name: 'Code' },
+    { prop: 'label', name: 'Country' },
+  ];
+
   constructor(private appHttpService: AppHttpService) {}
+  ngOnInit(): void {
+    this.data.set(environment.countries);
+  }
+
+  onPagination(event: PageEvent) {
+    console.log(event);
+  }
 
   submitLogin(event: Event) {
     event.preventDefault();
@@ -62,15 +69,30 @@ export class App {
     console.log(credentials);
   }
 
-  loadFromServer() {
+  /*
+  {
+    "count": 0,
+    "pageSize": 10,
+    "limit": 10,
+    "offset": 1,
+    "sorts": [
+        {
+            "dir": "asc",
+            "prop": "label"
+        }
+    ]
+}
+    */
+
+  loadFromServer(pageEvent: PageEvent) {
     //{"first":0,"rows":10,"sortOrder":1,"filters":{"name":{"value":null,"matchMode":"startsWith"},"country.name":{"value":null,"matchMode":"startsWith"},"company":{"value":null,"matchMode":"startsWith"},"representative":{"value":null,"matchMode":"in"}},"globalFilter":null}
 
     let event = {
-      first: this.pageSignal() * this.sizeSignal(),
-      rows: 5,
+      first: pageEvent.offset,
+      rows: pageEvent.pageSize,
       sortOrder: 1,
       sortField: 'id',
-      filters: this.serverFilters,
+      //filters: this.serverFilters,
       globalFilter: ['id'],
     };
 
@@ -82,7 +104,7 @@ export class App {
         next: (json: any) => {
           if (json) {
             this.data.set(json['content']);
-            this.totalSignal.set(json.totalElements);
+            //this.totalSignal.set(json.totalElements);
           }
         },
         error: (e) => {},
