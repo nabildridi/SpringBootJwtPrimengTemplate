@@ -23,69 +23,74 @@ import {
     NgpSelectPortal,
   ],
   template: `
-    <div class="input w-full" [attr.data-invalid]="invalid() ? '' : null">
-      <div
-        [(ngpSelectValue)]="value"
-        (ngpSelectOpenChange)="onOpen($event)"
-        ngpSelect
-        aria-labelledby="select-search-label"
-        class="w-full"
-      >
-        <div class="flex h-10 justify-between w-full">
-          <div class="content-center">
-            @if (value(); as selected) {
-              <span class="w-full">
-                <i [class]="'fi fi-' + selectedItem().value"></i>
-                {{ selectedItem()!.label }}</span
-              >
-            }
+    <label class="floating-label">
+      <span [class.requ]="required()">{{ label() }}</span>
+      <div class="input w-full" [attr.data-invalid]="invalid() ? '' : null">
+        <div
+          [(ngpSelectValue)]="value"
+          (ngpSelectOpenChange)="onOpen($event)"
+          ngpSelect
+          aria-labelledby="select-search-label"
+          class="w-full"
+        >
+          <div class="flex h-10 justify-between w-full">
+            <div class="content-center">
+              @if (value(); as selected) {
+                <span class="w-full">
+                  <i [class]="'fi fi-' + selectedItem().value"></i>
+                  {{ selectedItem()!.label }}</span
+                >
+              }
+            </div>
+            <div class="content-center space-x-2 text-xl">
+              @if (value()) {
+                <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
+              }
+              <i
+                [class]="opened() ? 'bx bx-caret-down' : 'bx bx-caret-up'"
+                class="cursor-pointer"
+              ></i>
+            </div>
           </div>
-          <div class="content-center space-x-2 text-xl">
-            @if (value()) {
-              <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
-            }
-            <i
-              [class]="opened() ? 'bx bx-caret-down' : 'bx bx-caret-up'"
-              class="cursor-pointer"
-            ></i>
-          </div>
-        </div>
-        <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full">
-          <label class="input w-full m-1">
-            <input
-              [value]="term()"
-              (input)="filter($event)"
-              ngpSelectInput
-              aria-labelledby="select-search-label"
-            />
-            <i class="bx bx-search"></i>
-          </label>
-          <div
-            class="max-h-52 overflow-y-auto bg-base-200 w-full"
-            ngpSelectList
-            aria-label="Options"
-          >
-            @for (option of countries(); track $index) {
-              <div
-                [ngpSelectOptionValue]="option.value"
-                ngpSelectOption
-                (click)="selectItem(option)"
-                class="content-center"
-              >
-                <i [class]="'fi fi-' + option.value"></i>
-                {{ option.label }}
-              </div>
-            }
-          </div>
-          <!-- outside the listbox, and always rendered so the status is announced -->
-          <div class="empty-message" role="status">
-            @if (countries().length === 0) {
-              No options found
-            }
+          <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full">
+            <div class="w-full p-2 bg-base-200">
+              <label class="input w-full ">
+                <input
+                  [value]="term()"
+                  (input)="filter($event)"
+                  ngpSelectInput
+                  aria-labelledby="select-search-label"
+                />
+                <i class="bx bx-search"></i>
+              </label>
+            </div>
+            <div
+              class="max-h-52 overflow-y-auto bg-base-200 w-full"
+              ngpSelectList
+              aria-label="Options"
+            >
+              @for (option of countries(); track $index) {
+                <div
+                  [ngpSelectOptionValue]="option.value"
+                  ngpSelectOption
+                  (click)="selectItem(option)"
+                  class="content-center"
+                >
+                  <i [class]="'fi fi-' + option.value"></i>
+                  {{ option.label }}
+                </div>
+              }
+            </div>
+            <!-- outside the listbox, and always rendered so the status is announced -->
+            <div class="empty-message" role="status">
+              @if (countries().length === 0) {
+                No options found
+              }
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </label>
   `,
   styleUrl: './country-select.css',
 })
@@ -110,7 +115,6 @@ export class CountrySelect implements FormValueControl<string | null>, OnInit {
 
   filter(event: Event) {
     this.term.set((event.target as HTMLInputElement).value);
-    console.log(this.term());
     if (this.term() != null && this.term().length > 0) {
       this.search(this.term());
     } else {

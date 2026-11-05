@@ -1,17 +1,6 @@
 @import 'tailwindcss';
 @plugin "daisyui";
 
-.select-field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.select-label {
-  font-size: 13px;
-  font-weight: 510;
-  letter-spacing: -0.011em;
-  color: var(--ngp-text-secondary);
-}
 [ngpSelect] {
   display: flex;
   justify-content: space-between;
@@ -26,23 +15,8 @@
   outline: 2px solid var(--ngp-focus-ring);
   outline-offset: 2px;
 }
-.select-value,
-.select-placeholder {
-  display: flex;
-  align-items: center;
-  flex: 1;
-  padding: 0 16px;
-  background-color: transparent;
-  color: var(--ngp-text-primary);
-  font-family: inherit;
-  font-size: 14px;
-  height: 100%;
-}
-.select-placeholder {
-  color: var(--ngp-text-secondary);
-}
-/* Search field pinned at the top of the dropdown */
 
+/* Search field pinned at the top of the dropdown */
 [ngpSelectDropdown] {
   background-color: var(--ngp-background);
   border: 1px solid var(--ngp-border);
@@ -99,7 +73,7 @@
   justify-content: center;
   align-items: center;
   padding: 0.5rem;
-  color: var(--ngp-text-secondary);
+  color: var(--color-secondary);
   font-size: 14px;
   font-weight: 510;
   text-align: center;

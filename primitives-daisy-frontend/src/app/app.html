@@ -1,52 +1,56 @@
-<form (submit)="submitLogin($event)" class="space-y-5 mt-8">
-  <label class="floating-label">
-    <span>Your Email</span>
-    <input
-      ngpInput
-      type="text"
-      placeholder="Your Email"
-      [formField]="loginForm.username"
-      class="input w-full"
-    />
-  </label>
+<form (submit)="submitLogin($event)" class="space-y-5 mt-8 p-8">
+  <div>
+    <n-text-input [formField]="loginForm.username" label="Email" type="email"></n-text-input>
+  </div>
 
-  <label class="floating-label">
-    <span>Your Password</span>
+  <div>
+    <n-password-input [formField]="loginForm.password" label="Mot de passe"></n-password-input>
+  </div>
 
-    <div class="relative w-full" #password="ngpPassword" ngpPassword>
-      <input
-        class="h-[2.125rem] w-full rounded-lg border-none bg-white px-3 pr-10 text-sm tracking-[-0.006em] text-zinc-950 shadow-[0_1px_2px_rgba(0,0,0,0.05),0_0_0_1px_rgba(0,0,0,0.1)] outline-none placeholder:text-zinc-400 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 dark:bg-zinc-950 dark:text-white dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.1)] dark:data-[focus]:outline-blue-400"
-        ngpPasswordInput
-        type="password"
-        placeholder="Enter your password"
-        autocomplete="current-password"
-        [formField]="loginForm.password"
-        class="input w-full"
-      />
-      <button
-        class="absolute top-0 right-0 flex h-[2.125rem] w-[2.125rem] cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-lg text-zinc-500 transition-colors duration-150 outline-none data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-blue-500 data-[hover]:text-zinc-700 data-[visible]:text-[#f01e2b] dark:data-[focus-visible]:outline-blue-400 dark:data-[hover]:text-zinc-300 dark:data-[visible]:text-[#ff4651]"
-        ngpButton
-        ngpPasswordToggle
-        ngpPasswordToggleShownAnnouncement=""
-        ngpPasswordToggleHiddenAnnouncement=""
-      >
-        <i
-          [class]="password.isVisible() ? 'bx bx-eye-slash' : 'bx bx-eye'"
-          class="cursor-pointer"
-        ></i>
-      </button>
-    </div>
-  </label>
-
-  <label class="floating-label">
-    <span>Pays</span>
-
+  <div>
     <n-country-select
       [formField]="loginForm.country"
-      label="Pays2"
+      label="Pays"
       class="w-full"
     ></n-country-select>
-  </label>
+  </div>
+
+  <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Job</th>
+          <th>Favorite Color</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th>1</th>
+          <td>Cy Ganderton</td>
+          <td>Quality Control Specialist</td>
+          <td>Blue</td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <th>2</th>
+          <td>Hart Hagerty</td>
+          <td>Desktop Support Technician</td>
+          <td>Purple</td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <th>3</th>
+          <td>Brice Swyre</td>
+          <td>Tax Accountant</td>
+          <td>Red</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <button ngpButton type="submit" [disabled]="loginForm().invalid()" class="btn btn-primary mt-8">
     Submit

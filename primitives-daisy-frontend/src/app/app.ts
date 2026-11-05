@@ -3,9 +3,10 @@ import { RouterOutlet } from '@angular/router';
 import { email, form, FormField, required } from '@angular/forms/signals';
 import { FormsModule } from '@angular/forms';
 import { NgpButton } from 'ng-primitives/button';
-import { NgpInput } from 'ng-primitives/input';
 import { CountrySelect } from './shared/country.select';
-import { NgpPassword, NgpPasswordInput, NgpPasswordToggle } from 'ng-primitives/password';
+import { DaisyTextInput } from './shared/text-input';
+import { DaisyPasswordInput } from './shared/password-input';
+import { environment } from '../environments/environment';
 
 export class LoginObject {
   username!: string;
@@ -19,11 +20,9 @@ export class LoginObject {
     FormField,
     FormsModule,
     NgpButton,
-    NgpInput,
     CountrySelect,
-    NgpPassword,
-    NgpPasswordInput,
-    NgpPasswordToggle,
+    DaisyTextInput,
+    DaisyPasswordInput,
   ],
   selector: 'app-root',
   styleUrl: './app.css',
@@ -47,6 +46,12 @@ export class App {
     required(path.password);
     required(path.country);
   });
+
+  countries = signal<any[]>([]);
+
+  constructor() {
+    this.countries.set(environment.countries);
+  }
 
   submitLogin(event: Event) {
     event.preventDefault();
