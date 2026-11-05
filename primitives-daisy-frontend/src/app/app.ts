@@ -7,6 +7,7 @@ import { CountrySelect } from './shared/country.select';
 import { DaisyTextInput } from './shared/text-input';
 import { DaisyPasswordInput } from './shared/password-input';
 import { environment } from '../environments/environment';
+import { DaisyTable } from './shared/custom-table';
 
 export class LoginObject {
   username!: string;
@@ -23,6 +24,7 @@ export class LoginObject {
     CountrySelect,
     DaisyTextInput,
     DaisyPasswordInput,
+    DaisyTable,
   ],
   selector: 'app-root',
   styleUrl: './app.css',
