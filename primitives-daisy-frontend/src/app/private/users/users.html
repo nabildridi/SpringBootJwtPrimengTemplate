@@ -1,0 +1,16 @@
+<ngx-datatable
+  class="material"
+  [rows]="data()"
+  [columns]="columns"
+  [limit]="10"
+  rowHeight="auto"
+  columnMode="force"
+  [headerHeight]="50"
+  [footerHeight]="50"
+  (page)="loadFromServer($event)"
+  sortType="multi"
+  [externalPaging]="true"
+  [externalSorting]="true"
+  [count]="totalRows()"
+>
+</ngx-datatable>
