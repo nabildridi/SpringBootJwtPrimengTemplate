@@ -5,7 +5,6 @@ import {
   PageEvent,
   DataTableColumnCellDirective,
   DataTableColumnDirective,
-  DataTableColumnHeaderDirective,
 } from '@siemens/ngx-datatable';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
@@ -18,7 +17,6 @@ import { ToastService } from '../../services/toast/toast.service';
     FormsModule,
     DatatableComponent,
     DataTableColumnDirective,
-    DataTableColumnHeaderDirective,
     DataTableColumnCellDirective,
   ],
   templateUrl: './users.html',

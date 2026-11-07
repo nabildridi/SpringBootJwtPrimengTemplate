@@ -1,40 +1,36 @@
-import { Component, input, model, OnInit, signal } from '@angular/core';
+import { Component, input, model, OnInit, Signal, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
-import { NgpPassword, NgpPasswordInput, NgpPasswordToggle } from 'ng-primitives/password';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'n-password-input',
-  imports: [NgpPassword, NgpPasswordInput, NgpPasswordToggle],
+  imports: [],
   template: `
-    <label class="floating-label">
-      <span [class.requ]="required()">{{ label() }}</span>
-
-      <div class="relative w-full" #password="ngpPassword" ngpPassword>
+    <div class="join w-full">
+      <div class="relative w-full join-item border-0">
         <input
-          class="h-[2.125rem] w-full rounded-lg border-none bg-white px-3 pr-10 text-sm tracking-[-0.006em] text-zinc-950 shadow-[0_1px_2px_rgba(0,0,0,0.05),0_0_0_1px_rgba(0,0,0,0.1)] outline-none placeholder:text-zinc-400 focus:outline-2 focus:outline-offset-2 focus:outline-blue-500 data-[focus]:outline-2 data-[focus]:outline-offset-2 data-[focus]:outline-blue-500 dark:bg-zinc-950 dark:text-white dark:shadow-[0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.1)] dark:data-[focus]:outline-blue-400"
-          ngpPasswordInput
-          type="password"
-          [placeholder]="label()"
-          autocomplete="current-password"
+          ngpInput
+          class="peer m-0 block h-14 w-full rounded border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-4 text-base font-normal leading-tight text-neutral-700 transition duration-200 ease-linear placeholder:text-transparent focus:border-primary focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-neutral-700 focus:outline-none peer-focus:text-primary dark:border-neutral-400 dark:text-white dark:autofill:shadow-autofill dark:focus:border-primary dark:peer-focus:text-primary [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+          [id]="inputId"
+          [type]="show() ? 'text' : 'password'"
           [value]="value()"
           (input)="value.set($event.target.value)"
-          class="input w-full"
           [attr.data-invalid]="invalid() ? '' : null"
+          [placeholder]="label()"
+          autofocus
         />
-        <button
-          class="absolute top-0 right-0 flex h-[2.125rem] w-[2.125rem] cursor-pointer items-center justify-center rounded-lg border-none bg-transparent text-lg text-zinc-500 transition-colors duration-150 outline-none data-[focus-visible]:outline-2 data-[focus-visible]:-outline-offset-2 data-[focus-visible]:outline-blue-500 data-[hover]:text-zinc-700 data-[visible]:text-[#f01e2b] dark:data-[focus-visible]:outline-blue-400 dark:data-[hover]:text-zinc-300 dark:data-[visible]:text-[#ff4651]"
-          ngpButton
-          ngpPasswordToggle
-          ngpPasswordToggleShownAnnouncement=""
-          ngpPasswordToggleHiddenAnnouncement=""
+        <label
+          [for]="inputId"
+          class="pointer-events-none absolute left-0 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-neutral-500 transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-primary peer-[:not(:placeholder-shown)]:-translate-y-2 peer-[:not(:placeholder-shown)]:translate-x-[0.15rem] peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-400 dark:peer-focus:text-primary"
+          [class.requ]="required()"
+          >{{ label() }}</label
         >
-          <i
-            [class]="password.isVisible() ? 'bx bx-eye-slash' : 'bx bx-eye'"
-            class="cursor-pointer"
-          ></i>
-        </button>
       </div>
-    </label>
+
+      <button type="button" class="btn btn-square btn-ghost join-item h-14" (click)="toggle()">
+        <i [class]="show() ? 'bx bx-eye-slash' : 'bx bx-eye'" class="cursor-pointer"></i>
+      </button>
+    </div>
   `,
 })
 export class DaisyPasswordInput implements FormValueControl<string | null>, OnInit {
@@ -42,7 +38,13 @@ export class DaisyPasswordInput implements FormValueControl<string | null>, OnIn
   label = input<string>('');
   invalid = input<boolean>(false);
   required = input<boolean>(false);
-  type = input<string>('text');
+
+  inputId: string = uuidv4();
+  show = signal<boolean>(false);
 
   ngOnInit(): void {}
+
+  toggle() {
+    this.show.update((value) => !value);
+  }
 }

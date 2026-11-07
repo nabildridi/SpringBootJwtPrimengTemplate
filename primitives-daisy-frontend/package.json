@@ -24,7 +24,8 @@
     "tslib": "^2.3.0",
     "daisyui": "5.7.50",
     "lodash": "4.18.1",
-    "@siemens/ngx-datatable": "27.1.0"
+    "@siemens/ngx-datatable": "27.1.0",
+    "uuid": "14.0.3"
   },
   "devDependencies": {
     "@angular/build": "^22.2.3",
