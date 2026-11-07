@@ -1,0 +1,236 @@
+/**
+ * Kodon Toast - Visual styling (colors, icons, typography, variants)
+ * All colors customizable via CSS custom properties.
+ */
+
+// Default color palette (can be overridden)
+:host {
+  // Error variant
+  --kodon-toast-error-bg: hsl(0 84% 97%);
+  --kodon-toast-error-border: hsl(0 84% 88%);
+  --kodon-toast-error-text: hsl(0 84% 28%);
+  --kodon-toast-error-icon: hsl(0 84% 50%);
+
+  // Success variant
+  --kodon-toast-success-bg: hsl(142 76% 96%);
+  --kodon-toast-success-border: hsl(142 76% 82%);
+  --kodon-toast-success-text: hsl(142 76% 18%);
+  --kodon-toast-success-icon: hsl(142 76% 36%);
+
+  // Warning variant
+  --kodon-toast-warning-bg: hsl(38 92% 96%);
+  --kodon-toast-warning-border: hsl(38 92% 78%);
+  --kodon-toast-warning-text: hsl(38 92% 22%);
+  --kodon-toast-warning-icon: hsl(38 92% 42%);
+
+  // Info variant
+  --kodon-toast-info-bg: hsl(217 91% 97%);
+  --kodon-toast-info-border: hsl(217 91% 84%);
+  --kodon-toast-info-text: hsl(217 91% 26%);
+  --kodon-toast-info-icon: hsl(217 91% 52%);
+
+  // Loading variant
+  --kodon-toast-loading-bg: hsl(0 0% 100%);
+  --kodon-toast-loading-border: hsl(0 0% 89%);
+  --kodon-toast-loading-text: hsl(0 0% 15%);
+  --kodon-toast-loading-icon: hsl(0 0% 45%);
+
+  // Close button
+  --kodon-toast-close-hover-bg: rgba(0, 0, 0, 0.08);
+}
+
+.kodon-toast-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kodon-toast-message {
+  flex: 1;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  user-select: none;
+  pointer-events: none;
+}
+
+.kodon-toast-close {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  transition:
+    opacity 150ms ease,
+    background-color 150ms ease;
+
+  &:hover {
+    opacity: 1;
+    background-color: var(--kodon-toast-close-hover-bg);
+  }
+
+  &:focus-visible {
+    opacity: 1;
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+}
+
+// ng-primitives starts a swipe unless the pressed element itself is focusable. Pressing ×
+// lands on its icon, which isn't, so a swipe began and the click was lost if the pointer
+// moved a pixel. Presses go through the icon to the button instead.
+.kodon-toast-close > * {
+  pointer-events: none;
+}
+
+// The × is drawn at 24px but takes presses across 44px.
+.kodon-toast-close {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+  }
+}
+
+// Variant: Error
+:host[data-variant='error'] .kodon-toast-content {
+  color: var(--kodon-toast-error-text);
+
+  &::before {
+    background-color: var(--kodon-toast-error-bg);
+    border-color: var(--kodon-toast-error-border);
+  }
+}
+
+:host[data-variant='error'] .kodon-toast-icon {
+  color: var(--kodon-toast-error-icon);
+}
+
+// Variant: Success
+:host[data-variant='success'] .kodon-toast-content {
+  color: var(--kodon-toast-success-text);
+
+  &::before {
+    background-color: var(--kodon-toast-success-bg);
+    border-color: var(--kodon-toast-success-border);
+  }
+}
+
+:host[data-variant='success'] .kodon-toast-icon {
+  color: var(--kodon-toast-success-icon);
+}
+
+// Variant: Warning
+:host[data-variant='warning'] .kodon-toast-content {
+  color: var(--kodon-toast-warning-text);
+
+  &::before {
+    background-color: var(--kodon-toast-warning-bg);
+    border-color: var(--kodon-toast-warning-border);
+  }
+}
+
+:host[data-variant='warning'] .kodon-toast-icon {
+  color: var(--kodon-toast-warning-icon);
+}
+
+// Variant: Info
+:host[data-variant='info'] .kodon-toast-content {
+  color: var(--kodon-toast-info-text);
+
+  &::before {
+    background-color: var(--kodon-toast-info-bg);
+    border-color: var(--kodon-toast-info-border);
+  }
+}
+
+:host[data-variant='info'] .kodon-toast-icon {
+  color: var(--kodon-toast-info-icon);
+}
+
+// Variant: Loading
+:host[data-variant='loading'] .kodon-toast-content {
+  color: var(--kodon-toast-loading-text);
+
+  &::before {
+    background-color: var(--kodon-toast-loading-bg);
+    border-color: var(--kodon-toast-loading-border);
+  }
+}
+
+:host[data-variant='loading'] .kodon-toast-icon {
+  color: var(--kodon-toast-loading-icon);
+}
+
+.kodon-toast-icon {
+  transition: color 200ms ease;
+}
+
+.kodon-toast-spinner {
+  display: flex;
+  animation: kodon-toast-spin 0.8s linear infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation-duration: 2s;
+  }
+}
+
+@keyframes kodon-toast-spin {
+  to {
+    rotate: 360deg;
+  }
+}
+
+// Updated in place (a promise settling, or show() with the same id): the new icon pops
+// in and the new text fades up. Only after an update, never on the first render.
+:host[data-updated] .kodon-toast-icon > * {
+  transition:
+    opacity 250ms ease,
+    scale 300ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 250ms ease;
+
+  @starting-style {
+    opacity: 0;
+    scale: 0.5;
+    filter: blur(2px);
+  }
+}
+
+:host[data-updated] .kodon-toast-message {
+  transition:
+    opacity 250ms ease,
+    translate 250ms cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :host[data-updated] .kodon-toast-icon > * {
+    transition: opacity 150ms ease;
+    @starting-style {
+      scale: 1;
+      filter: none;
+    }
+  }
+
+  :host[data-updated] .kodon-toast-message {
+    transition: opacity 150ms ease;
+    @starting-style {
+      translate: none;
+    }
+  }
+}

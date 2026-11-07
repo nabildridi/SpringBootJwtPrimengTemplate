@@ -1,12 +1,26 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DatatableComponent, PageEvent, TableColumn } from '@siemens/ngx-datatable';
+import {
+  DatatableComponent,
+  PageEvent,
+  DataTableColumnCellDirective,
+  DataTableColumnDirective,
+  DataTableColumnHeaderDirective,
+} from '@siemens/ngx-datatable';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
+import { RequestConverter } from '../../services/table/request-converter';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-users',
-  imports: [FormsModule, DatatableComponent],
+  imports: [
+    FormsModule,
+    DatatableComponent,
+    DataTableColumnDirective,
+    DataTableColumnHeaderDirective,
+    DataTableColumnCellDirective,
+  ],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
@@ -21,48 +35,35 @@ export class Users implements OnInit {
     { prop: 'lastname', name: 'lastname' },
   ];
 
-  constructor(private appHttpService: AppHttpService) {}
+  constructor(
+    private appHttpService: AppHttpService,
+    private requestConverter: RequestConverter,
+    private toastService: ToastService,
+  ) {}
+
   ngOnInit(): void {}
 
-  /*
-  {
-    "count": 0,
-    "pageSize": 10,
-    "limit": 10,
-    "offset": 1,
-    "sorts": [
-        {
-            "dir": "asc",
-            "prop": "label"
-        }
-    ]
-}
-    */
-
   loadFromServer(pageEvent: PageEvent) {
-    //{"first":0,"rows":10,"sortOrder":1,"filters":{"name":{"value":null,"matchMode":"startsWith"},"country.name":{"value":null,"matchMode":"startsWith"},"company":{"value":null,"matchMode":"startsWith"},"representative":{"value":null,"matchMode":"in"}},"globalFilter":null}
+    let request = this.requestConverter.convert(pageEvent);
 
-    let event = {
-      first: pageEvent.offset,
-      rows: pageEvent.pageSize,
-      sortOrder: 1,
-      sortField: 'id',
-      //filters: this.serverFilters,
-      globalFilter: ['id'],
-    };
+    console.log(request);
 
     this.appHttpService
       .topic(HttpTopics.Users)
       .add('paginate')
-      .post(event)
+      .post(request)
       .subscribe({
         next: (json: any) => {
           if (json) {
             this.data.set(json['content']);
             this.totalRows.set(json.totalElements);
+            this.toastService.showSuccess('all good');
           }
         },
         error: (e) => {},
       });
   }
+
+  onEdit(item: any) {}
+  onDelete(row: any) {}
 }

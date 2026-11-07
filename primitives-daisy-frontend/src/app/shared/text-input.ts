@@ -6,7 +6,7 @@ import { NgpInput } from 'ng-primitives/input';
   selector: 'n-text-input',
   imports: [NgpInput],
   template: `
-    <label class="floating-label">
+    <label class="floating-label w-full">
       <span [class.requ]="required()">{{ label() }}</span>
       <input
         ngpInput
@@ -26,6 +26,7 @@ export class DaisyTextInput implements FormValueControl<string | null>, OnInit {
   invalid = input<boolean>(false);
   required = input<boolean>(false);
   type = input<string>('text');
+  icon = input<string | null>(null);
 
   ngOnInit(): void {}
 }

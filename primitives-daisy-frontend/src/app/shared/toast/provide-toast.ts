@@ -1,0 +1,101 @@
+import { InjectionToken, Provider } from '@angular/core';
+import { provideToastConfig } from 'ng-primitives/toast';
+
+export type KodonToastPlacement =
+  | 'top-start'
+  | 'top-center'
+  | 'top-end'
+  | 'bottom-start'
+  | 'bottom-center'
+  | 'bottom-end';
+
+export type KodonSwipeDirection = 'top' | 'right' | 'bottom' | 'left';
+
+/**
+ * Get allowed swipe directions based on placement.
+ * Toasts can only be swiped toward the screen edges they sit against;
+ * centred toasts can also go left or right.
+ */
+export function getSwipeDirections(placement: KodonToastPlacement): KodonSwipeDirection[] {
+  const map: Record<KodonToastPlacement, KodonSwipeDirection[]> = {
+    'top-start': ['top', 'left'],
+    'top-center': ['top', 'left', 'right'],
+    'top-end': ['top', 'right'],
+    'bottom-start': ['bottom', 'left'],
+    'bottom-center': ['bottom', 'left', 'right'],
+    'bottom-end': ['bottom', 'right']
+  };
+  return map[placement];
+}
+
+/** @internal The resolved defaults, for KodonToast to read. */
+export const KODON_TOAST_DEFAULTS = new InjectionToken<{ duration: number; placement: KodonToastPlacement }>(
+  'KODON_TOAST_DEFAULTS',
+  { factory: () => ({ duration: 5000, placement: 'bottom-end' }) }
+);
+
+export interface KodonToastConfig {
+  /**
+   * Where toasts appear on screen.
+   * Swipe directions are auto-calculated: toward the edges the toast sits against,
+   * plus left and right for centred placements.
+   * @default 'bottom-end'
+   */
+  placement?: KodonToastPlacement;
+
+  /**
+   * Auto-dismiss duration in milliseconds.
+   * @default 5000
+   */
+  duration?: number;
+
+  /**
+   * Maximum number of visible toasts.
+   * @default 3
+   */
+  maxToasts?: number;
+
+  /**
+   * Gap between expanded toasts in pixels.
+   * @default 14
+   */
+  gap?: number;
+
+  /**
+   * Distance in pixels required to dismiss via swipe.
+   * @default 100
+   */
+  swipeThreshold?: number;
+}
+
+/**
+ * Provide Kodon toast configuration for your application.
+ *
+ * @example
+ * // app.config.ts
+ * export const appConfig: ApplicationConfig = {
+ *   providers: [
+ *     provideKodonToast({
+ *       placement: 'bottom-end',
+ *       duration: 5000,
+ *       maxToasts: 3
+ *     })
+ *   ]
+ * };
+ */
+export function provideKodonToast(config: KodonToastConfig = {}): Provider[] {
+  const placement = config.placement ?? 'bottom-end';
+  const duration = config.duration ?? 5000;
+
+  return [
+    { provide: KODON_TOAST_DEFAULTS, useValue: { duration, placement } },
+    provideToastConfig({
+      placement,
+      duration,
+      maxToasts: config.maxToasts ?? 3,
+      gap: config.gap ?? 14,
+      swipeThreshold: config.swipeThreshold ?? 100,
+      swipeDirections: getSwipeDirections(placement)
+    })
+  ];
+}

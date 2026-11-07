@@ -25,7 +25,7 @@ import { AppTopbar } from './app.topbar';
               <li class="py-2 ">
                 <button
                   [routerLink]="item.routerLink"
-                  class="btn btn-accent justify-start is-drawer-close:hidden"
+                  class="daisy-btn btn-accent justify-start is-drawer-close:hidden"
                   routerLinkActive
                   #rla="routerLinkActive"
                   [class]="rla.isActive ? 'btn-active' : 'btn-soft'"
@@ -35,7 +35,7 @@ import { AppTopbar } from './app.topbar';
                 </button>
 
                 <button
-                  class="btn btn-square btn-accent is-drawer-open:hidden"
+                  class="daisy-btn btn-square btn-accent is-drawer-open:hidden"
                   [routerLink]="item.routerLink"
                   routerLinkActive
                   #rla="routerLinkActive"

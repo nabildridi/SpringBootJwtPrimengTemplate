@@ -1,18 +1,27 @@
 import { Injectable } from '@angular/core';
+import { KodonToast } from '../../shared/toast/toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ToastService {
-  constructor() {}
+  constructor(private kodonToast: KodonToast) {}
 
-  public showMesssage(severity: any, title: any, message: any) {}
+  public showMesssage(severity: any, title: any, message: any) {
+    if (severity == 'success') {
+      this.kodonToast.success(message);
+    }
+
+    if (severity == 'error') {
+      this.kodonToast.error(message);
+    }
+  }
 
   public showSuccess(message: any) {
-    this.showMesssage('positive', 'Success', message);
+    this.showMesssage('success', 'Success', message);
   }
 
   public showError(message: any) {
-    this.showMesssage('secondary-destructive', 'Error', message);
+    this.showMesssage('error', 'Error', message);
   }
 }

@@ -3,7 +3,7 @@ layer(base);
 
 @import 'tailwindcss';
 @import '../node_modules/@siemens/ngx-datatable/assets/icons.css';
-@import '../node_modules/@siemens/ngx-datatable/themes/material.css';
+@import '../public/css/material.css';
 @plugin 'daisyui' {
   themes:
     corporate --default,
@@ -25,7 +25,7 @@ layer(base);
 }
 
 @utility daisy-btn {
-  @apply btn btn-xs sm:btn-sm md:btn-md lg:btn-lg xl:btn-xl rounded-xl bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
+  @apply btn btn-md rounded-sm bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
 @utility nav-link {

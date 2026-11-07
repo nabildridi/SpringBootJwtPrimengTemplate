@@ -13,7 +13,7 @@ import { LayoutService } from '../../services/layout/layout.service';
             aria-label="open sidebar"
             class="daisy-btn btn-square btn-ghost drawer-button"
           >
-            <i class="bx bx-menu text-3xl "></i>
+            <i class="bx bx-menu text-2xl "></i>
           </label>
           <div class="px-4">Template</div>
         </div>
