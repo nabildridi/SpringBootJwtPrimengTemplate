@@ -45,9 +45,14 @@ export class LoadingInterceptorService implements HttpInterceptor {
       catchError((err: HttpErrorResponse) => {
         let httpStatus: number = err.status;
 
-        if (httpStatus == 401 || httpStatus == 403) {
+        if (httpStatus == 401) {
+          this.toastService.showError('Invalid login/password');
           this.router.navigate(['/login']);
-        } else if (httpStatus == 404 || httpStatus == 503 || httpStatus == 502 || httpStatus == 0) {
+        } else if (httpStatus == 403) {
+          this.toastService.showError('Access Denied');
+        } else if (httpStatus == 404) {
+          this.toastService.showError('Api Not Found');
+        } else if (httpStatus >= 500 || httpStatus == 0) {
           this.toastService.showError('Server down');
         }
         return throwError(() => err);

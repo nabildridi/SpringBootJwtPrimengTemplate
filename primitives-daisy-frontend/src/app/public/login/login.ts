@@ -56,9 +56,7 @@ export class Login implements OnInit {
           this.storageService.setUsername(result.username);
           this.router.navigate(['/private']);
         },
-        error: (error: any) => {
-          this.toastService.showError('Invalid login/password');
-        },
+        error: (error: any) => {},
       });
   }
 }

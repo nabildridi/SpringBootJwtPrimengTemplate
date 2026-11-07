@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid';
         [value]="value()"
         (input)="value.set($event.target.value)"
         [attr.data-invalid]="invalid() ? '' : null"
-        [placeholder]="label()"
+        placeholder=" "
         autofocus
       />
       <label
