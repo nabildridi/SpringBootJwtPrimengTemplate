@@ -2,6 +2,7 @@ import { Component, input, model, OnInit, signal } from '@angular/core';
 import * as lod from 'lodash';
 import { FormValueControl } from '@angular/forms/signals';
 import { environment } from '../../environments/environment';
+import { v4 as uuidv4 } from 'uuid';
 
 import {
   NgpSelect,
@@ -23,18 +24,17 @@ import {
     NgpSelectPortal,
   ],
   template: `
-    <label class="floating-label">
-      <span [class.requ]="required()">{{ label() }}</span>
-      <div class="input w-full" [attr.data-invalid]="invalid() ? '' : null">
-        <div
-          [(ngpSelectValue)]="value"
-          (ngpSelectOpenChange)="onOpen($event)"
-          ngpSelect
-          aria-labelledby="select-search-label"
-          class="w-full"
-        >
-          <div class="flex h-10 justify-between w-full">
-            <div class="content-center">
+    <div class="border border-primary w-full" [attr.data-invalid]="invalid() ? '' : null">
+      <div
+        [(ngpSelectValue)]="value"
+        (ngpSelectOpenChange)="onOpen($event)"
+        ngpSelect
+        aria-labelledby="select-search-label"
+        class="w-full"
+      >
+        <div class="input-floating">
+          <div class="flex h-10 justify-between w-full" [id]="inputId">
+            <div class="flex ml-2 items-center">
               @if (value(); as selected) {
                 <span class="w-full">
                   <i [class]="'fi fi-' + selectedItem().value"></i>
@@ -42,7 +42,7 @@ import {
                 >
               }
             </div>
-            <div class="content-center space-x-2 text-xl">
+            <div class="flex gap-x-2 text-xl mr-2 items-center">
               @if (value()) {
                 <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
               }
@@ -52,40 +52,43 @@ import {
               ></i>
             </div>
           </div>
-          <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full">
-            <div class="w-full p-2 bg-base-200">
-              <label class="input w-full ">
-                <input [value]="term()" (input)="filter($event)" ngpSelectInput class="grow" />
-                <i class="bx bx-search text-base-content/80 my-auto ms-3 size-5 shrink-0"></i>
-              </label>
-            </div>
-            <div
-              class="max-h-52 overflow-y-auto bg-base-200 w-full"
-              ngpSelectList
-              aria-label="Options"
-            >
-              @for (option of countries(); track $index) {
-                <div
-                  [ngpSelectOptionValue]="option.value"
-                  ngpSelectOption
-                  (click)="selectItem(option)"
-                  class="content-center"
-                >
-                  <i [class]="'fi fi-' + option.value"></i>
-                  {{ option.label }}
-                </div>
-              }
-            </div>
-            <!-- outside the listbox, and always rendered so the status is announced -->
-            <div class="empty-message" role="status">
-              @if (countries().length === 0) {
-                No options found
-              }
-            </div>
+          <label class="input-floating-label" [for]="inputId" [class.requ]="required()">{{
+            label()
+          }}</label>
+        </div>
+        <div *ngpSelectPortal ngpSelectDropdown aria-label="Searchable select" class="w-full">
+          <div class="w-full p-2">
+            <label class="input w-full ">
+              <input [value]="term()" (input)="filter($event)" ngpSelectInput class="grow" />
+              <i class="bx bx-search text-base-content/80 my-auto ms-3 size-5 shrink-0"></i>
+            </label>
+          </div>
+          <div
+            class="max-h-52 overflow-y-auto bg-base-200 w-full"
+            ngpSelectList
+            aria-label="Options"
+          >
+            @for (option of countries(); track $index) {
+              <div
+                [ngpSelectOptionValue]="option.value"
+                ngpSelectOption
+                (click)="selectItem(option)"
+                class="content-center"
+              >
+                <i [class]="'fi fi-' + option.value"></i>
+                {{ option.label }}
+              </div>
+            }
+          </div>
+          <!-- outside the listbox, and always rendered so the status is announced -->
+          <div class="empty-message" role="status">
+            @if (countries().length === 0) {
+              No options found
+            }
           </div>
         </div>
       </div>
-    </label>
+    </div>
   `,
   styleUrl: './country-select.css',
 })
@@ -99,6 +102,7 @@ export class CountrySelect implements FormValueControl<string | null>, OnInit {
   opened = signal<boolean>(false);
   selectedItem = signal<any>(null);
   term = signal<string>('');
+  inputId: string = uuidv4();
 
   constructor() {
     this.countries.set(environment.countries);

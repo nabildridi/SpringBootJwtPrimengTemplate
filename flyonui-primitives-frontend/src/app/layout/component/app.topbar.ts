@@ -4,8 +4,10 @@ import { LayoutService } from '../../services/layout/layout.service';
 @Component({
   selector: 'app-topbar',
   imports: [],
-  template: ` <!-- Navbar -->
-    <nav class="navbar shrink-0 w-full bg-base-300 dark:bg-zinc-500 dark:text-white">
+  template: `
+    <!-- Navbar -->
+
+    <nav class="navbar rounded-box shadow-base-300/20 shadow-sm">
       <div class="flex w-full justify-between content-center">
         <div class="flex items-center">
           <label class="daisy-btn btn-square btn-ghost" (click)="toggleDrawer()">
@@ -19,7 +21,8 @@ import { LayoutService } from '../../services/layout/layout.service';
           </button>
         </div>
       </div>
-    </nav>`,
+    </nav>
+  `,
 })
 export class AppTopbar {
   constructor(public layoutService: LayoutService) {}
