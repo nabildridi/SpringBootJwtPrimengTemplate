@@ -10,7 +10,7 @@ interface LoginData {
 }
 
 @Component({
-  imports: [CountrySelect, FormField],
+  imports: [DaisyTextInput, DaisyPasswordInput, FormField],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
   templateUrl: './bobo.html',
@@ -22,6 +22,7 @@ export class Bobo {
   });
 
   loginForm = form(this.loginModel, (fieldPath) => {
-    required(fieldPath.username, { message: 'Email is required' });
+    required(fieldPath.username);
+    required(fieldPath.password);
   });
 }

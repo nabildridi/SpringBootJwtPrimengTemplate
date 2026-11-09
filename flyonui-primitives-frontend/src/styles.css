@@ -12,12 +12,10 @@ layer(base);
 @import '../node_modules/flyonui/variants.css';
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
 
+@custom-variant dark (&:is(.dark *));
+
 * {
   font-family: 'Outfit';
-}
-
-[data-invalid] {
-  @apply border border-error;
 }
 
 @utility requ {

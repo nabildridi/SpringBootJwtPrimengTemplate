@@ -2,32 +2,26 @@ import { Service } from '@angular/core';
 import { DataTablePageEvent, DataTableSortEvent } from '@stackline/angular-data-table-component';
 
 @Service()
-export class RequestConverter {
+export class TableService {
   //{"first":0,"rows":10,"sortOrder":1,"filters":{"name":{"value":null,"matchMode":"startsWith"},"country.name":{"value":null,"matchMode":"startsWith"},"company":{"value":null,"matchMode":"startsWith"},"representative":{"value":null,"matchMode":"in"}},"globalFilter":null}
 
   convert(
     pageEvent: DataTablePageEvent | null,
     sortEvent: DataTableSortEvent | null,
-    rowsPerPage: number,
+    tableEvent: any,
   ): any {
-    let event: any = {
-      rows: rowsPerPage,
-      filters: {},
-      globalFilter: ['id'],
-    };
-
     if (pageEvent) {
-      event.first = (pageEvent.page - 1) * rowsPerPage;
+      tableEvent.first = (pageEvent.page - 1) * tableEvent.rows;
     }
 
     if (sortEvent) {
-      event.first = 0;
-      event.sortField = sortEvent.column.id;
+      tableEvent.first = 0;
+      tableEvent.sortField = sortEvent.column.id;
       let sortDir = sortEvent.direction;
       if (sortDir == 'asc') {
-        event.sortOrder = 1;
+        tableEvent.sortOrder = 1;
       } else {
-        event.sortOrder = -1;
+        tableEvent.sortOrder = -1;
       }
     }
 
@@ -48,6 +42,37 @@ export class RequestConverter {
       event.multiSortMeta = multiSortMeta;
     }*/
 
-    return event;
+    return tableEvent;
+  }
+
+  getFirstPage(): any {
+    let firstPage: DataTablePageEvent = {
+      page: 1,
+      totalRows: 0,
+    };
+
+    return firstPage;
+  }
+
+  getTableEvent(pageSize: number): any {
+    let tableEvent: any = {
+      rows: pageSize,
+      filters: {},
+      globalFilter: ['id'],
+    };
+
+    return tableEvent;
+  }
+
+  makeGlobalSearch(tableEvent: any, filterValue: string): any {
+    tableEvent.first = 0;
+
+    if (filterValue != null || filterValue !== '') {
+      tableEvent.filters = { global: { value: filterValue, matchMode: 'equals' } };
+    } else {
+      tableEvent.filters = {};
+    }
+
+    return tableEvent;
   }
 }

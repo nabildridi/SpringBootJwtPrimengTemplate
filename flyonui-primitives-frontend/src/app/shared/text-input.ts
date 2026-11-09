@@ -7,20 +7,29 @@ import { v4 as uuidv4 } from 'uuid';
   selector: 'n-text-input',
   imports: [NgpInput],
   template: `
-    <div class="input-floating w-full">
-      <input
-        ngpInput
-        [id]="inputId"
-        [type]="type()"
-        [value]="value()"
-        (input)="value.set($event.target.value)"
-        [class.is-invalid]="invalid()"
-        placeholder=" "
-        class="input"
-      />
-      <label class="input-floating-label" [for]="inputId" [class.requ]="required()">{{
-        label()
-      }}</label>
+    <div class="input w-full">
+      <div class="input-floating grow">
+        <input
+          ngpInput
+          [id]="inputId"
+          [type]="type()"
+          [value]="value()"
+          (input)="value.set($event.target.value)"
+          [class.is-invalid]="invalid()"
+          placeholder=" "
+          autocomplete="off"
+        />
+        <label class="input-floating-label" [for]="inputId" [class.requ]="required()">{{
+          label()
+        }}</label>
+      </div>
+
+      @if (value()) {
+        <span
+          class="bx bx-x cursor-pointer text-base-content/80 my-auto ms-3 size-5 shrink-0"
+          (click)="reset()"
+        ></span>
+      }
     </div>
   `,
 })
@@ -35,4 +44,8 @@ export class DaisyTextInput implements FormValueControl<string | null>, OnInit {
   inputId: string = uuidv4();
 
   ngOnInit(): void {}
+
+  reset() {
+    this.value.set(null);
+  }
 }

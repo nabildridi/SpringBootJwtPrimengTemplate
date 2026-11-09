@@ -181,7 +181,7 @@
       <!-- ── RIGHT PANEL (login form) ── -->
 
       <div
-        class="w-full lg:w-[55%] glass border border-white/50 p-8 sm:p-12 flex flex-col justify-center relative overflow-hidden animate-glow-pulse"
+        class="w-full lg:w-[55%] not-dark:glass border border-white/50 p-8 sm:p-12 flex flex-col justify-center relative overflow-hidden animate-glow-pulse dark:bg-mist-800"
       >
         <!-- Mobile logo (visible only on small screens) -->
         <div class="flex lg:hidden items-center gap-2.5 mb-8 animate-slide-up">
@@ -199,13 +199,15 @@
           </div>
           <span
             class="text-lg font-extrabold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent"
-            >Nexus</span
+            >Vinitopia</span
           >
         </div>
 
         <!-- Heading -->
         <div class="mb-8 animate-slide-up delay-100">
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-amber-900 tracking-tight">
+          <h2
+            class="text-2xl sm:text-3xl font-extrabold text-amber-900 dark:text-amber-300 tracking-tight"
+          >
             Sign in to your account
           </h2>
           <p class="text-amber-600/70 mt-2 text-sm">
@@ -249,22 +251,6 @@
             </div>
           </div>
 
-          <!-- Remember + 2FA toggle -->
-          <div class="flex items-center justify-between animate-fade-in delay-400">
-            <label class="flex items-center gap-2.5 cursor-pointer group">
-              <div class="relative">
-                <input type="checkbox" class="sr-only peer" checked />
-                <div
-                  class="w-9 h-5 rounded-full bg-orange-200 peer-checked:bg-gradient-to-r peer-checked:from-orange-400 peer-checked:to-amber-400 transition-all duration-300"
-                ></div>
-                <div
-                  class="absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow-sm peer-checked:translate-x-4 transition-transform duration-300"
-                ></div>
-              </div>
-              <span class="text-sm text-amber-700 font-medium">Remember me</span>
-            </label>
-          </div>
-
           <!-- Submit -->
           <div class="animate-slide-up delay-500 pt-1">
             <button
@@ -290,12 +276,6 @@
             ></span>
           </a>
         </p>
-
-        <!-- Confetti container -->
-        <div
-          id="confettiContainer"
-          class="absolute inset-0 pointer-events-none overflow-hidden"
-        ></div>
       </div>
     </div>
   </div>

@@ -21,9 +21,11 @@ public class JwtTokenService {
 
 	public String generateToken(Authentication authentication) {
 		Instant now = Instant.now();
-		String scope = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
-		JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(now).expiresAt(now.plus(15, ChronoUnit.MINUTES)).subject(authentication.getName())
-				.claim("scope", scope).build();
+		String scope = authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+				.collect(Collectors.joining(" "));
+		JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(now)
+				.expiresAt(now.plus(24, ChronoUnit.HOURS)).subject(authentication.getName()).claim("scope", scope)
+				.build();
 		var encoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
 		return this.encoder.encode(encoderParameters).getTokenValue();
 	}

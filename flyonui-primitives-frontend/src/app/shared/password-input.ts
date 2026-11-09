@@ -16,22 +16,23 @@ import { v4 as uuidv4 } from 'uuid';
           [value]="value()"
           (input)="value.set($event.target.value)"
           [class.is-invalid]="invalid()"
+          autocomplete="off"
         />
         <label class="input-floating-label ms-0" [for]="inputId" [class.requ]="required()">{{
           label()
         }}</label>
       </div>
-      <button
-        type="button"
-        (click)="toggle()"
-        class="block cursor-pointer"
-        aria-label="password toggle"
-      >
+
+      <div class=" shrink-0 space-x-2 content-center">
+        @if (value()) {
+          <span class="bx bx-x cursor-pointer" (click)="reset()"></span>
+        }
         <span
           [class]="show() ? 'bx bx-eye-slash' : 'bx bx-eye'"
-          class="text-base-content/80 password-active:hidden block size-5 shrink-0"
+          class="cursor-pointer"
+          (click)="toggle()"
         ></span>
-      </button>
+      </div>
     </div>
   `,
 })
@@ -48,5 +49,9 @@ export class DaisyPasswordInput implements FormValueControl<string | null>, OnIn
 
   toggle() {
     this.show.update((value) => !value);
+  }
+
+  reset() {
+    this.value.set(null);
   }
 }
