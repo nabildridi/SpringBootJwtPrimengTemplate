@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "primitives-daisy-frontend": {
+    "flyonui-primitives-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -60,10 +60,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "primitives-daisy-frontend:build:production"
+              "buildTarget": "flyonui-primitives-frontend:build:production"
             },
             "development": {
-              "buildTarget": "primitives-daisy-frontend:build:development"
+              "buildTarget": "flyonui-primitives-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

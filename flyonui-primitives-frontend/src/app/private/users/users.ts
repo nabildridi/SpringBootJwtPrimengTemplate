@@ -1,24 +1,18 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
-  DatatableComponent,
-  PageEvent,
-  DataTableColumnCellDirective,
-  DataTableColumnDirective,
-} from '@siemens/ngx-datatable';
+  DataTableModule,
+  DataTablePageEvent,
+  DataTableSortEvent,
+} from '@stackline/angular-data-table-component';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
-import { RequestConverter } from '../../services/table/request-converter';
 import { ToastService } from '../../services/toast/toast.service';
+import { RequestConverter } from '../../services/table/request-converter';
 
 @Component({
   selector: 'app-users',
-  imports: [
-    FormsModule,
-    DatatableComponent,
-    DataTableColumnDirective,
-    DataTableColumnCellDirective,
-  ],
+  imports: [FormsModule, DataTableModule],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
@@ -26,23 +20,40 @@ export class Users implements OnInit {
   data = signal<any[]>([]);
   totalRows = signal<number>(0);
 
+  rowsPerPage = 10;
+
   columns = [
-    { prop: 'id', name: 'Id' },
-    { prop: 'username', name: 'Username' },
-    { prop: 'firstname', name: 'firstname' },
-    { prop: 'lastname', name: 'lastname' },
+    { id: 'id', name: 'Id', sortable: true },
+    { id: 'username', name: 'Username', sortable: true },
+    { id: 'firstname', name: 'firstname', sortable: true },
+    { id: 'lastname', name: 'lastname', sortable: true },
   ];
 
   constructor(
     private appHttpService: AppHttpService,
-    private requestConverter: RequestConverter,
     private toastService: ToastService,
+    private requestConverter: RequestConverter,
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let settings: DataTablePageEvent = {
+      page: 1,
+      totalRows: 0,
+    };
+    this.loadFromServer(settings, null);
+  }
 
-  loadFromServer(pageEvent: PageEvent) {
-    let request = this.requestConverter.convert(pageEvent);
+  sort(sortEvent: DataTableSortEvent) {
+    this.loadFromServer(null, sortEvent);
+  }
+
+  paginate(pageEvent: DataTablePageEvent) {
+    this.loadFromServer(pageEvent, null);
+  }
+
+  loadFromServer(pageEvent: DataTablePageEvent | null, sortEvent: DataTableSortEvent | null) {
+    console.log(pageEvent);
+    let request = this.requestConverter.convert(pageEvent, sortEvent, this.rowsPerPage);
 
     console.log(request);
 

@@ -1,5 +1,5 @@
 {
-  "name": "primitives-daisy-frontend",
+  "name": "flyonui-primitives-frontend",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -24,7 +24,7 @@
     "tslib": "^2.3.0",
     "flyonui": "2.4.1",
     "lodash": "4.18.1",
-    "@siemens/ngx-datatable": "27.1.0",
+    "@stackline/angular-data-table-component": "22.1.7",
     "uuid": "14.0.3",
     "ngx-spinner": "^22.0.1"
   },
