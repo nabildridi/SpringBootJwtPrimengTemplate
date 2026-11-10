@@ -24,9 +24,7 @@ export class Users implements AfterViewInit {
 
   data = signal<any[]>([]);
   totalRows = signal<number>(0);
-
   tableEvent: any;
-
   columns: any[] = [];
   globalFilterText = '';
 
@@ -60,23 +58,8 @@ export class Users implements AfterViewInit {
     this.loadFromServer(this.tableEvent);
   }
 
-  loadFromServer(tableEvent: any) {
-    const isPageEvent = (event: any): event is DataTablePageEvent =>
-      (event as DataTablePageEvent).page !== undefined;
-    const isSortEvent = (event: any): event is DataTableSortEvent =>
-      (event as DataTableSortEvent).direction !== undefined;
-
-    let pageEvent: DataTablePageEvent | null = null;
-    if (isPageEvent(tableEvent)) {
-      pageEvent = <DataTablePageEvent>tableEvent;
-    }
-
-    let sortEvent: DataTableSortEvent | null = null;
-    if (isSortEvent(tableEvent)) {
-      sortEvent = <DataTableSortEvent>tableEvent;
-    }
-
-    this.tableEvent = this.tableService.convert(pageEvent, sortEvent, this.tableEvent);
+  loadFromServer(receivedEvent: any) {
+    this.tableEvent = this.tableService.prepare(receivedEvent, this.tableEvent);
 
     this.appHttpService
       .topic(HttpTopics.Users)

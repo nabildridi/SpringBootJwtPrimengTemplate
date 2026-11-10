@@ -45,7 +45,7 @@ export class TableService {
     return tableEvent;
   }
 
-  getFirstPage(): any {
+  getFirstPage(): DataTablePageEvent {
     let firstPage: DataTablePageEvent = {
       page: 1,
       totalRows: 0,
@@ -73,6 +73,26 @@ export class TableService {
       tableEvent.filters = {};
     }
 
+    return tableEvent;
+  }
+
+  prepare(receivedEvent: any, tableEvent: any): any {
+    const isPageEvent = (event: any): event is DataTablePageEvent =>
+      (event as DataTablePageEvent).page !== undefined;
+    const isSortEvent = (event: any): event is DataTableSortEvent =>
+      (event as DataTableSortEvent).direction !== undefined;
+
+    let pageEvent: DataTablePageEvent | null = null;
+    if (isPageEvent(receivedEvent)) {
+      pageEvent = <DataTablePageEvent>receivedEvent;
+    }
+
+    let sortEvent: DataTableSortEvent | null = null;
+    if (isSortEvent(receivedEvent)) {
+      sortEvent = <DataTableSortEvent>receivedEvent;
+    }
+
+    tableEvent = this.convert(pageEvent, sortEvent, tableEvent);
     return tableEvent;
   }
 }
