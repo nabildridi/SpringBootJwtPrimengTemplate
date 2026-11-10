@@ -4,6 +4,7 @@ import { form, required, FormField } from '@angular/forms/signals';
 import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
 import { NgpButton } from 'ng-primitives/button';
+import { DaisySelectInput } from '../../shared/select-input';
 
 interface LoginData {
   username: string;
@@ -11,14 +12,14 @@ interface LoginData {
 }
 
 @Component({
-  imports: [DaisyTextInput, DaisyPasswordInput, FormField, NgpButton],
+  imports: [DaisyTextInput, DaisyPasswordInput, FormField, NgpButton, DaisySelectInput],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
   templateUrl: './bobo.html',
 })
 export class Bobo {
   loginModel = signal<LoginData>({
-    username: '',
+    username: 'fr',
     password: '',
   });
 
