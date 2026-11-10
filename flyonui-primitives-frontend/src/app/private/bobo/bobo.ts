@@ -3,6 +3,7 @@ import { CountrySelect } from '../../shared/country.select';
 import { form, required, FormField } from '@angular/forms/signals';
 import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
+import { NgpButton } from 'ng-primitives/button';
 
 interface LoginData {
   username: string;
@@ -10,7 +11,7 @@ interface LoginData {
 }
 
 @Component({
-  imports: [DaisyTextInput, DaisyPasswordInput, FormField],
+  imports: [DaisyTextInput, DaisyPasswordInput, FormField, NgpButton],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
   templateUrl: './bobo.html',
