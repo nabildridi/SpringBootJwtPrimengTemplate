@@ -16,27 +16,8 @@ import { LayoutService } from '../../services/layout/layout.service';
         tabindex="-1"
         [class]="layoutService.sidebarOpened() ? '' : 'minified'"
       >
-        <div
-          class="drawer-header  overlay-minified:px-3.75 py-2 w-full flex items-center justify-between gap-3"
-        >
-          <h3 class="drawer-title text-xl font-semibold overlay-minified:hidden">FlyonUI</h3>
-          <div class="hidden sm:block">
-            <!-- Toggle Button -->
-            <button
-              type="button"
-              class="daisy-btn btn-circle btn-text"
-              aria-haspopup="dialog"
-              aria-expanded="false"
-              aria-controls="collapsible-mini-sidebar"
-              aria-label="Minify navigation"
-              data-overlay-minifier="#collapsible-mini-sidebar"
-              (click)="layoutService.toggleDrawer()"
-            >
-              <span class="bx bx-menu"></span>
-              <span class="sr-only">Navigation Toggle</span>
-            </button>
-            <!-- End Toggle Button -->
-          </div>
+        <div class="drawer-header  overlay-minified:px-3.75 py-2 w-full flex items-center gap-3">
+          <h3 class="drawer-title text-xl font-semibold overlay-minified:hidden">Vinitopia</h3>
         </div>
         <div class="drawer-body px-2 pt-4">
           <ul class="menu p-0">
@@ -59,7 +40,10 @@ import { LayoutService } from '../../services/layout/layout.service';
         </div>
       </aside>
       <!-- Right column: header on top, main fills the rest -->
-      <div class="flex ml-16 min-w-0  flex-1 flex-col">
+      <div
+        class="flex  min-w-0  flex-1 flex-col"
+        [class]="layoutService.sidebarOpened() ? 'ml-66' : 'ml-16'"
+      >
         <app-topbar></app-topbar>
 
         <!-- The only scrollable area -->
