@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap')
 layer(base);
-
-@import 'tailwindcss';
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
-@plugin 'daisyui' {
+@import 'tailwindcss';
+@plugin "flyonui" {
   themes:
     corporate --default,
-    business --prefersdark;
+    vscode --prefersdark,
+    gourmet;
 }
+@import 'flyonui/variants.css';
+@source "../node_modules/flyonui/flyonui.js";
 
 @custom-variant dark (&:is(.dark *));
 

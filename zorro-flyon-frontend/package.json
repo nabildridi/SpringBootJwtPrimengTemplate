@@ -24,7 +24,7 @@
     "@stackline/angular-data-table-component": "22.1.7",
     "uuid": "14.0.3",
     "ngx-spinner": "^22.0.1",
-    "daisyui": "5.7.50"
+    "flyonui": "^2.4.1"
   },
   "devDependencies": {
     "@angular/build": "^22.2.5",

@@ -1,0 +1,36 @@
+<ng-template #actionsCell let-row let-value="value">
+  <button class="btn">Default</button>
+  <button class="btn btn-primary">Primary</button>
+</ng-template>
+
+<div class="card w-full border">
+  <div class="card-body">
+    <div class="card-title">
+      <div class="input">
+        <span class="bx bx-search text-base-content/80 my-auto me-3 size-5 shrink-0"></span>
+        <input
+          type="search"
+          [value]="globalFilterText"
+          class="grow"
+          placeholder="Rechercher"
+          (input)="searchGlobalFilter($any($event.target).value)"
+        />
+      </div>
+    </div>
+
+    <stackline-data-table
+      [theme]="layoutService.darkMode() ? 'dark' : 'default'"
+      [columns]="columns"
+      [data]="data()"
+      [pagination]="true"
+      [paginationServer]="true"
+      [paginationTotalRows]="totalRows()"
+      [paginationPerPage]="tableEvent.rows"
+      (pageChange)="loadFromServer($event)"
+      [sortServer]="true"
+      (sortChange)="loadFromServer($event)"
+      [paginationRowsPerPageOptions]="[]"
+    >
+    </stackline-data-table>
+  </div>
+</div>
