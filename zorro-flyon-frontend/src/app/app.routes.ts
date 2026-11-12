@@ -3,8 +3,8 @@ import { Login } from './public/login/login';
 import { NotFound } from './public/not-found/not-found';
 import { Landing } from './public/landing/landing';
 import { Users } from './private/users/users';
-import { AppLayout } from './layout/component/app.layout';
 import { Bobo } from './private/bobo/bobo';
+import { AppLayout } from './layout/app.layout';
 
 export const routes: Routes = [
   {

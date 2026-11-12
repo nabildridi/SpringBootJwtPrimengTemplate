@@ -1,12 +1,6 @@
 import { AfterViewInit, Component, OnInit, signal, TemplateRef, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  DataTableCellContext,
-  DataTableModule,
-  DataTablePageEvent,
-  DataTableSortEvent,
-  DataTableStateChangeEvent,
-} from '@stackline/angular-data-table-component';
+import { NzTableModule, NzTableQueryParams } from 'ng-zorro-antd/table';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
 import { ToastService } from '../../services/toast/toast.service';
@@ -15,56 +9,44 @@ import { LayoutService } from '../../services/layout/layout.service';
 
 @Component({
   selector: 'app-users',
-  imports: [FormsModule, DataTableModule],
+  imports: [FormsModule, NzTableModule],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
-export class Users implements AfterViewInit {
-  @ViewChild('actionsCell') actionsCell!: TemplateRef<any>;
-
+export class Users implements OnInit {
   data = signal<any[]>([]);
   totalRows = signal<number>(0);
-  tableEvent: any;
-  columns: any[] = [];
   globalFilterText = '';
+  readonly pageSize = 10;
 
   constructor(
     private appHttpService: AppHttpService,
     private toastService: ToastService,
     private tableService: TableService,
     public layoutService: LayoutService,
-  ) {
-    this.tableEvent = this.tableService.getTableEvent(10);
-  }
-
-  ngAfterViewInit(): void {
-    this.columns = [
-      { id: 'id', name: 'Id', sortable: true },
-      { id: 'username', name: 'Username', sortable: true },
-      { id: 'firstname', name: 'firstname', sortable: true },
-      { id: 'lastname', name: 'lastname', sortable: true },
-      { id: 'actions', name: 'Actions', cellTemplate: this.actionsCell },
-    ];
-  }
+  ) {}
 
   ngOnInit(): void {
-    let firstPage = this.tableService.getFirstPage();
-    this.loadFromServer(firstPage);
+    //let firstPage = this.tableService.getFirstPage();
+    //this.loadFromServer(firstPage);
   }
 
   searchGlobalFilter(value: string) {
     this.globalFilterText = value || '';
-    this.tableEvent = this.tableService.makeGlobalSearch(this.tableEvent, this.globalFilterText);
-    this.loadFromServer(this.tableEvent);
+    let output = this.tableService.makeGlobalSearch(this.pageSize, this.globalFilterText);
+    this.sendRequest(output);
   }
 
-  loadFromServer(receivedEvent: any) {
-    this.tableEvent = this.tableService.prepare(receivedEvent, this.tableEvent);
+  loadFromServer(receivedEvent: NzTableQueryParams) {
+    let request = this.tableService.convert(receivedEvent);
+    this.sendRequest(request);
+  }
 
+  sendRequest(request: any) {
     this.appHttpService
       .topic(HttpTopics.Users)
       .add('paginate')
-      .post(this.tableEvent)
+      .post(request)
       .subscribe({
         next: (json: any) => {
           if (json) {

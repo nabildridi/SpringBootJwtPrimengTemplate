@@ -1,34 +1,31 @@
 import { Component, input, model, OnInit, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
+import { NzInputModule } from 'ng-zorro-antd/input';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'n-text-input',
-  imports: [],
+  imports: [NzInputModule],
   template: `
-    <div class="input w-full">
-      <div class="input-floating grow">
+    <label class="floating-label">
+      <span [class.requ]="required()">{{ label() }}</span>
+      <nz-input-wrapper>
+        <i nzInputPrefix class="bx bx-user"></i>
         <input
+          nz-input
           [id]="inputId"
           [type]="type()"
           [value]="value()"
           (input)="value.set($event.target.value)"
-          [class.is-invalid]="invalid()"
-          placeholder=" "
+          [nzStatus]="invalid() ? 'error' : ''"
+          [placeholder]="label()"
           autocomplete="off"
         />
-        <label class="input-floating-label" [for]="inputId" [class.requ]="required()">{{
-          label()
-        }}</label>
-      </div>
-
-      @if (value()) {
-        <span
-          class="bx bx-x cursor-pointer text-base-content/80 my-auto ms-3 size-5 shrink-0"
-          (click)="reset()"
-        ></span>
-      }
-    </div>
+        @if (value()) {
+          <i nzInputSuffix class="bx bx-x cursor-pointer" (click)="reset()"></i>
+        }
+      </nz-input-wrapper>
+    </label>
   `,
 })
 export class DaisyTextInput implements FormValueControl<string | null>, OnInit {

@@ -1,8 +1,3 @@
-<ng-template #actionsCell let-row let-value="value">
-  <button class="btn">Default</button>
-  <button class="btn btn-primary">Primary</button>
-</ng-template>
-
 <div class="card w-full border">
   <div class="card-body">
     <div class="card-title">
@@ -18,19 +13,34 @@
       </div>
     </div>
 
-    <stackline-data-table
-      [theme]="layoutService.darkMode() ? 'dark' : 'default'"
-      [columns]="columns"
-      [data]="data()"
-      [pagination]="true"
-      [paginationServer]="true"
-      [paginationTotalRows]="totalRows()"
-      [paginationPerPage]="tableEvent.rows"
-      (pageChange)="loadFromServer($event)"
-      [sortServer]="true"
-      (sortChange)="loadFromServer($event)"
-      [paginationRowsPerPageOptions]="[]"
+    <nz-table
+      nzShowSizeChanger
+      [nzData]="data()"
+      [nzFrontPagination]="false"
+      [nzTotal]="totalRows()"
+      [nzPageSize]="pageSize"
+      (nzQueryParams)="loadFromServer($event)"
     >
-    </stackline-data-table>
+      <thead>
+        <tr>
+          <th nzColumnKey="id" [nzSortFn]="true">id</th>
+          <th nzColumnKey="username" [nzSortFn]="true">username</th>
+          <th nzColumnKey="lastname" [nzSortFn]="true">lastname</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of data(); track $index) {
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.username }}</td>
+            <td>{{ item.lastname }}</td>
+            <td>
+              <button class="btn">Default</button> <button class="btn btn-primary">Primary</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </nz-table>
   </div>
 </div>

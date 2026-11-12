@@ -1,39 +1,40 @@
 import { Component, input, model, OnInit, Signal, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { v4 as uuidv4 } from 'uuid';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'n-password-input',
-  imports: [],
+  imports: [NzInputModule],
   template: `
-    <div class="input w-full">
-      <div class="input-floating grow">
+    <label class="floating-label">
+      <span [class.requ]="required()">{{ label() }}</span>
+      <nz-input-wrapper>
+        <i nzInputPrefix class="bx bx-user"></i>
+
         <input
-          ngpInput
+          nz-input
           [id]="inputId"
           [type]="show() ? 'text' : 'password'"
-          placeholder=" "
           [value]="value()"
           (input)="value.set($event.target.value)"
-          [class.is-invalid]="invalid()"
+          [nzStatus]="invalid() ? 'error' : ''"
+          [placeholder]="label()"
           autocomplete="off"
         />
-        <label class="input-floating-label ms-0" [for]="inputId" [class.requ]="required()">{{
-          label()
-        }}</label>
-      </div>
 
-      <div class=" shrink-0 space-x-2 content-center">
         @if (value()) {
-          <span class="bx bx-x cursor-pointer" (click)="reset()"></span>
+          <i nzInputSuffix class="bx bx-x cursor-pointer" (click)="reset()"></i>
         }
-        <span
+
+        <i
+          nzInputSuffix
           [class]="show() ? 'bx bx-eye-slash' : 'bx bx-eye'"
           class="cursor-pointer"
           (click)="toggle()"
-        ></span>
-      </div>
-    </div>
+        ></i>
+      </nz-input-wrapper>
+    </label>
   `,
 })
 export class DaisyPasswordInput implements FormValueControl<string | null>, OnInit {

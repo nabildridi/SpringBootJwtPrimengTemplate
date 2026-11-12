@@ -1,49 +1,56 @@
-import { Component, HostListener, signal } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { AppTopbar } from './app.topbar';
-import { LayoutService } from '../../services/layout/layout.service';
 
 @Component({
   selector: 'app-layout',
   imports: [RouterModule, AppTopbar],
   template: `
-    <div class="flex overflow-hidden w-screen h-screen ">
-      <aside
-        id="collapsible-mini-sidebar"
-        class="overlay [--auto-close:sm] overlay-minified:w-17  sm:shadow-none overlay-open:translate-x-0 drawer drawer-start hidden w-66  sm:flex sm:translate-x-0 border-e border-base-content/20"
-        role="dialog"
-        tabindex="-1"
-        [class]="layoutService.sidebarOpened() ? '' : 'minified'"
-      >
-        <div class="drawer-header  overlay-minified:px-3.75 py-2 w-full flex items-center gap-3">
-          <h3 class="drawer-title text-xl font-semibold overlay-minified:hidden">Vinitopia</h3>
-        </div>
-        <div class="drawer-body px-2 pt-4">
-          <ul class="menu p-0">
+    <div
+      class="flex overflow-hidden w-screen h-screen dark:bg-gray-700 bg-gray-100 drawer lg:drawer-open"
+    >
+      <input id="my-drawer-4" type="checkbox" class="drawer-toggle inline" />
+
+      <!-- Vertical navigation: full height, never scrolls with the page -->
+      <div class="drawer-side is-drawer-close:overflow-visible ">
+        <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
+        <div
+          class="flex min-h-full flex-col items-start bg-base-300 dark:bg-zinc-500 is-drawer-close:w-16 is-drawer-open:w-64"
+        >
+          <!-- Sidebar content here -->
+          <!-- Navigation Links -->
+          <ul class="menu w-full grow mt-16 content-center">
             @for (item of menuItems; track $index) {
               <li class="py-2 ">
                 <button
                   [routerLink]="item.routerLink"
-                  class="daisy-btn justify-start"
+                  class="daisy-btn btn-accent justify-start is-drawer-close:hidden"
                   routerLinkActive
                   #rla="routerLinkActive"
-                  [class]="rla.isActive ? 'btn-primary btn-active' : 'btn-outline'"
+                  [class]="rla.isActive ? 'btn-active' : 'btn-soft'"
                 >
                   <i [class]="'bx bx-' + item.icon"></i>
+                  {{ item.label }}
+                </button>
 
-                  <span class="overlay-minified:hidden">{{ item.label }}</span>
+                <button
+                  class="daisy-btn btn-square btn-accent is-drawer-open:hidden"
+                  [routerLink]="item.routerLink"
+                  routerLinkActive
+                  #rla="routerLinkActive"
+                  [class]="rla.isActive ? 'btn-active' : 'btn-ghost'"
+                >
+                  <i [class]="'bx bx-' + item.icon"></i>
                 </button>
               </li>
             }
           </ul>
         </div>
-      </aside>
+      </div>
+
       <!-- Right column: header on top, main fills the rest -->
-      <div
-        class="flex  min-w-0  flex-1 flex-col"
-        [class]="layoutService.sidebarOpened() ? 'ml-66' : 'ml-16'"
-      >
+      <div class="flex min-w-0  flex-1 flex-col drawer-content">
         <app-topbar></app-topbar>
 
         <!-- The only scrollable area -->
@@ -72,13 +79,13 @@ export class AppLayout {
 
     {
       label: 'Components Tester',
-      icon: 'test-tube',
+      icon: 'test-tube-diagonal',
       routerLink: '/private/tester',
       routerLinkActiveOptions: { exact: true },
     },
     {
       label: 'Stepper with MultiForms',
-      icon: 'steps-up',
+      icon: 'door-stairwell',
       routerLink: '/private/stepper',
       routerLinkActiveOptions: { exact: true },
     },
@@ -89,6 +96,5 @@ export class AppLayout {
       routerLinkActiveOptions: { exact: true },
     },
   ];
-
-  constructor(public layoutService: LayoutService) {}
+  constructor() {}
 }

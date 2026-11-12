@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap')
 layer(base);
-@import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
+
 @import 'tailwindcss';
-@plugin "flyonui" {
+@import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
+@plugin 'daisyui' {
   themes:
     corporate --default,
-    vscode --prefersdark,
-    gourmet;
+    business --prefersdark;
 }
-@import 'flyonui/variants.css';
-@source "../node_modules/flyonui/flyonui.js";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -26,7 +24,7 @@ layer(base);
 }
 
 @utility daisy-btn {
-  @apply btn btn-md rounded-sm bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
+  @apply btn btn-md  bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
 @utility nav-link {
