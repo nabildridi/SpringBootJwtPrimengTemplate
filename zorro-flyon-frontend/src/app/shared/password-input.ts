@@ -10,7 +10,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     <label class="floating-label">
       <span [class.requ]="required()">{{ label() }}</span>
       <nz-input-wrapper>
-        <i nzInputPrefix class="bx bx-user"></i>
+        <i nzInputPrefix class="bx bx-key"></i>
 
         <input
           nz-input
@@ -21,6 +21,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
           [nzStatus]="invalid() ? 'error' : ''"
           [placeholder]="label()"
           autocomplete="off"
+          [nzVariant]="'outlined'"
+          nzSize="large"
         />
 
         @if (value()) {

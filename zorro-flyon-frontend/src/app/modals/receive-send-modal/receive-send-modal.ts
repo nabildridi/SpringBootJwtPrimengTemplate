@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 
 @Component({
   imports: [],
@@ -6,4 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './receive-send-modal.css',
   templateUrl: './receive-send-modal.html',
 })
-export class ReceiveSendModal {}
+export class ReceiveSendModal {
+  constructor(
+    @Inject(NZ_MODAL_DATA) public data: any,
+    private modalRef: NzModalRef,
+  ) {}
+
+  close() {
+    this.modalRef.destroy();
+  }
+}

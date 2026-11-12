@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
     <label class="floating-label">
       <span [class.requ]="required()">{{ label() }}</span>
       <nz-input-wrapper>
-        <i nzInputPrefix class="bx bx-user"></i>
+        <i nzInputPrefix [class]="'bx bx-' + icon()"></i>
         <input
           nz-input
           [id]="inputId"
@@ -20,6 +20,8 @@ import { v4 as uuidv4 } from 'uuid';
           [nzStatus]="invalid() ? 'error' : ''"
           [placeholder]="label()"
           autocomplete="off"
+          [nzVariant]="'outlined'"
+          nzSize="large"
         />
         @if (value()) {
           <i nzInputSuffix class="bx bx-x cursor-pointer" (click)="reset()"></i>
