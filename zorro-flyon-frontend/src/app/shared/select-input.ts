@@ -10,21 +10,24 @@ import { FormsModule } from '@angular/forms';
   selector: 'n-select-input',
   imports: [NzSelectModule, FormsModule],
   template: `
-    <nz-select
-      nzShowSearch
-      nzAllowClear
-      nzPlaceHolder="Select OS"
-      class="w-full"
-      [nzStatus]="invalid() ? 'error' : ''"
-      (nzOnClear)="reset()"
-      [(ngModel)]="value"
-    >
-      @for (option of countries(); track $index) {
-        <nz-option nzCustomContent [nzLabel]="option.label" [nzValue]="option.value">
-          <i [class]="'z-0 fi fi-' + option.value"></i> {{ option.label }}
-        </nz-option>
-      }
-    </nz-select>
+    <label class="floating-label">
+      <span [class.requ]="required()">{{ label() }}</span>
+      <nz-select
+        nzShowSearch
+        nzAllowClear
+        nzPlaceHolder=" "
+        class="w-full"
+        [nzStatus]="invalid() ? 'error' : ''"
+        (nzOnClear)="reset()"
+        [(ngModel)]="value"
+      >
+        @for (option of countries(); track $index) {
+          <nz-option nzCustomContent [nzLabel]="option.label" [nzValue]="option.value">
+            <i [class]="'z-0 fi fi-' + option.value"></i> {{ option.label }}
+          </nz-option>
+        }
+      </nz-select>
+    </label>
   `,
 })
 export class DaisySelectInput implements FormValueControl<string | null>, OnInit {

@@ -3,6 +3,7 @@ import { form, required, FormField } from '@angular/forms/signals';
 import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
 import { DaisySelectInput } from '../../shared/select-input';
+import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 
 interface LoginData {
   username: string;
@@ -10,7 +11,7 @@ interface LoginData {
 }
 
 @Component({
-  imports: [DaisyTextInput, DaisyPasswordInput, FormField, DaisySelectInput],
+  imports: [DaisyTextInput, DaisyPasswordInput, FormField, DaisySelectInput, NzCollapseModule],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
   templateUrl: './bobo.html',

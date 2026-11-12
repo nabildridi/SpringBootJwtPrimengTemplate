@@ -1,9 +1,11 @@
-<form class="flex flex-col mb-8 space-y-8" autocomplete="off">
-  <n-select-input [formField]="loginForm.username" label="Select country"></n-select-input>
+<nz-collapse>
+  <nz-collapse-panel nzHeader="Ingrédients" [nzActive]="true">
+    <n-select-input [formField]="loginForm.username" label="Select country"></n-select-input>
+  </nz-collapse-panel>
+</nz-collapse>
 
-  <!--
+<!--
   <n-password-input [formField]="loginForm.username" label="Texte"></n-password-input>
   -->
-</form>
 
 <button class="btn btn-primary">Open modal</button>
