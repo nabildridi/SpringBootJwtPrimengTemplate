@@ -21,7 +21,7 @@ import { v4 as uuidv4 } from 'uuid';
           [placeholder]="label()"
           autocomplete="off"
           [nzVariant]="'outlined'"
-          nzSize="large"
+          class="h-10"
         />
         @if (value()) {
           <i nzInputSuffix class="bx bx-x cursor-pointer" (click)="reset()"></i>

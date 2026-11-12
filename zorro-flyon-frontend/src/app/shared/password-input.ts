@@ -22,7 +22,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
           [placeholder]="label()"
           autocomplete="off"
           [nzVariant]="'outlined'"
-          nzSize="large"
+          class="h-10"
         />
 
         @if (value()) {
