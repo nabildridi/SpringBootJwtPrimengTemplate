@@ -26,9 +26,9 @@ export const appConfig: ApplicationConfig = {
       useClass: LoadingInterceptorService,
       multi: true,
     },
-    provideAppInitializer(() => {
-      const configurationService = inject(ConfigurationService);
-      return configurationService.load();
-    }),
+    //provideAppInitializer(() => {
+    //const configurationService = inject(ConfigurationService);
+    //return configurationService.load();
+    //}),
   ],
 };

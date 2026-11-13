@@ -16,7 +16,7 @@ import com.turkraft.springfilter.boot.Filter;
 import com.turkraft.springfilter.boot.Pagination;
 
 @RestController
-@RequestMapping("/rest/private/users")
+@RequestMapping("/api/private/users")
 public class UsersController {
 
 	private static Logger logger = LoggerFactory.getLogger(UsersController.class);

@@ -1,15 +1,54 @@
 <nz-collapse>
-  <nz-collapse-panel nzHeader="Ingrédients" [nzActive]="true">
-    <n-select-input [formField]="loginForm.username" label="Select country"></n-select-input>
-  </nz-collapse-panel>
+  <nz-collapse-panel nzHeader="Ingrédients" [nzActive]="true"> </nz-collapse-panel>
 </nz-collapse>
-
-<!--
-  
-  -->
 
 <button class="btn btn-primary" (click)="openModal()">Open modal</button>
 
-<div class="mb-8 mt-8"></div>
+<form (submit)="submitLogin($event)" class="space-y-8 mt-8">
+  <div>
+    <n-text-input
+      [formField]="pageForm.username"
+      label="Email"
+      type="email"
+      icon="user"
+    ></n-text-input>
+  </div>
 
-<n-text-input [formField]="loginForm.username" label="Texte" icon="qr"></n-text-input>
+  <div>
+    <n-password-input [formField]="pageForm.password" label="Mot de passe"></n-password-input>
+  </div>
+
+  <div>
+    <n-country-select-input
+      [formField]="pageForm.country"
+      label="Select country"
+    ></n-country-select-input>
+  </div>
+
+  <div>
+    <n-select-input
+      [formField]="pageForm.color"
+      label="Select a color"
+      [listItems]="availableColors"
+    ></n-select-input>
+  </div>
+
+  <div>
+    <n-multi-button-selector
+      [formField]="pageForm.colors"
+      label="Select multiple colors"
+      [listItems]="availableColors"
+    ></n-multi-button-selector>
+  </div>
+
+  <div>
+    <n-tristate
+      [formField]="pageForm.triholder"
+      falseLabel="Non"
+      trueLabel="Oui"
+      nullLabel="Inconnu"
+    ></n-tristate>
+  </div>
+
+  <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
+</form>

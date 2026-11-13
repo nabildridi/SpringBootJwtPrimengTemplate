@@ -18,7 +18,7 @@ export class LayoutService {
 
     if (this.darkMode() == true) {
       element?.classList.add('dark');
-      document.querySelector('html')?.setAttribute('data-theme', 'vscode');
+      document.querySelector('html')?.setAttribute('data-theme', 'night');
     } else {
       element?.classList.remove('dark');
       document.querySelector('html')?.setAttribute('data-theme', 'corporate');
@@ -31,7 +31,7 @@ export class LayoutService {
     element?.classList.toggle('dark');
 
     if (this.darkMode() == true) {
-      document.querySelector('html')?.setAttribute('data-theme', 'vscode');
+      document.querySelector('html')?.setAttribute('data-theme', 'night');
     } else {
       document.querySelector('html')?.setAttribute('data-theme', 'corporate');
     }

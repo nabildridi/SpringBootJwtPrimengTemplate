@@ -17,7 +17,7 @@ import tools.jackson.databind.ObjectMapper;
 import tools.jackson.databind.node.ObjectNode;
 
 @RestController
-@RequestMapping("/rest/public/auth")
+@RequestMapping("/api/public/auth")
 public class AuthenticationController {
 
 	private static Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
