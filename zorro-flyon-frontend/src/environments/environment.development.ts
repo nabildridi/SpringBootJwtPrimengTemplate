@@ -1,5 +1,24 @@
 export const environment = {
   backendUrl: 'http://dev.local',
+  colors: [
+    { value: 'val1', label: 'colors.val1', vf: 'Rouge' },
+    { value: 'val2', label: 'colors.val2', vf: 'Blanc' },
+    { value: 'val3', label: 'colors.val3', vf: 'Rosé' },
+    { value: 'val4', label: 'colors.val4', vf: 'Orange' },
+    { value: 'val5', label: 'colors.val5', vf: 'Effervescent' },
+    { value: 'val7', label: 'colors.val7', vf: 'Effervescent rosé' },
+    { value: 'val8', label: 'colors.val8', vf: 'Ambré' },
+    { value: 'val9', label: 'colors.val9', vf: 'Tuilé' },
+    { value: 'val10', label: 'colors.val10', vf: 'Transparent' },
+    { value: 'val11', label: 'colors.val11', vf: 'Ambré' },
+    { value: 'val12', label: 'colors.val12', vf: 'Doré' },
+    { value: 'val13', label: 'colors.val13', vf: 'Brun' },
+    { value: 'val14', label: 'colors.val14', vf: 'Vert' },
+    { value: 'val15', label: 'colors.val15', vf: 'Jaune' },
+    { value: 'val16', label: 'colors.val16', vf: 'Rouge' },
+    { value: 'val17', label: 'colors.val17', vf: 'Noir' },
+    { value: 'val18', label: 'colors.val18', vf: 'rosé' },
+  ],
   countries: [
     {
       value: 'fr',

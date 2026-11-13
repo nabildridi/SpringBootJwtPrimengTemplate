@@ -8,7 +8,8 @@ export interface Marque {
   country: string;
   site: string;
   presentation: string;
-  originalLogo: string;
-  resizedLogo: string;
+  originalLogo: any;
+  resizedLogo: any;
   showLogoFiche: boolean;
+  createdAt: Date;
 }

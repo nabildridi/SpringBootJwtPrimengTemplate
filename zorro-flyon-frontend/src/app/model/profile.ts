@@ -6,4 +6,5 @@ export interface Profile {
   city: string;
   zipCode: string;
   country: string;
+  createdAt: Date;
 }

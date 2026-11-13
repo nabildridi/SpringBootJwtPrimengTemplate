@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import * as lod from 'lodash';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule } from '@angular/forms';
+import { ListsService } from '../services/configuration/lists-service';
 
 @Component({
   selector: 'n-select-input',
@@ -22,7 +23,7 @@ import { FormsModule } from '@angular/forms';
         [(ngModel)]="value"
         nzSize="large"
       >
-        @for (option of countries(); track $index) {
+        @for (option of originalList(); track $index) {
           <nz-option nzCustomContent [nzLabel]="option.label" [nzValue]="option.value">
             <i [class]="'z-0 fi fi-' + option.value"></i> {{ option.label }}
           </nz-option>
@@ -34,69 +35,71 @@ import { FormsModule } from '@angular/forms';
 export class DaisySelectInput implements FormValueControl<string | null>, OnInit {
   value = model<string | null>(null);
   label = input<string>('');
+  listId = input<string | null>(null);
+  listItems = input<any[] | null>(null);
   invalid = input<boolean>(false);
   required = input<boolean>(false);
-  icon = input<string | null>(null);
 
-  countries = signal<any[]>([]);
+  originalList = signal<any[]>([]);
+  filteredList = signal<any[]>([]);
   opened = signal<boolean>(false);
   selectedItem = signal<any>(null);
-  term = signal<string>('');
-  inputId: string = uuidv4();
+  term: string = '';
 
-  constructor() {
-    this.countries.set(environment.countries);
-  }
+  constructor(private listsService: ListsService) {}
 
   ngOnInit(): void {
-    this.selectedItem.set(lod.find(this.countries(), { value: this.value() }));
+    if (this.listId() != null) {
+      this.originalList.set(this.listsService.getList(this.listId()!));
+    }
+    if (this.listItems() != null) {
+      this.originalList.set(this.listItems()!);
+    }
+    this.filteredList.set(this.originalList());
+    this.selectedItem.set(lod.find(this.originalList(), { value: this.value() }));
   }
 
-  filter(event: Event) {
-    this.term.set((event.target as HTMLInputElement).value);
-    if (this.term() != null && this.term().length > 0) {
-      this.search(this.term());
+  filter() {
+    if (this.term != null && this.term.length > 0) {
+      this.search(this.term);
     } else {
-      this.countries.set(environment.countries);
+      this.filteredList.set(this.originalList());
     }
   }
 
   search(toSearch: string) {
-    this.countries.set(environment.countries);
-    this.countries.set(
-      lod.filter(this.countries(), function (o) {
+    this.filteredList.set(this.originalList());
+    this.filteredList.set(
+      lod.filter(this.originalList(), function (o) {
         return o.label.toLowerCase().includes(toSearch);
       }),
     );
   }
 
   selectItem(item: any) {
-    console.log(item);
-    /*
     this.selectedItem.set(item);
     this.value.set(item.value);
-    this.opened.set(false)*/
+    this.opened.set(false);
   }
 
   reset() {
     this.selectedItem.set(null);
     this.value.set(null);
+    this.opened.set(false);
   }
 
   resetSearch() {
-    this.term.set('');
-    this.countries.set(environment.countries);
+    this.term = '';
+    this.filteredList.set(this.originalList());
   }
 
-  protected onOpen(open: boolean): void {
-    this.opened.set(open);
-    if (!open) {
-      this.term.set('');
-      this.countries.set(environment.countries);
+  protected onZone(activeZoning: boolean): void {
+    if (!activeZoning) {
+      this.opened.set(false);
     }
   }
 
-  toggle() {
+  toggle(event: Event) {
     this.opened.update((value) => !value);
   }
 }

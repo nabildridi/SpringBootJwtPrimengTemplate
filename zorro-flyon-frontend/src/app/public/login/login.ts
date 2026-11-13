@@ -47,7 +47,7 @@ export class Login implements OnInit {
     const credentials = this.loginModel();
 
     this.appHttpService
-      .topic(HttpTopics.Token)
+      .topic(HttpTopics.Auth)
       .add('token')
       .post(credentials)
       .subscribe({
