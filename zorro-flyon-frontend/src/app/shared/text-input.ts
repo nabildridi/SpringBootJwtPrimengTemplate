@@ -13,7 +13,6 @@ import { v4 as uuidv4 } from 'uuid';
         <i nzInputPrefix [class]="'bx bx-' + icon()"></i>
         <input
           nz-input
-          [id]="inputId"
           [type]="type()"
           [value]="value()"
           (input)="value.set($event.target.value)"
@@ -37,8 +36,6 @@ export class DaisyTextInput implements FormValueControl<string | null>, OnInit {
   required = input<boolean>(false);
   type = input<string>('text');
   icon = input<string | null>(null);
-
-  inputId: string = uuidv4();
 
   ngOnInit(): void {}
 

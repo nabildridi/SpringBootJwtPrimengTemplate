@@ -14,7 +14,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 
         <input
           nz-input
-          [id]="inputId"
           [type]="show() ? 'text' : 'password'"
           [value]="value()"
           (input)="value.set($event.target.value)"
@@ -45,7 +44,6 @@ export class DaisyPasswordInput implements FormValueControl<string | null>, OnIn
   invalid = input<boolean>(false);
   required = input<boolean>(false);
 
-  inputId: string = uuidv4();
   show = signal<boolean>(false);
 
   ngOnInit(): void {}

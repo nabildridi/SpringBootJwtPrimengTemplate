@@ -11,6 +11,7 @@ import { DaisyCountrySelectInput } from '../../shared/country-select-input';
 import { environment } from '../../../environments/environment';
 import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
 import { DaisyTristate } from '../../shared/tristate-control';
+import { DaisyPasswordGenerator } from '../../shared/password-generator';
 
 export type TriState = boolean | null;
 
@@ -21,6 +22,7 @@ interface pageData {
   color: string;
   colors: string[];
   triholder: TriState;
+  generated: string;
 }
 
 @Component({
@@ -35,6 +37,7 @@ interface pageData {
     DaisyCountrySelectInput,
     DaisyMultiButtonSelector,
     DaisyTristate,
+    DaisyPasswordGenerator,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -48,6 +51,7 @@ export class Bobo {
     color: 'val5',
     colors: [],
     triholder: null,
+    generated: '',
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {
@@ -57,6 +61,7 @@ export class Bobo {
     //required(fieldPath.colors);
     //required(fieldPath.triholder);
     required(fieldPath.color);
+    required(fieldPath.generated);
   });
 
   availableColors: any[] = [];

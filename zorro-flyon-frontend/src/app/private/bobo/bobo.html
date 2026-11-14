@@ -50,5 +50,9 @@
     ></n-tristate>
   </div>
 
+  <div>
+    <n-password-generator [formField]="pageForm.generated" label="Generated"></n-password-generator>
+  </div>
+
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
 </form>

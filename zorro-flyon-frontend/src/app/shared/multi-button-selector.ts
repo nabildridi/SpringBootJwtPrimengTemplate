@@ -9,7 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
   selector: 'n-multi-button-selector',
   imports: [NzSelectModule, FormsModule],
   template: `
-    <fieldset class="fieldset border-base-300 rounded-box w-full border">
+    <fieldset class="fieldset  rounded-box w-full border-2">
       <legend class="fieldset-legend" [class.requ]="required()">{{ label() }}</legend>
 
       <div class="flex flex-row flex-wrap gap-4 m-2">
@@ -63,6 +63,12 @@ export class DaisyMultiButtonSelector implements FormValueControl<string[] | nul
   toggle(event: Event, option: any) {
     if (this.value() == null) {
       this.value.set([]);
+    }
+
+    if (this.value()?.includes(option.value)) {
+      this.value.update((prev) => prev!.filter((c) => c !== option.value));
+    } else {
+      this.value.update((prev) => [...prev!, option.value]);
     }
   }
 }
