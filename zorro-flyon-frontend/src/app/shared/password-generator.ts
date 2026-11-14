@@ -10,7 +10,12 @@ import { NzSliderModule, NzSliderValue } from 'ng-zorro-antd/slider';
   imports: [FormsModule, NzPopoverModule, NzInputModule, NzSliderModule],
   selector: 'n-password-generator',
   template: `
-    <label class="floating-label">
+    <label
+      class="floating-label"
+      nz-popover
+      [nzPopoverContent]="contentTemplate"
+      nzPopoverTitle="Générateur"
+    >
       <span [class.requ]="required()">{{ label() }}</span>
       <nz-input-wrapper>
         <i nzInputPrefix class="bx bx-key"></i>
@@ -25,9 +30,6 @@ import { NzSliderModule, NzSliderValue } from 'ng-zorro-antd/slider';
           autocomplete="off"
           [nzVariant]="'outlined'"
           class="h-10"
-          nz-popover
-          [nzPopoverContent]="contentTemplate"
-          nzPopoverTitle="Générateur"
         />
 
         @if (value()) {

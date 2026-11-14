@@ -18,7 +18,6 @@ import { v4 as uuidv4 } from 'uuid';
           (input)="value.set($event.target.value)"
           [nzStatus]="invalid() ? 'error' : ''"
           [placeholder]="label()"
-          autocomplete="off"
           [nzVariant]="'outlined'"
           class="h-10"
         />

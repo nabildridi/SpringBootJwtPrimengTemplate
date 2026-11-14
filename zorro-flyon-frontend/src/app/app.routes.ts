@@ -5,6 +5,11 @@ import { Landing } from './public/landing/landing';
 import { Users } from './private/users/users';
 import { Bobo } from './private/bobo/bobo';
 import { AppLayout } from './layout/app.layout';
+import { Registration } from './public/registration/registration';
+import { ConfirmAccount } from './public/confirm-account/confirm-account';
+import { ResetRequest } from './public/reset-request/reset-request';
+import { WriteNewPassword } from './public/write-new-password/write-new-password';
+import { AccessDenied } from './public/AccessDenied/AccessDenied';
 
 export const routes: Routes = [
   {
@@ -20,5 +25,10 @@ export const routes: Routes = [
   { path: '', redirectTo: 'landing', pathMatch: 'full' },
   { path: 'landing', component: Landing },
   { path: 'login', component: Login },
+  { path: 'register', component: Registration },
+  { path: 'confirmed', component: ConfirmAccount },
+  { path: 'reset', component: ResetRequest },
+  { path: 'setResetPassword', component: WriteNewPassword },
+  { path: 'denied', component: AccessDenied },
   { path: '**', pathMatch: 'full', component: NotFound },
 ];

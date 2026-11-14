@@ -19,7 +19,6 @@ import { NzInputModule } from 'ng-zorro-antd/input';
           (input)="value.set($event.target.value)"
           [nzStatus]="invalid() ? 'error' : ''"
           [placeholder]="label()"
-          autocomplete="off"
           [nzVariant]="'outlined'"
           class="h-10"
         />

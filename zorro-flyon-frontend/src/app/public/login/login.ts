@@ -8,6 +8,8 @@ import { email, form, FormField, required } from '@angular/forms/signals';
 import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
 import { ToastService } from '../../services/toast/toast.service';
+import { AppLogo } from '../../layout/app.logo';
+import { DaisyStyledLink } from '../../shared/styled-link';
 
 interface LoginData {
   username: string;
@@ -16,7 +18,7 @@ interface LoginData {
 
 @Component({
   selector: 'app-login',
-  imports: [DaisyTextInput, DaisyPasswordInput, FormField],
+  imports: [DaisyTextInput, DaisyPasswordInput, FormField, AppLogo, DaisyStyledLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
