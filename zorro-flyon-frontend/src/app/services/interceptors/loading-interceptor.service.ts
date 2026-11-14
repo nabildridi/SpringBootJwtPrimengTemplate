@@ -11,8 +11,8 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError, finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { SignalsService } from '../signals/signals.service';
-import { StorageService } from '../storage/storage.service';
 import { ToastService } from '../toast/toast.service';
+import { StorageService } from '../storage/storage-service';
 
 @Injectable()
 export class LoadingInterceptorService implements HttpInterceptor {

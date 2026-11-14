@@ -1,4 +1,4 @@
-import { Component, HostListener } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { RouterModule } from '@angular/router';
 import { AppTopbar } from './app.topbar';
@@ -16,16 +16,17 @@ import { AppTopbar } from './app.topbar';
       <div class="drawer-side is-drawer-close:overflow-visible ">
         <label for="my-drawer-4" aria-label="close sidebar" class="drawer-overlay"></label>
         <div
-          class="flex min-h-full flex-col items-start bg-base-300 dark:bg-zinc-500 is-drawer-close:w-16 is-drawer-open:w-64"
+          class="flex  min-h-full flex-col items-start bg-mauve-300 dark:bg-mauve-800 is-drawer-close:w-16 is-drawer-open:w-64"
         >
+          <div class="h-12"></div>
           <!-- Sidebar content here -->
           <!-- Navigation Links -->
-          <ul class="menu w-full grow mt-16 content-center">
+          <ul class="menu w-full grow">
             @for (item of menuItems; track $index) {
-              <li class="py-2 ">
+              <li class="py-2">
                 <button
                   [routerLink]="item.routerLink"
-                  class="daisy-btn btn-accent justify-start is-drawer-close:hidden"
+                  class="btn btn-accent justify-start is-drawer-close:hidden"
                   routerLinkActive
                   #rla="routerLinkActive"
                   [class]="rla.isActive ? 'btn-active' : 'btn-soft'"
@@ -35,7 +36,7 @@ import { AppTopbar } from './app.topbar';
                 </button>
 
                 <button
-                  class="daisy-btn btn-square btn-accent is-drawer-open:hidden"
+                  class="btn btn-square btn-accent  is-drawer-open:hidden"
                   [routerLink]="item.routerLink"
                   routerLinkActive
                   #rla="routerLinkActive"
@@ -54,7 +55,7 @@ import { AppTopbar } from './app.topbar';
         <app-topbar></app-topbar>
 
         <!-- The only scrollable area -->
-        <main class="flex-1 overflow-y-auto p-4">
+        <main class="flex-1 overflow-y-auto p-4  bg-secondary">
           <router-outlet />
         </main>
       </div>
@@ -64,37 +65,27 @@ import { AppTopbar } from './app.topbar';
 export class AppLayout {
   menuItems: any[] = [
     {
+      label: 'Produits',
+      icon: 'qr',
+      routerLink: '/private/produits',
+    },
+    {
+      label: 'Marques',
+      icon: 'store',
+      routerLink: '/private/marques',
+    },
+    {
       label: 'Users',
       icon: 'user',
       routerLink: '/private/users',
-      routerLinkActiveOptions: { exact: true },
     },
 
     {
-      label: 'table without pagination',
+      label: 'Experiments',
       icon: 'tag',
       routerLink: '/private/bobo',
-      routerLinkActiveOptions: { exact: true },
-    },
-
-    {
-      label: 'Components Tester',
-      icon: 'test-tube-diagonal',
-      routerLink: '/private/tester',
-      routerLinkActiveOptions: { exact: true },
-    },
-    {
-      label: 'Stepper with MultiForms',
-      icon: 'door-stairwell',
-      routerLink: '/private/stepper',
-      routerLinkActiveOptions: { exact: true },
-    },
-    {
-      label: 'filtered-list',
-      icon: 'list',
-      routerLink: '/private/filtered-list-v2',
-      routerLinkActiveOptions: { exact: true },
     },
   ];
+
   constructor() {}
 }

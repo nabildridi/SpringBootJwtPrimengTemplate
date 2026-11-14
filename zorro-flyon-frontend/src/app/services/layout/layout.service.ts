@@ -6,7 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class LayoutService {
   darkMode = signal<boolean>(false);
 
-  public sidebarOpened = signal<boolean>(false);
+  public drawerState = signal<boolean>(false);
 
   constructor() {}
 
@@ -38,6 +38,6 @@ export class LayoutService {
   }
 
   public toggleDrawer() {
-    this.sidebarOpened.update((value) => !value);
+    this.drawerState.update((value) => !value);
   }
 }

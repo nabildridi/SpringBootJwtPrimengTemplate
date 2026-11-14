@@ -24,7 +24,7 @@
       <thead>
         <tr>
           <th nzColumnKey="id" [nzSortFn]="true">id</th>
-          <th nzColumnKey="username" [nzSortFn]="true">username</th>
+          <th nzColumnKey="firstname" [nzSortFn]="true">firstname</th>
           <th nzColumnKey="lastname" [nzSortFn]="true">lastname</th>
           <th>Actions</th>
         </tr>
@@ -33,7 +33,7 @@
         @for (item of data(); track $index) {
           <tr>
             <td>{{ item.id }}</td>
-            <td>{{ item.username }}</td>
+            <td>{{ item.firstname }}</td>
             <td>{{ item.lastname }}</td>
             <td>
               <button class="btn">Default</button> <button class="btn btn-primary">Primary</button>

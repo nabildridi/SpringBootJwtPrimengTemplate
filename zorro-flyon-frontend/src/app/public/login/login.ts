@@ -1,7 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { Router } from '@angular/router';
-import { StorageService } from '../../services/storage/storage.service';
 import { HttpTopics } from '../../enums/http-topics';
 
 import { email, form, FormField, required } from '@angular/forms/signals';
@@ -10,6 +9,7 @@ import { DaisyPasswordInput } from '../../shared/password-input';
 import { ToastService } from '../../services/toast/toast.service';
 import { AppLogo } from '../../layout/app.logo';
 import { DaisyStyledLink } from '../../shared/styled-link';
+import { StorageService } from '../../services/storage/storage-service';
 
 interface LoginData {
   username: string;
@@ -55,7 +55,9 @@ export class Login implements OnInit {
       .subscribe({
         next: (result: any) => {
           this.storageService.setAccessToken(result.token);
-          this.storageService.setUsername(result.username);
+          this.storageService.setUserId(result.userId);
+          if (result.profileId) this.storageService.setProfileId(result.profileId);
+          this.storageService.setRole(result.role);
           this.router.navigate(['/private']);
         },
         error: (error: any) => {},
