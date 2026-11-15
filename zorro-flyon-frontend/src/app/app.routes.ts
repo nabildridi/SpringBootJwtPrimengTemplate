@@ -10,6 +10,7 @@ import { ConfirmAccount } from './public/confirm-account/confirm-account';
 import { ResetRequest } from './public/reset-request/reset-request';
 import { WriteNewPassword } from './public/write-new-password/write-new-password';
 import { AccessDenied } from './public/AccessDenied/AccessDenied';
+import { MarquesListing } from './private/marques-listing/marques-listing';
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'bobo', pathMatch: 'full' },
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
+      { path: 'marques', component: MarquesListing },
     ],
   },
 

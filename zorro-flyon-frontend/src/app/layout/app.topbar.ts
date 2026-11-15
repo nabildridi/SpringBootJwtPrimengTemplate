@@ -15,7 +15,7 @@ import { StorageService } from '../services/storage/storage-service';
           <label
             for="my-drawer-4"
             aria-label="open sidebar"
-            class="daisy-btn btn-circle drawer-button"
+            class="daisy-btn btn-square drawer-button"
             (click)="toggleDrawer()"
           >
             <!-- Sidebar toggle icon -->

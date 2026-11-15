@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../services/toast/toast.service';
+import { AppLogoText } from '../../layout/app.logo.text';
 
 @Component({
-  imports: [RouterLink],
+  imports: [RouterLink, AppLogoText],
   selector: 'app-landing',
   styleUrl: './landing.css',
   templateUrl: './landing.html',

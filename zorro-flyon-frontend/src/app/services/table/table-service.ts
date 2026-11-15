@@ -82,4 +82,16 @@ export class TableService {
 
     return output;
   }
+
+  getFirstPage(pageSize: number): any {
+    const firstPage = {
+      first: 0,
+      rows: pageSize,
+      filters: {},
+      globalFilter: null,
+      sortField: 'id',
+      sortOrder: -1,
+    };
+    return firstPage;
+  }
 }

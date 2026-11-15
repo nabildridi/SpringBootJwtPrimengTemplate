@@ -1,0 +1,83 @@
+<div class="card shadow-sm bg-base-300">
+  <div class="card-body">
+    <div class="card-title text-3xl text-base-content mb-6">Mes Marques</div>
+
+    <div class="card w-full border">
+      <div class="card-body">
+        <div class="card-title">
+          <div class="flex justify-between items-center w-full">
+            <div class="input">
+              <i class="bx bx-search text-base-content"></i>
+              <input
+                type="search"
+                [value]="globalFilterText"
+                class="grow"
+                placeholder="Rechercher"
+                (input)="searchGlobalFilter($any($event.target).value)"
+              />
+            </div>
+
+            <div class="flex">
+              <button class="daisy-btn btn-primary" (click)="add()">
+                <i class="bx bx-plus"></i>
+                Ajouter une marque
+              </button>
+            </div>
+          </div>
+          <div class="divider mb-2"></div>
+        </div>
+
+        <nz-table
+          [nzData]="data()"
+          [nzFrontPagination]="false"
+          [nzTotal]="totalRows()"
+          [nzPageSize]="pageSize"
+          (nzQueryParams)="loadFromServer($event)"
+        >
+          <tbody>
+            @for (item of data(); track $index) {
+              <tr>
+                <td>
+                  <div class="card w-full bg-base-100 shadow-xl mb-4">
+                    <div class="card-body">
+                      <h2 class="card-title text-3xl">{{ item.name }}</h2>
+
+                      <div class="flex gap-x-6">
+                        @if (item.resizedLogo) {
+                          <div class="flex">
+                            <img [src]="'data:image/png;base64,' + item.resizedLogo" alt="Image" />
+                          </div>
+                        }
+                        <div class="flex">
+                          <div class="grid grid-cols-3 gap-4">
+                            <app-styled-info [label]="item.address"></app-styled-info>
+                            <app-styled-info [label]="item.city"></app-styled-info>
+                            <app-styled-info [label]="item.zipCode"></app-styled-info>
+
+                            <app-styled-info
+                              [icon]="'fi fi-' + item.country"
+                              [label]="countriesService.getCountryName(item.country)"
+                            ></app-styled-info>
+                            @if (item.site) {
+                              <app-styled-info [label]="item.site"></app-styled-info>
+                            }
+                          </div>
+                        </div>
+                      </div>
+                      <div class="justify-end card-actions">
+                        <button class="btn btn-accent" (click)="update(item)">Modifier</button>
+                        <button class="btn btn-error" (click)="confirmDelete(item)">
+                          Supprimer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</div>
