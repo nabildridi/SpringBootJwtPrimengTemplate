@@ -5,12 +5,16 @@ layer(base);
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
 @import 'jsoneditor/dist/jsoneditor.min.css';
 @import 'quill/dist/quill.snow.css';
-@import '../public/css/zorro.css';
+@import 'ng-zorro-antd/ng-zorro-antd.aliyun.min.css';
 @plugin 'daisyui' {
   themes: all;
 }
 
 @custom-variant dark (&:is(.dark *));
+
+.dark {
+  @import 'ng-zorro-antd/ng-zorro-antd.dark.min.css';
+}
 
 * {
   font-family: 'Outfit';

@@ -74,7 +74,7 @@
                         [src]="'data:image/png;base64,' + formObject.resizedLogo"
                         class="h-64 w-64 object-none"
                         alt=""
-                        (click)="showPreview()"
+                        onclick="full_image_modal.showModal()"
                       />
                     </div>
 
@@ -117,3 +117,14 @@
     </div>
   </div>
 </form>
+
+<dialog id="full_image_modal" class="modal">
+  <div class="modal-box">
+    <img [src]="'data:image/png;base64,' + formObject.originalLogo" alt="" />
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Fermer</button>
+      </form>
+    </div>
+  </div>
+</dialog>
