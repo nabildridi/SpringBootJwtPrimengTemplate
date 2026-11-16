@@ -11,6 +11,7 @@ import { ResetRequest } from './public/reset-request/reset-request';
 import { WriteNewPassword } from './public/write-new-password/write-new-password';
 import { AccessDenied } from './public/AccessDenied/AccessDenied';
 import { MarquesListing } from './private/marques-listing/marques-listing';
+import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: 'users', component: Users },
       { path: 'bobo', component: Bobo },
       { path: 'marques', component: MarquesListing },
+      { path: 'marques-add-update', component: MarquesAddUpdate },
     ],
   },
 

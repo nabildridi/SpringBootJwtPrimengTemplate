@@ -34,6 +34,8 @@
           [nzPageSize]="pageSize"
           (nzQueryParams)="loadFromServer($event)"
         >
+          <thead></thead>
+
           <tbody>
             @for (item of data(); track $index) {
               <tr>

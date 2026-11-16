@@ -3,6 +3,8 @@ layer(base);
 
 @import 'tailwindcss';
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
+@import 'jsoneditor/dist/jsoneditor.min.css';
+@import 'quill/dist/quill.snow.css';
 @plugin 'daisyui' {
   themes: all;
 }

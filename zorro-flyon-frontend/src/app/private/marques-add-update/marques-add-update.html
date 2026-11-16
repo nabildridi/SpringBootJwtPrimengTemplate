@@ -1,0 +1,119 @@
+<form (submit)="submitData($event)" class="space-y-5">
+  <div class="card w-full shadow-lg bg-base-300">
+    <div class="card-body">
+      <h2 class="card-title text-base-content text-2xl">Ma marque</h2>
+      <div class="divider"></div>
+
+      <nz-collapse class="shadow-lg">
+        <nz-collapse-panel nzHeader="Informations" [nzActive]="true">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <n-text-input [formField]="pageForm.name" label="Nom" icon="edit"></n-text-input>
+            </div>
+
+            <div>
+              <n-text-input
+                [formField]="pageForm.address"
+                label="Addresse"
+                icon="location-check"
+              ></n-text-input>
+            </div>
+
+            <div>
+              <n-text-input [formField]="pageForm.city" label="Cité" icon="city"></n-text-input>
+            </div>
+
+            <div>
+              <n-text-input
+                [formField]="pageForm.zipCode"
+                label="Code postal"
+                icon="code"
+              ></n-text-input>
+            </div>
+
+            <div>
+              <n-country-select-input
+                [formField]="pageForm.country"
+                label="Pays d'origine"
+              ></n-country-select-input>
+            </div>
+
+            <div>
+              <n-text-input [formField]="pageForm.site" label="Site web" icon="link"></n-text-input>
+            </div>
+          </div>
+        </nz-collapse-panel>
+      </nz-collapse>
+
+      <!-- Logo -->
+
+      <nz-collapse class="shadow-lg">
+        <nz-collapse-panel nzHeader="Informations" [nzActive]="true">
+          <div class="flex justify-around">
+            <div class="flex w-full">
+              <nz-upload
+                nzAccept=""
+                [(nzFileList)]="fileList"
+                [nzBeforeUpload]="beforeUpload"
+                nzAccept="image/*"
+                [nzRemove]="removeFile"
+              >
+                <button type="button" class="daisy-btn btn-primary">
+                  <i class="bx bx-folder-up-arrow"></i>
+                  Select File
+                </button>
+              </nz-upload>
+            </div>
+            <div class="flex w-full justify-center">
+              <div class="card bg-base-100 card-xs shadow-sm">
+                <div class="card-body">
+                  <h2 class="card-title">Logo actuel</h2>
+                  @if (formObject.resizedLogo) {
+                    <div class="w-64 h-64">
+                      <img
+                        [src]="'data:image/png;base64,' + formObject.resizedLogo"
+                        class="h-64 w-64 object-none"
+                        alt=""
+                        (click)="showPreview()"
+                      />
+                    </div>
+
+                    <div class="justify-center card-actions">
+                      <button type="button" class="daisy-btn btn-primary" (click)="deleteLogo()">
+                        Supprimer le logo
+                      </button>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+            <div class="flex w-full justify-center items-center">
+              <label nz-checkbox [formField]="pageForm.showLogoFiche"
+                >Afficher le logo dans la fiche</label
+              >
+            </div>
+          </div>
+        </nz-collapse-panel></nz-collapse
+      >
+
+      <!-- editor -->
+      <nz-collapse class="shadow-lg">
+        <nz-collapse-panel nzHeader="Présentation" [nzActive]="true">
+          <quill-editor
+            [formField]="pageForm.presentation"
+            class="h-96 w-full border-2"
+          ></quill-editor> </nz-collapse-panel
+      ></nz-collapse>
+
+      <div class="w-full card-actions mt-4">
+        <button
+          type="submit"
+          class="daisy-btn btn-primary w-full"
+          [disabled]="pageForm().invalid()"
+        >
+          Sauvegarder
+        </button>
+      </div>
+    </div>
+  </div>
+</form>

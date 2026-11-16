@@ -116,6 +116,9 @@ export class MarquesListing implements OnInit {
   }
 
   sendRequest(request: any) {
+    request.globalFilter = ['profileId'];
+    request.filters = { global: { value: this.profileId, matchMode: 'contains' } };
+
     this.appHttpService
       .topic(HttpTopics.Marques)
       .add('paginate')
