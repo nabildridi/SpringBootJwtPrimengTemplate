@@ -13,6 +13,7 @@ import { FormValueControl } from '@angular/forms/signals';
 export class FilteredDropdown implements FormValueControl<string | null>, OnInit {
   value = model<string | null>(null);
   invalid = input<boolean>(false);
+  inputLabel = input<string>('');
 
   countries = signal<any[]>([]);
   opened: boolean = false;

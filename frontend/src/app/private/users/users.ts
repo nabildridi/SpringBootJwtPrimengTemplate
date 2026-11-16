@@ -28,7 +28,7 @@ export class Users implements OnInit {
   filterValue: string | null = null;
   serverFilters: any = {};
 
-  protected columns = ['id', 'username', 'accessdate'];
+  protected columns = ['id', 'firstname', 'lastname'];
 
   data: WritableSignal<any> = signal([]);
 

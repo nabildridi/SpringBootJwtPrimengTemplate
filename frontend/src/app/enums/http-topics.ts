@@ -1,4 +1,4 @@
 export enum HttpTopics {
-    Users = 'rest/private/users',
-    Token = "rest/public/auth"
-  }
+  Users = 'api/public/users',
+  Token = 'api/public/auth',
+}

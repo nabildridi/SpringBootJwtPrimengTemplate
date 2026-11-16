@@ -5,6 +5,7 @@ layer(base);
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
 @import 'jsoneditor/dist/jsoneditor.min.css';
 @import 'quill/dist/quill.snow.css';
+@import '../public/css/zorro.css';
 @plugin 'daisyui' {
   themes: all;
 }

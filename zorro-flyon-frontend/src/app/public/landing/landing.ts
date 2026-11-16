@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { ToastService } from '../../services/toast/toast.service';
 import { AppLogoText } from '../../layout/app.logo.text';
+import { LayoutService } from '../../services/layout/layout.service';
 
 @Component({
   imports: [RouterLink, AppLogoText],
@@ -10,9 +11,9 @@ import { AppLogoText } from '../../layout/app.logo.text';
   templateUrl: './landing.html',
 })
 export class Landing {
-  constructor(private toastService: ToastService) {}
+  constructor(public layoutService: LayoutService) {}
 
-  showToast() {
-    this.toastService.showError('all');
+  toggleDarkMode() {
+    this.layoutService.toggleDarkMode();
   }
 }

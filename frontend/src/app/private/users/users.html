@@ -17,16 +17,16 @@
       <thead>
         <tr tuiThGroup>
           <th tuiTh tuiSortable *tuiHead="'id'" [requiredSort]="true">id</th>
-          <th tuiTh tuiSortable *tuiHead="'username'" [requiredSort]="true">username</th>
-          <th tuiTh tuiSortable *tuiHead="'accessdate'" [requiredSort]="true">accessdate</th>
+          <th tuiTh tuiSortable *tuiHead="'firstname'" [requiredSort]="true">firstname</th>
+          <th tuiTh tuiSortable *tuiHead="'lastname'" [requiredSort]="true">lastname</th>
         </tr>
       </thead>
       <tbody tuiTbody>
         @for (item of data(); track $index) {
           <tr tuiTr>
             <td tuiTd *tuiCell="'id'">{{ item.id }}</td>
-            <td tuiTd *tuiCell="'username'">{{ item.username }}</td>
-            <td tuiTd *tuiCell="'accessdate'">{{ item.accessdate }}</td>
+            <td tuiTd *tuiCell="'firstname'">{{ item.firstname }}</td>
+            <td tuiTd *tuiCell="'lastname'">{{ item.lastname }}</td>
           </tr>
         }
       </tbody>
