@@ -1,0 +1,202 @@
+<div class="card w-full bg-base-100 shadow-lg">
+  <div class="card-body">
+    <h2 class="card-title text-2xl">Mon Produit</h2>
+    <div class="divider"></div>
+
+    <n-collapse title="Informations principales">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <n-text-input [formField]="stepOneForm().nom" label="Nom" icon="edit"></n-text-input>
+        </div>
+
+        <div>
+          <n-select-input
+            [formField]="stepOneForm().marqueId"
+            label="Marque"
+            [listItems]="marques()"
+          ></n-select-input>
+        </div>
+
+        <div>
+          <n-country-select-input
+            label="Pays de production"
+            [formField]="stepOneForm().paysProd"
+          ></n-country-select-input>
+        </div>
+
+        <div>
+          <n-text-input
+            [formField]="stepOneForm().regProd"
+            label="Région de production"
+            icon="edit"
+          ></n-text-input>
+        </div>
+
+        <div>
+          <n-grouped-select
+            [formField]="stepOneForm().prodNature"
+            label="Nature"
+            [listItems]="natures"
+          ></n-grouped-select>
+        </div>
+
+        <div>
+          <n-select-input
+            [formField]="stepOneForm().methodProd"
+            label="Méthode de production"
+            listId="methods"
+          ></n-select-input>
+        </div>
+
+        <div>
+          <n-select-input
+            [formField]="stepOneForm().teneurSucre"
+            label="Teneur de sucre"
+            listId="teneurs"
+          ></n-select-input>
+        </div>
+      </div>
+    </n-collapse>
+
+    <!-- Informations secondaires -->
+    <n-collapse title="Informations secondaires">
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <n-select-input
+            [formField]="stepOneForm().millesime"
+            label="Millésime"
+            [listItems]="millesimes"
+          ></n-select-input>
+        </div>
+
+        <div>
+          <n-text-input
+            [formField]="stepOneForm().appellation"
+            label="Appellation"
+            icon="edit"
+          ></n-text-input>
+        </div>
+      </div>
+
+      <fieldset class="fieldset border">
+        <legend class="fieldset-legend">Contenants</legend>
+        <n-multi-button-selector
+          listId="contenant"
+          [formField]="stepOneForm().contenant"
+        ></n-multi-button-selector>
+      </fieldset>
+
+      <fieldset class="fieldset border">
+        <legend class="fieldset-legend">Couleurs</legend>
+        <n-multi-button-selector
+          listId="colors"
+          [formField]="stepOneForm().color"
+        ></n-multi-button-selector>
+      </fieldset>
+    </n-collapse>
+
+    <!-- Image -->
+    <n-collapse title="Image de produit">
+      <div class="flex justify-around">
+        <div class="flex w-full">
+          <label tuiInputFiles>
+            <input accept="image/*" tuiInputFiles name="logoImage" [(ngModel)]="productImage" />
+          </label>
+
+          <tui-files class="tui-space_top-1">
+            @if (productImage()) {
+              <tui-file size="l" [file]="productImage()!" (remove)="removeFile()" />
+            }
+          </tui-files>
+        </div>
+        <div class="flex w-full justify-center">
+          <div class="card bg-base-100 shadow-sm">
+            <div class="card-body">
+              <h2 class="card-title">Photo actuel</h2>
+              @if (inputsModel().resizedImage) {
+                <div class="w-72 h-72 relative group" (click)="togglePreview()">
+                  <img
+                    [src]="'data:image/png;base64,' + inputsModel().resizedImage"
+                    class="h-72 w-72 object-none"
+                  />
+                  <div
+                    class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 bottom-0 flex justify-center items-end text-xl bg-gray-200 text-black font-semibold"
+                  >
+                    Enlarge
+                  </div>
+                </div>
+
+                <div class="justify-center card-actions">
+                  <button type="button" class="daisy-btn btn-primary" (click)="deleteLogo()">
+                    Supprimer la photo
+                  </button>
+                </div>
+
+                <ng-template [(tuiPreviewDialog)]="previewOpened">
+                  <tui-preview>
+                    <button
+                      iconStart="@tui.x"
+                      tuiIconButton
+                      tuiPreviewAction
+                      type="button"
+                      (click)="togglePreview()"
+                    >
+                      Close
+                    </button>
+
+                    <img
+                      alt="preview"
+                      [src]="'data:image/png;base64,' + inputsModel().resizedImage"
+                    />
+                  </tui-preview>
+                </ng-template>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="flex w-full justify-center items-center">
+          <label tuiLabel>
+            <input [formField]="stepOneForm().showPhotoFiche" tuiSwitch type="checkbox" />
+            Afficher le logo dans la fiche
+          </label>
+        </div>
+      </div>
+    </n-collapse>
+
+    <!-- intervenants -->
+    <tui-accordion class="border bg-base-300">
+      <button tuiAccordion>Intervenants</button>
+      <tui-expand [expanded]="true">
+        <button type="button" class="daisy-btn btn-primary mb-4" (click)="addIntervenant()">
+          Ajouter un conditionneur ou un importateur
+        </button>
+
+        @for (item of stepOneForm().intervenants; track $index) {
+          <div class="flex gap-4 items-center w-full mb-2">
+            <app-list-select
+              [formField]="item.interventionMethod"
+              label="Méthode d'intervention"
+              listId="InterventionMethods"
+            ></app-list-select>
+
+            <tui-textfield class="w-full">
+              <label tuiLabel>Nom de conditionneur ou importateur</label>
+              <input tuiInput type="text" [formField]="item.intervenantName" class="w-full" />
+            </tui-textfield>
+
+            <app-country-select
+              label="Pays de conditionneur ou importateur"
+              [formField]="item.intervenantPays"
+            ></app-country-select>
+
+            <div class="shrink">
+              <button type="button" class="daisy-btn btn-error" (click)="deleteIntervenant($index)">
+                <tui-icon icon="@tui.trash" />
+              </button>
+            </div>
+          </div>
+        }
+      </tui-expand>
+    </tui-accordion>
+  </div>
+</div>

@@ -8,11 +8,10 @@ import { DaisyCountrySelectInput } from '../../shared/country-select-input';
 import { DaisyTextInput } from '../../shared/text-input';
 import { AppHttpService } from '../../services/http/app-http.service';
 import { ToastService } from '../../services/toast/toast.service';
-import { NzCollapseModule } from 'ng-zorro-antd/collapse';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
-import { NzImageService } from 'ng-zorro-antd/image';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { QuillModule } from 'ngx-quill';
+import { DaisyCollapse } from '../../shared/styled-collapse';
 
 @Component({
   imports: [
@@ -21,7 +20,7 @@ import { QuillModule } from 'ngx-quill';
     DaisyCountrySelectInput,
     FormField,
     DaisyTextInput,
-    NzCollapseModule,
+    DaisyCollapse,
     NzUploadModule,
     NzCheckboxModule,
     QuillModule,

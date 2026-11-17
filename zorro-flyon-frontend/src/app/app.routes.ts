@@ -12,6 +12,8 @@ import { WriteNewPassword } from './public/write-new-password/write-new-password
 import { AccessDenied } from './public/AccessDenied/AccessDenied';
 import { MarquesListing } from './private/marques-listing/marques-listing';
 import { MarquesAddUpdate } from './private/marques-add-update/marques-add-update';
+import { ProductsListing } from './private/products-listing/products-listing';
+import { ProductsAddUpdate } from './private/products-add-update/products-add-update';
 
 export const routes: Routes = [
   {
@@ -23,6 +25,8 @@ export const routes: Routes = [
       { path: 'bobo', component: Bobo },
       { path: 'marques', component: MarquesListing },
       { path: 'marques-add-update', component: MarquesAddUpdate },
+      { path: 'produits', component: ProductsListing },
+      { path: 'produits-add-update', component: ProductsAddUpdate },
     ],
   },
 

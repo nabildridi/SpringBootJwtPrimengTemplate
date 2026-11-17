@@ -1,0 +1,84 @@
+<div class="card shadow-sm bg-base-300">
+  <div class="card-body">
+    <div class="card-title text-3xl mb-6">Mes Produits</div>
+
+    <div class="card w-full border">
+      <div class="card-body">
+        <div class="card-title">
+          <div class="flex justify-between items-center w-full">
+            <div class="input">
+              <i class="bx bx-search text-base-content"></i>
+              <input
+                type="search"
+                [value]="globalFilterText"
+                class="grow"
+                placeholder="Rechercher"
+                (input)="searchGlobalFilter($any($event.target).value)"
+              />
+            </div>
+
+            <div class="flex">
+              <button class="daisy-btn btn-primary" (click)="add()">
+                <i class="bx bx-plus"></i>
+                Ajouter un produit
+              </button>
+            </div>
+          </div>
+          <div class="divider mb-2"></div>
+        </div>
+
+        <nz-table
+          [nzData]="data()"
+          [nzFrontPagination]="false"
+          [nzTotal]="totalRows()"
+          [nzPageSize]="pageSize"
+          (nzQueryParams)="loadFromServer($event)"
+        >
+          <thead></thead>
+
+          <tbody>
+            @for (item of data(); track $index) {
+              <tr tuiTr>
+                <td tuiTd>
+                  <div class="card w-full bg-base-100 shadow-xl mb-4">
+                    <div class="card-body">
+                      <h2 class="card-title text-3xl">{{ item.nom }}</h2>
+
+                      <div class="flex gap-x-6">
+                        @if (item.resizedImage) {
+                          <div class="flex w-32 h-32">
+                            <img [src]="'data:image/png;base64,' + item.resizedImage" alt="Image" />
+                          </div>
+                        }
+                        <div class="flex">
+                          <div class="grid grid-cols-3 gap-4">
+                            <app-styled-info [label]="item.prodNature"></app-styled-info>
+                            <app-styled-info [label]="item.teneurSucre"></app-styled-info>
+                            <app-styled-info [label]="item.methodProd"></app-styled-info>
+
+                            <app-styled-info
+                              [icon]="'fi fi-' + item.paysProd"
+                              [label]="countriesService.getCountryName(item.paysProd)"
+                            ></app-styled-info>
+
+                            <app-styled-info [label]="item.regProd"></app-styled-info>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="justify-end card-actions">
+                        <button class="btn btn-accent" (click)="update(item)">Modifier</button>
+                        <button class="btn btn-error" (click)="confirmDelete(item)">
+                          Supprimer
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </nz-table>
+      </div>
+    </div>
+  </div>
+</div>

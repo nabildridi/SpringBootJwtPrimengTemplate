@@ -17421,7 +17421,7 @@ span.ant-radio + * {
   font-size: 14px;
 }
 .ant-select-single.ant-select {
-  height: 32px;
+  height: 50px;
   font-size: 14px;
 }
 .ant-select-single.ant-select .ant-select-selector {

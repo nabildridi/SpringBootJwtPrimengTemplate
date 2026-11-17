@@ -1,8 +1,6 @@
 import { Component, input, model, OnInit, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { v4 as uuidv4 } from 'uuid';
-import { environment } from '../../environments/environment';
-import * as lod from 'lodash';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FormsModule } from '@angular/forms';
 import { ListsService } from '../services/configuration/lists-service';

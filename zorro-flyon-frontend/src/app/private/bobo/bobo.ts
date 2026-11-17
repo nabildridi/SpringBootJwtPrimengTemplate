@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment';
 import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
 import { DaisyTristate } from '../../shared/tristate-control';
 import { DaisyPasswordGenerator } from '../../shared/password-generator';
+import { DaisyCollapse } from '../../shared/styled-collapse';
 
 export type TriState = boolean | null;
 
@@ -38,6 +39,7 @@ interface pageData {
     DaisyMultiButtonSelector,
     DaisyTristate,
     DaisyPasswordGenerator,
+    DaisyCollapse,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',

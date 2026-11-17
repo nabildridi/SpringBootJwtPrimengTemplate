@@ -1,0 +1,179 @@
+<div class="card w-full bg-base-100 shadow-lg">
+  <div class="card-body">
+    <h2 class="card-title text-2xl">Données nutritionnelles</h2>
+    <div class="divider"></div>
+    <tui-accordion class="border bg-base-300">
+      <button tuiAccordion>Valeurs énergetiques</button>
+      <tui-expand [expanded]="true">
+        <div class="grid grid-cols-2 gap-4">
+          <tui-textfield>
+            <label tuiLabel class="requ">Titre alcoométrique volumique (% vol.) </label>
+
+            <input
+              postfix="%"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().alcoometrique"
+              class="w-full"
+              (input)="calculateEnergiesFromInputs()"
+              (keydown.arrowDown)="calculateEnergiesFromInputs()"
+              (keydown.arrowUp)="calculateEnergiesFromInputs()"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel class="requ">Sucres résiduels, Glucose + Fructose (g/L) </label>
+
+            <input
+              postfix=" g/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().glucose"
+              class="w-full"
+              (input)="calculateEnergiesFromInputs()"
+              (keydown.arrowDown)="calculateEnergiesFromInputs()"
+              (keydown.arrowUp)="calculateEnergiesFromInputs()"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel class="requ">Valeur énergétique (kcal/100ml) </label>
+
+            <input
+              postfix=" kcal"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().energeticValueKcal"
+              class="w-full"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel class="requ">Valeur énergétique (kJ) </label>
+
+            <input
+              postfix=" Kcal"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().energeticValueKj"
+              class="w-full"
+            />
+          </tui-textfield>
+        </div>
+      </tui-expand>
+    </tui-accordion>
+
+    <tui-accordion class="border bg-base-300">
+      <button tuiAccordion>Autres données</button>
+      <tui-expand [expanded]="true">
+        <div class="grid grid-cols-2 gap-4">
+          <tui-textfield>
+            <label tuiLabel>Dioxyde de soufre total (mg/L)</label>
+
+            <input
+              postfix=" mg/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().sulfur"
+              class="w-full"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel>Acidité totale (g/L)</label>
+
+            <input
+              postfix=" g/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().acidity"
+              class="w-full"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel>pH</label>
+
+            <input
+              postfix=" g/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().ph"
+              class="w-full"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel>Acide acétique (g/L) </label>
+
+            <input
+              postfix=" g/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().aceticAcid"
+              class="w-full"
+            />
+          </tui-textfield>
+
+          <tui-textfield>
+            <label tuiLabel>Taux de polyphénols (mg/L) </label>
+
+            <input
+              postfix=" mg/L"
+              tuiInputNumber
+              [min]="0"
+              [step]="1"
+              [formField]="stepTwoForm().polyphenols"
+              class="w-full"
+            />
+          </tui-textfield>
+        </div>
+      </tui-expand>
+    </tui-accordion>
+
+    <tui-accordion class="border bg-base-300">
+      <button tuiAccordion>Autres données</button>
+      <tui-expand [expanded]="true">
+        <div class="grid grid-cols-2 gap-4">
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Levure</legend>
+            <app-tristate-control
+              [formField]="stepTwoForm().yeast"
+              trueLabel="Oui"
+              falseLabel="Non"
+              nullLabel="Non communiqué"
+            ></app-tristate-control>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Collage</legend>
+            <app-tristate-control
+              [formField]="stepTwoForm().collage"
+              trueLabel="Oui"
+              falseLabel="Non"
+              nullLabel="Non communiqué"
+            ></app-tristate-control>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend">Filtrage</legend>
+            <app-tristate-control
+              [formField]="stepTwoForm().filtrage"
+              trueLabel="Oui"
+              falseLabel="Non"
+              nullLabel="Non communiqué"
+            ></app-tristate-control>
+          </fieldset>
+        </div>
+      </tui-expand>
+    </tui-accordion>
+  </div>
+</div>

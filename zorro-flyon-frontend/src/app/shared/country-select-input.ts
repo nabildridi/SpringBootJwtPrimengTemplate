@@ -18,7 +18,6 @@ import { FormsModule } from '@angular/forms';
         [nzStatus]="invalid() ? 'error' : ''"
         (nzOnClear)="reset()"
         [(ngModel)]="value"
-        nzSize="large"
       >
         @for (option of countries(); track $index) {
           <nz-option nzCustomContent [nzLabel]="option.label" [nzValue]="option.value">

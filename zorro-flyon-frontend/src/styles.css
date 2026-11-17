@@ -5,7 +5,7 @@ layer(base);
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
 @import 'jsoneditor/dist/jsoneditor.min.css';
 @import 'quill/dist/quill.snow.css';
-@import 'ng-zorro-antd/ng-zorro-antd.aliyun.min.css';
+@import '../public/css/zorro.css';
 @plugin 'daisyui' {
   themes: all;
 }
@@ -13,7 +13,7 @@ layer(base);
 @custom-variant dark (&:is(.dark *));
 
 .dark {
-  @import 'ng-zorro-antd/ng-zorro-antd.dark.min.css';
+  @import '../public/css/zorro-dark.css';
 }
 
 * {
