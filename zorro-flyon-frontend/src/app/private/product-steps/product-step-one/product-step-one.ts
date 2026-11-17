@@ -14,6 +14,8 @@ import { DaisyTextInput } from '../../../shared/text-input';
 import { DaisySelectInput } from '../../../shared/select-input';
 import { DaisyCountrySelectInput } from '../../../shared/country-select-input';
 import { DaisyMultiButtonSelector } from '../../../shared/multi-button-selector';
+import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 @Component({
   imports: [
@@ -25,6 +27,8 @@ import { DaisyMultiButtonSelector } from '../../../shared/multi-button-selector'
     DaisySelectInput,
     DaisyCountrySelectInput,
     DaisyMultiButtonSelector,
+    NzUploadModule,
+    NzCheckboxModule,
   ],
   selector: 'app-product-step-one',
   styleUrl: './product-step-one.css',
@@ -45,6 +49,7 @@ export class ProductStepOne implements OnInit {
   millesimes: any[] = [];
 
   previewOpened = signal<boolean>(false);
+  readonly fileList = signal<NzUploadFile[]>([]);
 
   constructor(
     private appHttpService: AppHttpService,
@@ -58,15 +63,26 @@ export class ProductStepOne implements OnInit {
     this.millesimes = this.listsService.getMillesimes();
   }
 
-  togglePreview() {
-    this.previewOpened.update((value) => !value);
+  beforeUpload = (file: NzUploadFile): boolean => {
+    this.fileList.set([]);
+    this.fileList.update((fileList) => fileList.concat(file));
+    this.handleUpload();
+    return false;
+  };
+
+  handleUpload() {
+    this.fileList().forEach((file: any) => {
+      this.productImage.set(file);
+    });
   }
 
-  removeFile(): void {
+  removeFile = (file: NzUploadFile): boolean => {
+    this.fileList.set([]);
     this.productImage.set(null);
-  }
+    return false;
+  };
 
-  deleteLogo() {
+  deleteImage() {
     this.inputsModel()!.resizedImage = null;
     this.inputsModel()!.originalImage = null;
   }

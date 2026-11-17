@@ -99,104 +99,99 @@
     <n-collapse title="Image de produit">
       <div class="flex justify-around">
         <div class="flex w-full">
-          <label tuiInputFiles>
-            <input accept="image/*" tuiInputFiles name="logoImage" [(ngModel)]="productImage" />
-          </label>
-
-          <tui-files class="tui-space_top-1">
-            @if (productImage()) {
-              <tui-file size="l" [file]="productImage()!" (remove)="removeFile()" />
-            }
-          </tui-files>
+          <nz-upload
+            nzAccept=""
+            [(nzFileList)]="fileList"
+            [nzBeforeUpload]="beforeUpload"
+            nzAccept="image/*"
+            [nzRemove]="removeFile"
+          >
+            <button type="button" class="daisy-btn btn-primary">
+              <i class="bx bx-folder-up-arrow"></i>
+              Select File
+            </button>
+          </nz-upload>
         </div>
         <div class="flex w-full justify-center">
-          <div class="card bg-base-100 shadow-sm">
+          <div class="card bg-base-100 card-xs shadow-sm">
             <div class="card-body">
-              <h2 class="card-title">Photo actuel</h2>
+              <h2 class="card-title">Logo actuel</h2>
               @if (inputsModel().resizedImage) {
-                <div class="w-72 h-72 relative group" (click)="togglePreview()">
+                <div class="w-64 h-64">
                   <img
                     [src]="'data:image/png;base64,' + inputsModel().resizedImage"
-                    class="h-72 w-72 object-none"
+                    class="h-64 w-64 object-none"
+                    alt=""
+                    onclick="full_image_modal.showModal()"
                   />
-                  <div
-                    class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 bottom-0 flex justify-center items-end text-xl bg-gray-200 text-black font-semibold"
-                  >
-                    Enlarge
-                  </div>
                 </div>
 
                 <div class="justify-center card-actions">
-                  <button type="button" class="daisy-btn btn-primary" (click)="deleteLogo()">
-                    Supprimer la photo
+                  <button type="button" class="daisy-btn btn-primary" (click)="deleteImage()">
+                    Supprimer l'image'
                   </button>
                 </div>
-
-                <ng-template [(tuiPreviewDialog)]="previewOpened">
-                  <tui-preview>
-                    <button
-                      iconStart="@tui.x"
-                      tuiIconButton
-                      tuiPreviewAction
-                      type="button"
-                      (click)="togglePreview()"
-                    >
-                      Close
-                    </button>
-
-                    <img
-                      alt="preview"
-                      [src]="'data:image/png;base64,' + inputsModel().resizedImage"
-                    />
-                  </tui-preview>
-                </ng-template>
               }
             </div>
           </div>
         </div>
         <div class="flex w-full justify-center items-center">
-          <label tuiLabel>
-            <input [formField]="stepOneForm().showPhotoFiche" tuiSwitch type="checkbox" />
-            Afficher le logo dans la fiche
-          </label>
+          <label nz-checkbox [formField]="stepOneForm().showPhotoFiche"
+            >Afficher le logo dans la fiche</label
+          >
         </div>
       </div>
     </n-collapse>
 
     <!-- intervenants -->
-    <tui-accordion class="border bg-base-300">
-      <button tuiAccordion>Intervenants</button>
-      <tui-expand [expanded]="true">
-        <button type="button" class="daisy-btn btn-primary mb-4" (click)="addIntervenant()">
-          Ajouter un conditionneur ou un importateur
-        </button>
+    <n-collapse title="Intervenants">
+      <button type="button" class="daisy-btn btn-primary mb-4" (click)="addIntervenant()">
+        Ajouter un conditionneur ou un importateur
+      </button>
 
-        @for (item of stepOneForm().intervenants; track $index) {
-          <div class="flex gap-4 items-center w-full mb-2">
-            <app-list-select
+      @for (item of stepOneForm().intervenants; track $index) {
+        <div class="flex gap-4 items-center w-full mb-2">
+          <div>
+            <n-select-input
               [formField]="item.interventionMethod"
               label="Méthode d'intervention"
               listId="InterventionMethods"
-            ></app-list-select>
+            ></n-select-input>
+          </div>
 
-            <tui-textfield class="w-full">
-              <label tuiLabel>Nom de conditionneur ou importateur</label>
-              <input tuiInput type="text" [formField]="item.intervenantName" class="w-full" />
-            </tui-textfield>
+          <div>
+            <n-text-input
+              [formField]="item.intervenantName"
+              label="Nom de conditionneur ou importateur"
+              icon="edit"
+            ></n-text-input>
+          </div>
 
-            <app-country-select
+          <div>
+            <n-country-select-input
               label="Pays de conditionneur ou importateur"
               [formField]="item.intervenantPays"
-            ></app-country-select>
-
-            <div class="shrink">
-              <button type="button" class="daisy-btn btn-error" (click)="deleteIntervenant($index)">
-                <tui-icon icon="@tui.trash" />
-              </button>
-            </div>
+            ></n-country-select-input>
           </div>
-        }
-      </tui-expand>
-    </tui-accordion>
+
+          <div class="shrink">
+            <button type="button" class="daisy-btn btn-error" (click)="deleteIntervenant($index)">
+              <i class="bx bx-trash"></i>
+            </button>
+          </div>
+        </div>
+      }
+    </n-collapse>
   </div>
 </div>
+
+<dialog id="full_image_modal" class="modal">
+  <div class="modal-box">
+    <img [src]="'data:image/png;base64,' + inputsModel().originalImage" alt="" />
+    <div class="modal-action">
+      <form method="dialog">
+        <button class="btn">Fermer</button>
+      </form>
+    </div>
+  </div>
+</dialog>

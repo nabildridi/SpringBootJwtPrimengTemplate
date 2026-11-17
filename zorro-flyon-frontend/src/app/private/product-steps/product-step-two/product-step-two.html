@@ -2,70 +2,68 @@
   <div class="card-body">
     <h2 class="card-title text-2xl">Données nutritionnelles</h2>
     <div class="divider"></div>
-    <tui-accordion class="border bg-base-300">
-      <button tuiAccordion>Valeurs énergetiques</button>
-      <tui-expand [expanded]="true">
-        <div class="grid grid-cols-2 gap-4">
-          <tui-textfield>
-            <label tuiLabel class="requ">Titre alcoométrique volumique (% vol.) </label>
 
-            <input
-              postfix="%"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().alcoometrique"
-              class="w-full"
-              (input)="calculateEnergiesFromInputs()"
-              (keydown.arrowDown)="calculateEnergiesFromInputs()"
-              (keydown.arrowUp)="calculateEnergiesFromInputs()"
-            />
-          </tui-textfield>
+    <n-collapse title="Valeurs énergetiques">
+      <div class="grid grid-cols-2 gap-4">
+        <tui-textfield>
+          <label tuiLabel class="requ">Titre alcoométrique volumique (% vol.) </label>
 
-          <tui-textfield>
-            <label tuiLabel class="requ">Sucres résiduels, Glucose + Fructose (g/L) </label>
+          <input
+            postfix="%"
+            tuiInputNumber
+            [min]="0"
+            [step]="1"
+            [formField]="stepTwoForm().alcoometrique"
+            class="w-full"
+            (input)="calculateEnergiesFromInputs()"
+            (keydown.arrowDown)="calculateEnergiesFromInputs()"
+            (keydown.arrowUp)="calculateEnergiesFromInputs()"
+          />
+        </tui-textfield>
 
-            <input
-              postfix=" g/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().glucose"
-              class="w-full"
-              (input)="calculateEnergiesFromInputs()"
-              (keydown.arrowDown)="calculateEnergiesFromInputs()"
-              (keydown.arrowUp)="calculateEnergiesFromInputs()"
-            />
-          </tui-textfield>
+        <tui-textfield>
+          <label tuiLabel class="requ">Sucres résiduels, Glucose + Fructose (g/L) </label>
 
-          <tui-textfield>
-            <label tuiLabel class="requ">Valeur énergétique (kcal/100ml) </label>
+          <input
+            postfix=" g/L"
+            tuiInputNumber
+            [min]="0"
+            [step]="1"
+            [formField]="stepTwoForm().glucose"
+            class="w-full"
+            (input)="calculateEnergiesFromInputs()"
+            (keydown.arrowDown)="calculateEnergiesFromInputs()"
+            (keydown.arrowUp)="calculateEnergiesFromInputs()"
+          />
+        </tui-textfield>
 
-            <input
-              postfix=" kcal"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().energeticValueKcal"
-              class="w-full"
-            />
-          </tui-textfield>
+        <tui-textfield>
+          <label tuiLabel class="requ">Valeur énergétique (kcal/100ml) </label>
 
-          <tui-textfield>
-            <label tuiLabel class="requ">Valeur énergétique (kJ) </label>
+          <input
+            postfix=" kcal"
+            tuiInputNumber
+            [min]="0"
+            [step]="1"
+            [formField]="stepTwoForm().energeticValueKcal"
+            class="w-full"
+          />
+        </tui-textfield>
 
-            <input
-              postfix=" Kcal"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().energeticValueKj"
-              class="w-full"
-            />
-          </tui-textfield>
-        </div>
-      </tui-expand>
-    </tui-accordion>
+        <tui-textfield>
+          <label tuiLabel class="requ">Valeur énergétique (kJ) </label>
+
+          <input
+            postfix=" Kcal"
+            tuiInputNumber
+            [min]="0"
+            [step]="1"
+            [formField]="stepTwoForm().energeticValueKj"
+            class="w-full"
+          />
+        </tui-textfield>
+      </div>
+    </n-collapse>
 
     <tui-accordion class="border bg-base-300">
       <button tuiAccordion>Autres données</button>
