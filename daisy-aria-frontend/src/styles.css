@@ -11,6 +11,7 @@ layer(base);
     business --prefersdark;
 }
 @import '../public/css/select-aria.css';
+@import '../public/css/table-aria.css';
 
 @custom-variant dark (&:is(.dark *));
 

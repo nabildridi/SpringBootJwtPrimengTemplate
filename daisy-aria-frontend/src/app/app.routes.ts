@@ -6,14 +6,16 @@ import { Login } from './public/login/login';
 import { AccessDenied } from './public/AccessDenied/AccessDenied';
 import { NotFound } from './public/not-found/not-found';
 import { Bobo } from './private/bobo/bobo';
+import { Users } from './private/users/users';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'bobo', pathMatch: 'full' },
+      { path: '', redirectTo: 'users', pathMatch: 'full' },
       { path: 'bobo', component: Bobo },
+      { path: 'users', component: Users },
     ],
   },
 

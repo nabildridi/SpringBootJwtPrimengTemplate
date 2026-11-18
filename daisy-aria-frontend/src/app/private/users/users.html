@@ -1,0 +1,34 @@
+<div class="space-y-4 bg-base-100">
+  <div class="overflow-x-auto rounded-box border border-base-content/5">
+    <table ngGrid class="table">
+      <thead>
+        <tr ngGridRow>
+          <th ngGridCell>id</th>
+          <th ngGridCell>firstname</th>
+          <th ngGridCell>lastname</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of data(); track $index) {
+          <tr ngGridRow>
+            <td ngGridCell>{{ item.id }}</td>
+            <td ngGridCell>{{ item.firstname }}</td>
+            <td ngGridCell>{{ item.lastname }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <div class="w-full flex justify-end p-8">
+    <div class="join">
+      <button class="join-item btn"><i class="bx bx-chevrons-left"></i></button>
+      <button class="join-item btn"><i class="bx bx-chevron-left"></i></button>
+      <button class="join-item btn">Page 22</button>
+      <button class="join-item btn">Page 23</button>
+      <button class="join-item btn">Page 24</button>
+      <button class="join-item btn"><i class="bx bx-chevron-right"></i></button>
+      <button class="join-item btn"><i class="bx bx-chevrons-right"></i></button>
+    </div>
+  </div>
+</div>
