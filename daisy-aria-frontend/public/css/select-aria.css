@@ -1,0 +1,62 @@
+.ariaSelect,
+[ngListbox],
+[ngOption] {
+  @apply outline-none;
+}
+.ariaSelect {
+  @apply relative bg-base-100 items-center flex border rounded-sm cursor-pointer p-2 h-12 select-none w-full;
+}
+.ariaSelect span {
+  @apply select-none;
+}
+.ariaSelect:hover {
+  @apply bg-base-300;
+}
+.ariaSelect[aria-disabled='true'] {
+  @apply opacity-60 cursor-default;
+}
+
+.caret-arrow {
+  @apply pointer-events-none transition-transform duration-150 ease-in-out;
+}
+.ariaSelect[aria-expanded='true'] .caret-arrow {
+  @apply rotate-180;
+}
+.select-popup-container {
+  animation: smoothPopupOpen 150ms ease-out forwards;
+  transform-origin: top;
+
+  @apply w-full p-3 mt-1 bg-base-300 text-lg max-h-44 box-border overflow-hidden;
+}
+@keyframes smoothPopupOpen {
+  0% {
+    max-height: 0;
+    opacity: 0;
+  }
+  16.7% {
+    opacity: 1;
+  }
+  100% {
+    max-height: 11rem;
+    opacity: 1;
+  }
+}
+[ngListbox] {
+  @apply gap-1 h-full flex overflow-auto flex-col;
+}
+[ngOption] {
+  @apply flex cursor-pointer items-center m-0.5 p-1 min-h-8 rounded-lg;
+}
+[ngOption]:hover {
+  @apply bg-primary;
+}
+[ngOption][data-active='true'] {
+  @apply outline-2 outline-primary -outline-offset-1;
+}
+[ngOption]:not([aria-selected='true']) .select-option-check {
+  @apply hidden;
+}
+
+[aria-invalid='true'] {
+  @apply outline-2 outline-error outline-solid;
+}

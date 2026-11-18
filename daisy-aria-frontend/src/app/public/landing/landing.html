@@ -1,0 +1,232 @@
+<!-- Navbar -->
+<header class="navbar bg-base-100 shadow-sm px-4 py-4">
+  <div class="navbar-start">
+    <a href="#" class="display text-2xl font-black flex items-center gap-2">
+      <app-logo-text></app-logo-text>
+    </a>
+  </div>
+  <nav class="navbar-center gap-6">
+    <a href="#how">How it works</a>
+    <a href="#tools">What's on the shelf</a>
+    <a href="#faq">Questions</a>
+  </nav>
+  <div class="navbar-end gap-2">
+    <button class="daisy-btn btn-primary" routerLink="/login">Sign in</button>
+
+    <button class="daisy-btn btn-primary" routerLink="/login">Get started</button>
+
+    <button class="daisy-btn btn-circle btn-primary" (click)="toggleDarkMode()">
+      <i [class]="layoutService.darkMode() ? 'bx bx-sun' : 'bx bx-moon'"></i>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="bg-base-100 border-y-[1.5px] border-base-300">
+    <div
+      class="max-w-6xl mx-auto px-4 py-16 md:py-24 grid lg:grid-cols-[1.15fr_.85fr] gap-12 items-center"
+    >
+      <div>
+        <h1 class="text-5xl sm:text-6xl lg:text-7xl">
+          You need a drill for ten minutes. Your neighbour has one.
+        </h1>
+        <p class="mt-6 text-lg max-w-[52ch]">
+          Loan Shelf links the tools sitting in garages on your street. Borrow a ladder, a tile
+          cutter or a pressure washer, and give it back by the weekend.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#join" class="btn btn-primary btn-lg">Find tools near me</a>
+          <a href="#how" class="btn btn-outline btn-lg">See how it works</a>
+        </div>
+        <div class="mt-8 flex items-center gap-3">
+          <div class="avatar-group -space-x-4">
+            <div class="avatar avatar-placeholder">
+              <div class="bg-secondary text-secondary-content w-10"><span>MA</span></div>
+            </div>
+            <div class="avatar avatar-placeholder">
+              <div class="bg-accent text-accent-content w-10"><span>JL</span></div>
+            </div>
+            <div class="avatar avatar-placeholder">
+              <div class="bg-warning text-warning-content w-10"><span>SK</span></div>
+            </div>
+            <div class="avatar avatar-placeholder">
+              <div class="bg-base-300 text-base-content w-10"><span>+84</span></div>
+            </div>
+          </div>
+          <p class="text-sm">87 neighbours on the Elm Street shelf</p>
+        </div>
+      </div>
+
+      <!-- Live-looking request card -->
+      <div
+        class="hero-card card border-[1.5px] border-base-content shadow-[6px_6px_0_var(--color-base-content)]"
+      >
+        <div class="card-body gap-4">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h2 class="card-title text-xl">Cordless drill, 18V</h2>
+              <p class="text-sm opacity-75">Shared by Marta, 3 doors down</p>
+            </div>
+            <span class="badge badge-success">Available</span>
+          </div>
+          <ul class="list rounded-box">
+            <li class="list-row">
+              <div class="list-col-grow text-sm">Includes</div>
+              <div class="text-sm font-medium">2 batteries, bit set</div>
+            </li>
+            <li class="list-row">
+              <div class="list-col-grow text-sm">Pickup</div>
+              <div class="text-sm font-medium">Today, 6–8 pm</div>
+            </li>
+            <li class="list-row">
+              <div class="list-col-grow text-sm">Return by</div>
+              <div class="text-sm font-medium">Sunday</div>
+            </li>
+          </ul>
+          <div class="card-actions">
+            <button class="btn btn-secondary w-full">Request this drill</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How it works (a real sequence) -->
+  <section id="how" class="max-w-6xl mx-auto px-4 py-20">
+    <h2 class="text-3xl md:text-4xl font-black max-w-[22ch]">
+      Three steps from "I need" to "done"
+    </h2>
+    <ul class="steps steps-vertical lg:steps-horizontal w-full mt-10">
+      <li class="step step-primary">Search your street</li>
+      <li class="step step-primary">Message the owner</li>
+      <li class="step">Pick up, use, return</li>
+    </ul>
+    <div class="grid md:grid-cols-3 gap-6 mt-8">
+      <p class="max-w-[38ch]">
+        Type what you need. Results are sorted by distance, so the closest option is always first.
+      </p>
+      <p class="max-w-[38ch]">
+        Agree on a pickup time in the app. Owners set their own hours and can decline any request.
+      </p>
+      <p class="max-w-[38ch]">
+        Tap "Returned" when you hand it back. If something breaks, both of you see it in the log.
+      </p>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section id="tools" class="bg-base-200 border-y-[1.5px] border-base-300">
+    <div class="max-w-6xl mx-auto px-4 py-20">
+      <div class="flex flex-wrap items-end justify-between gap-4">
+        <h2 class="text-3xl md:text-4xl font-black max-w-[20ch]">Most borrowed this month</h2>
+        <div role="tablist" class="tabs tabs-box">
+          <a role="tab" class="tab tab-active">All</a>
+          <a role="tab" class="tab">Garden</a>
+          <a role="tab" class="tab">Power tools</a>
+          <a role="tab" class="tab">Ladders</a>
+        </div>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-10">
+        <div class="card bg-base-100 border-[1.5px] border-base-300">
+          <div class="card-body">
+            <h3 class="card-title">Pressure washer</h3>
+            <p class="text-sm">Borrowed 14 times. Hose and two nozzles included.</p>
+            <div class="card-actions"><span class="badge badge-outline">Garden</span></div>
+          </div>
+        </div>
+        <div class="card bg-base-100 border-[1.5px] border-base-300">
+          <div class="card-body">
+            <h3 class="card-title">Extension ladder</h3>
+            <p class="text-sm">Borrowed 11 times. Reaches 4 m, needs a roof rack.</p>
+            <div class="card-actions"><span class="badge badge-outline">Ladders</span></div>
+          </div>
+        </div>
+        <div class="card bg-base-100 border-[1.5px] border-base-300">
+          <div class="card-body">
+            <h3 class="card-title">Tile cutter</h3>
+            <p class="text-sm">Borrowed 9 times. Wet saw, with water tray.</p>
+            <div class="card-actions"><span class="badge badge-outline">Power tools</span></div>
+          </div>
+        </div>
+        <div class="card bg-base-100 border-[1.5px] border-base-300">
+          <div class="card-body">
+            <h3 class="card-title">Hedge trimmer</h3>
+            <p class="text-sm">Borrowed 8 times. Cordless, one hour of battery.</p>
+            <div class="card-actions"><span class="badge badge-outline">Garden</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="max-w-3xl mx-auto px-4 py-20">
+    <h2 class="text-3xl md:text-4xl font-black">Questions people ask first</h2>
+    <div class="mt-8 space-y-3">
+      <div class="collapse collapse-arrow bg-base-100 border-[1.5px] border-base-300">
+        <input type="radio" name="faq" checked />
+        <div class="collapse-title font-semibold">What if I break something?</div>
+        <div class="collapse-content text-sm">
+          Tell the owner right away. Most repairs are a small fix or a shared cost, and the return
+          log keeps a record for both sides.
+        </div>
+      </div>
+      <div class="collapse collapse-arrow bg-base-100 border-[1.5px] border-base-300">
+        <input type="radio" name="faq" />
+        <div class="collapse-title font-semibold">Does it cost anything?</div>
+        <div class="collapse-content text-sm">
+          Joining and borrowing are free. Owners can ask for a small deposit on expensive items.
+        </div>
+      </div>
+      <div class="collapse collapse-arrow bg-base-100 border-[1.5px] border-base-300">
+        <input type="radio" name="faq" />
+        <div class="collapse-title font-semibold">Who can see my address?</div>
+        <div class="collapse-content text-sm">
+          Only people you accept a request from. Everyone else sees your street name, not your door.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="join" class="bg-secondary text-secondary-content">
+    <div class="max-w-6xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-10 items-center">
+      <h2 class="stencil text-4xl md:text-5xl">Start a shelf on your street</h2>
+      <div>
+        <p class="max-w-[46ch]">
+          Enter your email and postcode. We'll show you which neighbours already share tools, or
+          help you invite the first five.
+        </p>
+        <div class="mt-6 grid sm:grid-cols-[1fr_8rem] gap-3">
+          <label class="input w-full text-base-content">
+            <span class="sr-only">Email</span>
+            <input type="email" placeholder="you@example.com" aria-label="Email address" />
+          </label>
+          <label class="input w-full text-base-content">
+            <span class="sr-only">Postcode</span>
+            <input type="text" placeholder="Postcode" aria-label="Postcode" />
+          </label>
+        </div>
+        <button class="btn btn-primary btn-lg mt-4">Find my shelf</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer sm:footer-horizontal max-w-6xl mx-auto p-10">
+  <aside>
+    <p class="display font-black text-xl">Loan Shelf</p>
+    <p class="text-sm">Fewer drills in the world, more done.</p>
+  </aside>
+  <nav>
+    <h6 class="footer-title">Product</h6>
+    <a class="link link-hover" href="#how">How it works</a>
+    <a class="link link-hover" href="#tools">Tools</a>
+  </nav>
+  <nav>
+    <h6 class="footer-title">Company</h6>
+    <a class="link link-hover" href="#">About</a>
+    <a class="link link-hover" href="#">Contact</a>
+  </nav>
+</footer>
