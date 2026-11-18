@@ -18,7 +18,6 @@ import { ListsService } from '../services/configuration/lists-service';
         [nzStatus]="invalid() ? 'error' : ''"
         (nzOnClear)="reset()"
         [(ngModel)]="value"
-        nzSize="large"
       >
         @for (group of itemsList(); track $index) {
           <nz-option-group [nzLabel]="group.label">

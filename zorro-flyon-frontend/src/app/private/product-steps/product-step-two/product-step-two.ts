@@ -4,9 +4,10 @@ import { FieldTree, FormField } from '@angular/forms/signals';
 import { Produit } from '../../../model/produit';
 import { DaisyTristate } from '../../../shared/tristate-control';
 import { DaisyCollapse } from '../../../shared/styled-collapse';
+import { DaisyNumberInput } from '../../../shared/number-input';
 
 @Component({
-  imports: [FormField, DaisyTristate, DaisyCollapse],
+  imports: [FormField, DaisyTristate, DaisyCollapse, DaisyNumberInput],
   selector: 'app-product-step-two',
   styleUrl: './product-step-two.css',
   templateUrl: './product-step-two.html',

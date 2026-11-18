@@ -5,173 +5,140 @@
 
     <n-collapse title="Valeurs énergetiques">
       <div class="grid grid-cols-2 gap-4">
-        <tui-textfield>
-          <label tuiLabel class="requ">Titre alcoométrique volumique (% vol.) </label>
-
-          <input
-            postfix="%"
-            tuiInputNumber
-            [min]="0"
-            [step]="1"
+        <div>
+          <n-number-input
             [formField]="stepTwoForm().alcoometrique"
-            class="w-full"
+            label="Titre alcoométrique volumique (% vol.)"
+            [minimum]="0"
+            icon="edit"
             (input)="calculateEnergiesFromInputs()"
             (keydown.arrowDown)="calculateEnergiesFromInputs()"
             (keydown.arrowUp)="calculateEnergiesFromInputs()"
-          />
-        </tui-textfield>
+            suffix="%"
+          ></n-number-input>
+        </div>
 
-        <tui-textfield>
-          <label tuiLabel class="requ">Sucres résiduels, Glucose + Fructose (g/L) </label>
-
-          <input
-            postfix=" g/L"
-            tuiInputNumber
-            [min]="0"
-            [step]="1"
+        <div>
+          <n-number-input
             [formField]="stepTwoForm().glucose"
-            class="w-full"
+            label="Sucres résiduels, Glucose + Fructose (g/L)"
+            [minimum]="0"
+            icon="edit"
             (input)="calculateEnergiesFromInputs()"
             (keydown.arrowDown)="calculateEnergiesFromInputs()"
             (keydown.arrowUp)="calculateEnergiesFromInputs()"
-          />
-        </tui-textfield>
+            suffix="g/L"
+          ></n-number-input>
+        </div>
 
-        <tui-textfield>
-          <label tuiLabel class="requ">Valeur énergétique (kcal/100ml) </label>
-
-          <input
-            postfix=" kcal"
-            tuiInputNumber
-            [min]="0"
-            [step]="1"
+        <div>
+          <n-number-input
             [formField]="stepTwoForm().energeticValueKcal"
-            class="w-full"
-          />
-        </tui-textfield>
+            label="Valeur énergétique (kcal/100ml)"
+            [minimum]="0"
+            icon="edit"
+            suffix="kcal/100ml"
+          ></n-number-input>
+        </div>
 
-        <tui-textfield>
-          <label tuiLabel class="requ">Valeur énergétique (kJ) </label>
-
-          <input
-            postfix=" Kcal"
-            tuiInputNumber
-            [min]="0"
-            [step]="1"
+        <div>
+          <n-number-input
             [formField]="stepTwoForm().energeticValueKj"
-            class="w-full"
-          />
-        </tui-textfield>
+            label="Valeur énergétique (kJ)"
+            [minimum]="0"
+            icon="edit"
+            suffix="kJ"
+          ></n-number-input>
+        </div>
       </div>
     </n-collapse>
 
-    <tui-accordion class="border bg-base-300">
-      <button tuiAccordion>Autres données</button>
-      <tui-expand [expanded]="true">
-        <div class="grid grid-cols-2 gap-4">
-          <tui-textfield>
-            <label tuiLabel>Dioxyde de soufre total (mg/L)</label>
-
-            <input
-              postfix=" mg/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().sulfur"
-              class="w-full"
-            />
-          </tui-textfield>
-
-          <tui-textfield>
-            <label tuiLabel>Acidité totale (g/L)</label>
-
-            <input
-              postfix=" g/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().acidity"
-              class="w-full"
-            />
-          </tui-textfield>
-
-          <tui-textfield>
-            <label tuiLabel>pH</label>
-
-            <input
-              postfix=" g/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().ph"
-              class="w-full"
-            />
-          </tui-textfield>
-
-          <tui-textfield>
-            <label tuiLabel>Acide acétique (g/L) </label>
-
-            <input
-              postfix=" g/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().aceticAcid"
-              class="w-full"
-            />
-          </tui-textfield>
-
-          <tui-textfield>
-            <label tuiLabel>Taux de polyphénols (mg/L) </label>
-
-            <input
-              postfix=" mg/L"
-              tuiInputNumber
-              [min]="0"
-              [step]="1"
-              [formField]="stepTwoForm().polyphenols"
-              class="w-full"
-            />
-          </tui-textfield>
+    <n-collapse title="Autres données">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <n-number-input
+            [formField]="stepTwoForm().sulfur"
+            label="Dioxyde de soufre total (mg/L)"
+            [minimum]="0"
+            icon="edit"
+            suffix="mg/L"
+          ></n-number-input>
         </div>
-      </tui-expand>
-    </tui-accordion>
 
-    <tui-accordion class="border bg-base-300">
-      <button tuiAccordion>Autres données</button>
-      <tui-expand [expanded]="true">
-        <div class="grid grid-cols-2 gap-4">
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Levure</legend>
-            <app-tristate-control
-              [formField]="stepTwoForm().yeast"
-              trueLabel="Oui"
-              falseLabel="Non"
-              nullLabel="Non communiqué"
-            ></app-tristate-control>
-          </fieldset>
-
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Collage</legend>
-            <app-tristate-control
-              [formField]="stepTwoForm().collage"
-              trueLabel="Oui"
-              falseLabel="Non"
-              nullLabel="Non communiqué"
-            ></app-tristate-control>
-          </fieldset>
-
-          <fieldset class="fieldset">
-            <legend class="fieldset-legend">Filtrage</legend>
-            <app-tristate-control
-              [formField]="stepTwoForm().filtrage"
-              trueLabel="Oui"
-              falseLabel="Non"
-              nullLabel="Non communiqué"
-            ></app-tristate-control>
-          </fieldset>
+        <div>
+          <n-number-input
+            [formField]="stepTwoForm().acidity"
+            label="Acidité totale (g/L)"
+            [minimum]="0"
+            icon="edit"
+            suffix="g/L"
+          ></n-number-input>
         </div>
-      </tui-expand>
-    </tui-accordion>
+
+        <div>
+          <n-number-input
+            [formField]="stepTwoForm().ph"
+            label="pH"
+            [minimum]="0"
+            icon="edit"
+            suffix=""
+          ></n-number-input>
+        </div>
+
+        <div>
+          <n-number-input
+            [formField]="stepTwoForm().aceticAcid"
+            label="Acide acétique (g/L)"
+            [minimum]="0"
+            icon="edit"
+            suffix="g/L"
+          ></n-number-input>
+        </div>
+
+        <div>
+          <n-number-input
+            [formField]="stepTwoForm().polyphenols"
+            label="Taux de polyphénols (mg/L)"
+            [minimum]="0"
+            icon="edit"
+            suffix="mg/L"
+          ></n-number-input>
+        </div>
+      </div>
+    </n-collapse>
+
+    <n-collapse title="Autres données">
+      <div class="grid grid-cols-2 gap-4">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Levure</legend>
+          <n-tristate
+            [formField]="stepTwoForm().yeast"
+            trueLabel="Oui"
+            falseLabel="Non"
+            nullLabel="Non communiqué"
+          ></n-tristate>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Collage</legend>
+          <n-tristate
+            [formField]="stepTwoForm().collage"
+            trueLabel="Oui"
+            falseLabel="Non"
+            nullLabel="Non communiqué"
+          ></n-tristate>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Filtrage</legend>
+          <n-tristate
+            [formField]="stepTwoForm().filtrage"
+            trueLabel="Oui"
+            falseLabel="Non"
+            nullLabel="Non communiqué"
+          ></n-tristate>
+        </fieldset>
+      </div>
+    </n-collapse>
   </div>
 </div>

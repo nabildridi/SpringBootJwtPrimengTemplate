@@ -1,5 +1,6 @@
-import { TriStateEnum } from '../enums/tristate';
 import { Intervenant } from './intervenant';
+
+export type TriState = boolean | null;
 
 export interface Produit {
   id: string | null;
@@ -60,11 +61,11 @@ export interface Produit {
   agentsVal7: boolean;
   gaz: string;
   practices: string[];
-  yeast: TriStateEnum;
+  yeast: TriState;
   yeastNames: string;
-  collage: TriStateEnum;
+  collage: TriState;
   collageMethod: string[];
-  filtrage: TriStateEnum;
+  filtrage: TriState;
   filtrageMethod: string[];
   typeEmballage: string[];
   checkEmballage: string;
@@ -151,11 +152,11 @@ export class ProduitObject implements Produit {
   agentsVal7!: boolean;
   gaz: string = '';
   practices!: string[];
-  yeast: TriStateEnum = TriStateEnum.Null;
+  yeast: TriState = null;
   yeastNames: string = '';
-  collage: TriStateEnum = TriStateEnum.Null;
+  collage: TriState = null;
   collageMethod!: string[];
-  filtrage: TriStateEnum = TriStateEnum.Null;
+  filtrage: TriState = null;
   filtrageMethod!: string[];
   typeEmballage!: string[];
   checkEmballage: string = '';

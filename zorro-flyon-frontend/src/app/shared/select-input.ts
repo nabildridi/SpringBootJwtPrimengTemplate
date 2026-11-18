@@ -19,7 +19,6 @@ import { ListsService } from '../services/configuration/lists-service';
         [nzStatus]="invalid() ? 'error' : ''"
         (nzOnClear)="reset()"
         [(ngModel)]="value"
-        nzSize="large"
       >
         @for (option of itemsList(); track $index) {
           <nz-option nzCustomContent [nzLabel]="option.label" [nzValue]="option.value">
@@ -47,6 +46,7 @@ export class DaisySelectInput implements FormValueControl<string | null>, OnInit
       this.itemsList.set(this.listsService.getList(this.listId()!));
     }
     if (this.listItems() != null) {
+      console.log(this.listItems());
       this.itemsList.set(this.listItems()!);
     }
   }
