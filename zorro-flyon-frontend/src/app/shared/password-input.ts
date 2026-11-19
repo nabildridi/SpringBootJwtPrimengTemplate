@@ -1,40 +1,50 @@
 import { Component, input, model, OnInit, Signal, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { v4 as uuidv4 } from 'uuid';
-import { NzInputModule } from 'ng-zorro-antd/input';
 
 @Component({
   selector: 'n-password-input',
-  imports: [NzInputModule],
+  imports: [],
   template: `
-    <label class="floating-label">
-      <span [class.requ]="required()">{{ label() }}</span>
-      <nz-input-wrapper>
-        <i nzInputPrefix class="bx bx-key"></i>
+    <div class="relative w-full">
+      <span class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
+        <i class="bx bx-key" [ariaInvalid]="invalid()"></i>
+      </span>
 
-        <input
-          nz-input
-          [type]="show() ? 'text' : 'password'"
-          [value]="value()"
-          (input)="value.set($event.target.value)"
-          [nzStatus]="invalid() ? 'error' : ''"
-          [placeholder]="label()"
-          [nzVariant]="'outlined'"
-          class="h-10"
-        />
+      <input
+        [type]="show() ? 'text' : 'password'"
+        [value]="value()"
+        (input)="value.set($event.target.value)"
+        [ariaInvalid]="invalid()"
+        [id]="inputId"
+        placeholder=" "
+        class="peer block w-full appearance-none rounded-md border border-base-200  bg-base-100
+             px-3 ps-11 pe-11 pb-2.5 pt-6 text-sm 
+             focus:border-primary focus:outline-none focus:ring-0 hover:border-primary"
+      />
 
+      <label
+        [for]="inputId"
+        class="pointer-events-none absolute start-11 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm 
+             duration-200
+             peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
+             peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-primary"
+        [class.requ]="required()"
+        >{{ label() }}
+      </label>
+
+      <span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3.5 space-x-2">
         @if (value()) {
-          <i nzInputSuffix class="bx bx-x cursor-pointer" (click)="reset()"></i>
+          <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
         }
 
         <i
-          nzInputSuffix
           [class]="show() ? 'bx bx-eye-slash' : 'bx bx-eye'"
           class="cursor-pointer"
           (click)="toggle()"
         ></i>
-      </nz-input-wrapper>
-    </label>
+      </span>
+    </div>
   `,
 })
 export class DaisyPasswordInput implements FormValueControl<string | null>, OnInit {
@@ -44,6 +54,8 @@ export class DaisyPasswordInput implements FormValueControl<string | null>, OnIn
   required = input<boolean>(false);
 
   show = signal<boolean>(false);
+
+  inputId: string = uuidv4();
 
   ngOnInit(): void {}
 
