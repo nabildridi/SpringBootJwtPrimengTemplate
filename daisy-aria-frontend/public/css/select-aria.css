@@ -29,9 +29,6 @@ app-select-default-example {
 
 .select-chevron {
   flex: none;
-  width: 14px;
-  height: 14px;
-  color: var(--ex-muted, #585d66);
   transition: transform 0.15s ease;
 }
 

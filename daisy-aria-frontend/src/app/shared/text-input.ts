@@ -35,7 +35,7 @@ import { v4 as uuidv4 } from 'uuid';
 
       <span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3.5 ">
         @if (value()) {
-          <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
+          <i class="bx bx-x cursor-pointer" (click)="clear()"></i>
         }
       </span>
     </div>
@@ -53,7 +53,7 @@ export class DaisyTextInput implements FormValueControl<string | null>, OnInit {
 
   ngOnInit(): void {}
 
-  reset() {
+  clear() {
     this.value.set(null);
   }
 }

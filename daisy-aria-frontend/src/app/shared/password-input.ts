@@ -35,7 +35,7 @@ import { v4 as uuidv4 } from 'uuid';
 
       <span class="cursor-pointer absolute inset-y-0 end-0 flex items-center pe-3.5 space-x-2">
         @if (value()) {
-          <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
+          <i class="bx bx-x cursor-pointer" (click)="clear()"></i>
         }
 
         <i
@@ -63,7 +63,7 @@ export class DaisyPasswordInput implements FormValueControl<string | null>, OnIn
     this.show.update((value) => !value);
   }
 
-  reset() {
+  clear() {
     this.value.set(null);
   }
 }

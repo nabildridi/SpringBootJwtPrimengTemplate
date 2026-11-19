@@ -15,10 +15,7 @@
   </div>
 
   <div>
-    <n-country-select-input
-      [formField]="pageForm.country"
-      label="Select country"
-    ></n-country-select-input>
+    <n-country-select-input [formField]="pageForm.country" label="Pays"></n-country-select-input>
   </div>
 
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
