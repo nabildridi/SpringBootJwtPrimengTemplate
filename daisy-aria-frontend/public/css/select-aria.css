@@ -1,62 +1,138 @@
-.ariaSelect,
-[ngListbox],
-[ngOption] {
-  @apply outline-none;
-}
-.ariaSelect {
-  @apply relative bg-base-100 items-center flex border rounded-sm cursor-pointer p-2 h-12 select-none w-full;
-}
-.ariaSelect span {
-  @apply select-none;
-}
-.ariaSelect:hover {
-  @apply bg-base-300;
-}
-.ariaSelect[aria-disabled='true'] {
-  @apply opacity-60 cursor-default;
+app-select-default-example {
+  display: contents;
 }
 
-.caret-arrow {
-  @apply pointer-events-none transition-transform duration-150 ease-in-out;
+.select-field {
+  display: block;
+  width: min(260px, 100%);
 }
-.ariaSelect[aria-expanded='true'] .caret-arrow {
-  @apply rotate-180;
-}
-.select-popup-container {
-  animation: smoothPopupOpen 150ms ease-out forwards;
-  transform-origin: top;
 
-  @apply w-full p-3 mt-1 bg-base-300 text-lg max-h-44 box-border overflow-hidden;
+.select-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  font: inherit;
+  font-size: 0.875rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--ex-radius-sm, 14px);
+  border: 1px solid var(--ex-border-strong, #d0c9bc);
+  background: var(--ex-surface, #ffffff);
+  color: var(--ex-text, #17191c);
+  cursor: pointer;
 }
-@keyframes smoothPopupOpen {
-  0% {
-    max-height: 0;
+
+.select-trigger:hover {
+  background: var(--ex-surface-2, #f2eee6);
+}
+
+.select-chevron {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--ex-muted, #585d66);
+  transition: transform 0.15s ease;
+}
+
+.select-trigger[aria-expanded='true'] .select-chevron {
+  transform: rotate(180deg);
+}
+
+.select-content {
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: var(--for-floating-anchor-width);
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 4px;
+  background: var(--ex-surface, #ffffff);
+  border: 1px solid var(--ex-border, #e5e0d6);
+  border-radius: var(--ex-radius-sm, 14px);
+  box-shadow: var(--ex-shadow, 0 2px 4px rgba(0, 0, 0, 0.04), 0 20px 40px -18px rgba(0, 0, 0, 0.2));
+}
+
+.select-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  font: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  padding: 0.4rem 0.6rem;
+  border: 0;
+  border-radius: var(--ex-radius-sm, 14px);
+  background: transparent;
+  color: var(--ex-text, #17191c);
+  cursor: pointer;
+}
+
+.select-option[data-highlighted] {
+  background: var(--ex-surface-2, #f2eee6);
+}
+
+.select-option[data-state='checked'] {
+  color: var(--ex-accent, #0e7c6b);
+  font-weight: 600;
+}
+
+.select-option[data-disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.select-indicator {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.1em;
+  height: 1.1em;
+  color: var(--ex-accent, #0e7c6b);
+}
+
+.select-indicator[hidden] {
+  display: none;
+}
+
+.select-indicator svg {
+  width: 100%;
+  height: 100%;
+}
+
+.select-group-label {
+  padding: 0.35rem 0.6rem 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ex-muted, #585d66);
+}
+
+.select-separator {
+  height: 1px;
+  margin: 4px -1px;
+  border: 0;
+  background: var(--ex-border, #e5e0d6);
+}
+
+.select-pop-in {
+  transform-origin: var(--for-floating-content-transform-origin, center);
+  animation: select-pop-in 0.2s var(--ex-ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)) both;
+}
+
+@keyframes select-pop-in {
+  from {
     opacity: 0;
+    scale: 0.9;
   }
-  16.7% {
-    opacity: 1;
-  }
-  100% {
-    max-height: 11rem;
-    opacity: 1;
-  }
-}
-[ngListbox] {
-  @apply gap-1 h-full flex overflow-auto flex-col;
-}
-[ngOption] {
-  @apply flex cursor-pointer items-center m-0.5 p-1 min-h-8 rounded-lg;
-}
-[ngOption]:hover {
-  @apply bg-primary;
-}
-[ngOption][data-active='true'] {
-  @apply outline-2 outline-primary -outline-offset-1;
-}
-[ngOption]:not([aria-selected='true']) .select-option-check {
-  @apply hidden;
 }
 
-[aria-invalid='true'] {
-  @apply outline-2 outline-error outline-solid;
+@media (prefers-reduced-motion: reduce) {
+  .select-pop-in {
+    animation-duration: 0.01ms;
+  }
 }

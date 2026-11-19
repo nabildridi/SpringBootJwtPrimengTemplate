@@ -4,7 +4,6 @@ layer(base);
 
 @import 'tailwindcss';
 @import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
-@import '../node_modules/tw-animate-css/dist/tw-animate.css';
 @plugin 'daisyui' {
   themes:
     corporate --default,
@@ -19,8 +18,12 @@ layer(base);
   font-family: 'Outfit';
 }
 
+[aria-invalid='true'] {
+  @apply text-error border-error;
+}
+
 @utility requ {
-  @apply block text-sm font-medium text-gray-700 after:ml-0.5 after:text-red-500 after:content-['*'];
+  @apply block text-sm font-medium text-gray-700 after:ml-0.5 after:text-error after:content-['*'];
 }
 
 @utility daisy-btn {

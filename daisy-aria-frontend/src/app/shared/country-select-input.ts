@@ -1,96 +1,69 @@
 import {
-  afterRenderEffect,
+  ChangeDetectionStrategy,
   Component,
-  computed,
   input,
   model,
   OnInit,
   signal,
-  viewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Combobox, ComboboxPopup, ComboboxWidget } from '@angular/aria/combobox';
-import { Listbox, Option } from '@angular/aria/listbox';
-import { OverlayModule } from '@angular/cdk/overlay';
+
 import { FormValueControl } from '@angular/forms/signals';
 import { environment } from '../../environments/environment';
 import { CountriesService } from '../services/countries/countries-service';
+import {
+  ForSelect,
+  ForSelectContent,
+  ForSelectIndicator,
+  ForSelectOption,
+  ForSelectTrigger,
+  ForSelectValue,
+} from 'forty-cdk/select';
 
 @Component({
   selector: 'n-country-select-input',
-  imports: [Combobox, ComboboxPopup, ComboboxWidget, Listbox, Option, OverlayModule],
-
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+  imports: [
+    ForSelect,
+    ForSelectTrigger,
+    ForSelectValue,
+    ForSelectContent,
+    ForSelectOption,
+    ForSelectIndicator,
+  ],
   template: `
     <label class="floating-label">
       <span [class.requ]="required()">{{ label() }}</span>
 
       <div
-        ngCombobox
-        #combobox="ngCombobox"
-        [(expanded)]="popupExpanded"
-        [preserveContent]="true"
-        class="ariaSelect"
-        [ariaInvalid]="invalid()"
+        forSelect
+        #select="forSelect"
+        class="select-field"
+        [(value)]="selectValues"
+        placeholder="Pick your country"
+        (valueChange)="change()"
       >
-        <div class="flex justify-between w-full">
-          <div class="grow  content-center">
-            <span class="pointer-events-none space-x-2">
-              <span translate="no" aria-hidden="true">
-                <i [class]="'fi fi-' + displayIcon()"></i>
-              </span>
-              <span>{{ displayValue() }}</span>
-            </span>
+        <button forSelectTrigger type="button" class="select-trigger">
+          <span forSelectValue> </span>
+          <div>
+            <i class="bx bx-x cursor-pointer" (click)="reset()"></i>
+            <i class="select-chevron bx bx-chevron-down"></i>
           </div>
-          <div class="flex-none justify-center content-center space-x-2">
-            @if (value()) {
-              <span class="bx bx-x cursor-pointer text-base" (click)="reset()"></span>
+        </button>
+        @if (select.open()) {
+          <div forSelectContent class="select-content" animate.enter="select-pop-in">
+            @for (county of countries(); track county.value) {
+              <button forSelectOption type="button" class="select-option" [value]="county.value">
+                <span forSelectIndicator class="select-indicator">
+                  <i class="bx bx-check"></i>
+                </span>
+                {{ county.label }}
+              </button>
             }
-            <span class="caret-arrow bx bx-caret-down" translate="no" aria-hidden="true"></span>
           </div>
-        </div>
+        }
       </div>
-
-      <ng-template
-        [cdkConnectedOverlay]="{ origin: combobox.element, usePopover: 'inline', matchWidth: true }"
-        [cdkConnectedOverlayOpen]="popupExpanded()"
-      >
-        <ng-template ngComboboxPopup [combobox]="combobox">
-          <div class="select-popup-container">
-            <div
-              #listbox="ngListbox"
-              ngListbox
-              ngComboboxWidget
-              [tabindex]="-1"
-              focusMode="activedescendant"
-              selectionMode="explicit"
-              [(value)]="selectedValues"
-              [activeDescendant]="listbox.activeDescendant()"
-              (click)="onCommit()"
-              (keydown.enter)="onCommit()"
-              (keydown.space)="onCommit()"
-            >
-              @for (country of countries(); track country.value) {
-                <div
-                  ngOption
-                  [value]="country.value"
-                  [label]="country.label"
-                  class="flex justify-between "
-                >
-                  <div class="grow  content-center space-x-2">
-                    <span translate="no" aria-hidden="true" [class]="'fi fi-' + country.value">
-                    </span>
-                    <span class="example-option-text">{{ country.label }}</span>
-                  </div>
-                  <div class="flex-none justify-center content-center">
-                    <span translate="no" class="select-option-check" aria-hidden="true"
-                      ><i class="bx bx-check text-lg"></i
-                    ></span>
-                  </div>
-                </div>
-              }
-            </div>
-          </div>
-        </ng-template>
-      </ng-template>
     </label>
   `,
 })
@@ -102,40 +75,25 @@ export class DaisyCountrySelectInput implements FormValueControl<string | null>,
 
   countries = signal<any[]>([]);
 
-  readonly listbox = viewChild(Listbox);
-  readonly selectedValues = signal<string[]>([]);
-  readonly popupExpanded = signal(false);
-  readonly displayIcon = computed(() => {
-    const val = this.selectedValues()[0];
-    return val ? val : '';
-  });
-
-  readonly displayValue = computed(
-    () => this.countriesService.getCountryName(this.selectedValues()[0]) || '',
-  );
+  selectValues = signal<string[]>([]);
 
   constructor(private countriesService: CountriesService) {
     this.countries.set(environment.countries);
-    afterRenderEffect(() => {
-      this.listbox()?.scrollActiveItemIntoView();
-    });
   }
 
   ngOnInit(): void {
     if (this.value() != null) {
-      this.selectedValues.set([this.value()!]);
+      this.selectValues.set([this.value()!]);
     }
+  }
+
+  change() {
+    console.log(this.selectValues()[0]);
+    this.value.set(this.selectValues()[0]);
   }
 
   reset() {
     this.value.set(null);
-    this.selectedValues.set([]);
-  }
-
-  onCommit() {
-    if (this.selectedValues() && this.selectedValues()[0]) {
-      this.value.set(this.selectedValues()[0]);
-    }
-    this.popupExpanded.set(false);
+    this.selectValues.set([]);
   }
 }

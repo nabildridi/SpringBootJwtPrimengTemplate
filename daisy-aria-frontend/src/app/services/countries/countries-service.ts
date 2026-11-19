@@ -14,4 +14,15 @@ export class CountriesService {
       return '';
     }
   }
+
+  public getCountryObject(code: string): any {
+    let found = lod.find(environment.countries, {
+      value: code,
+    });
+    if (found) {
+      return found;
+    } else {
+      return null;
+    }
+  }
 }
