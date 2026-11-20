@@ -55,7 +55,9 @@ import { v4 as uuidv4 } from 'uuid';
           [id]="inputId"
           class="peer block h-14 w-full appearance-none rounded-md border border-base-200 bg-base-100
              px-3 ps-11 pe-11 pb-2.5 pt-6 text-sm 
-             focus:border-primary focus:outline-none focus:ring-0 hover:border-primary"
+             focus:border-primary focus:outline-none focus:ring-0 hover:border-primary
+             "
+          [ariaInvalid]="invalid()"
         >
         </span>
 

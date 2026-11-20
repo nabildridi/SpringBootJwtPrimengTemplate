@@ -19,7 +19,7 @@ layer(base);
 }
 
 [aria-invalid='true'] {
-  @apply text-error border-error;
+  @apply text-error border-2 border-error;
 }
 
 @utility requ {

@@ -1,38 +1,19 @@
-tbody [ngGridRow]:focus-within,
-tbody [ngGridRow]:hover {
-  @apply bg-base-300;
+.tbl {
+  @apply block w-full;
 }
 
-.sort-button {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: 700;
+.tbl-row {
+  @apply flex flex-row w-full bg-base-100;
 }
 
-.assignee-cell [ngGridCellWidget] {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  outline: none;
+.tbl-head {
+  @apply bg-info font-bold;
 }
 
-.assignee-edit-button {
-  visibility: hidden;
-  cursor: pointer;
+.tbl-cell {
+  @apply w-full border-b outline-none border-base-300 pt-2 pb-2 pl-2;
 }
 
-.assignee-cell:focus-within .assignee-edit-button,
-.assignee-cell:hover .assignee-edit-button {
-  visibility: initial;
-}
-
-.assignee-edit-input {
-  outline: none;
-  border: none;
-  color: var(--full-contrast);
-  background-color: var(--page-background);
-  font-size: 1rem;
-  padding: 0.5rem;
+.tbl-row:not(.tbl-head) {
+  @apply hover:bg-base-300;
 }
