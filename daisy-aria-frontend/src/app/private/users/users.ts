@@ -1,13 +1,5 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  OnInit,
-  signal,
-  TemplateRef,
-  ViewChild,
-} from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/core';
+
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
 import { ToastService } from '../../services/toast/toast.service';
@@ -18,12 +10,33 @@ import {
   ForTableHeaderCell,
   ForTableHeaderRow,
   ForTableRow,
+  ForTableSortHeader,
+  type TableSortDescriptor,
+  type TableSortDirection,
 } from 'forty-cdk/table';
+
+import {
+  ForPagination,
+  ForPaginationItem,
+  ForPaginationNext,
+  ForPaginationPrevious,
+} from 'forty-cdk/pagination';
 
 @Component({
   selector: 'app-users',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ForTable, ForTableHeaderRow, ForTableRow, ForTableHeaderCell, ForTableCell],
+  imports: [
+    ForTable,
+    ForTableHeaderRow,
+    ForTableRow,
+    ForTableHeaderCell,
+    ForTableCell,
+    ForTableSortHeader,
+    ForPagination,
+    ForPaginationItem,
+    ForPaginationPrevious,
+    ForPaginationNext,
+  ],
   templateUrl: './users.html',
   styleUrl: './users.css',
 })
@@ -32,6 +45,8 @@ export class Users implements OnInit {
   totalRows = signal<number>(0);
   globalFilterText = '';
   readonly pageSize = 10;
+  protected readonly sort = signal<TableSortDescriptor>({ column: '', direction: 'none' });
+  protected readonly page = signal(1);
 
   constructor(
     private appHttpService: AppHttpService,
@@ -43,6 +58,15 @@ export class Users implements OnInit {
     //let firstPage = this.tableService.getFirstPage();
     //this.loadFromServer(firstPage);
     this.sendRequest();
+  }
+
+  protected directionFor(column: string): TableSortDirection {
+    return this.sort().column === column ? this.sort().direction : 'none';
+  }
+
+  protected onSort(descriptor: TableSortDescriptor): void {
+    console.log(descriptor);
+    this.sort.set(descriptor);
   }
 
   sendRequest() {

@@ -1,18 +1,89 @@
-<div forTable mode="table" class="tbl">
-  <div role="rowgroup" class="w-full">
-    <div forTableHeaderRow class="tbl-row tbl-head">
-      <div forTableHeaderCell name="id" class="tbl-cell">id</div>
-      <div forTableHeaderCell name="firstname" class="tbl-cell">firstname</div>
-      <div forTableHeaderCell name="lastname" class="tbl-cell">lastname</div>
-    </div>
-  </div>
-  <div role="rowgroup" class="w-full">
-    @for (item of data(); track $index) {
-      <div forTableRow class="tbl-row">
-        <div forTableCell name="id" class="tbl-cell">{{ item.id }}</div>
-        <div forTableCell name="firstname" class="tbl-cell">{{ item.firstname }}</div>
-        <div forTableCell name="lastname" class="tbl-cell">{{ item.lastname }}</div>
+<div class="card w-full bg-base-100 shadow-sm">
+  <div class="card-body">
+    <div forTable mode="table" class="tbl">
+      <div role="rowgroup" class="w-full">
+        <div forTableHeaderRow class="tbl-row tbl-head">
+          <div
+            forTableHeaderCell
+            forTableSortHeader
+            column="id"
+            name="id"
+            class="tbl-cell"
+            [direction]="directionFor('id')"
+            (sortChange)="onSort($event)"
+            class="tbl-cell tbl-sort"
+            scope="col"
+          >
+            id
+          </div>
+          <div
+            forTableHeaderCell
+            forTableSortHeader
+            column="firstname"
+            name="firstname"
+            class="tbl-cell"
+            [direction]="directionFor('firstname')"
+            (sortChange)="onSort($event)"
+            class="tbl-cell tbl-sort"
+            scope="col"
+          >
+            firstname
+          </div>
+          <div
+            forTableHeaderCell
+            forTableSortHeader
+            column="lastname"
+            name="lastname"
+            class="tbl-cell"
+            [direction]="directionFor('lastname')"
+            (sortChange)="onSort($event)"
+            class="tbl-cell tbl-sort"
+            scope="col"
+          >
+            lastname
+          </div>
+        </div>
       </div>
-    }
+      <div role="rowgroup" class="w-full">
+        @for (item of data(); track $index) {
+          <div forTableRow class="tbl-row">
+            <div forTableCell name="id" class="tbl-cell">{{ item.id }}</div>
+            <div forTableCell name="firstname" class="tbl-cell">{{ item.firstname }}</div>
+            <div forTableCell name="lastname" class="tbl-cell">{{ item.lastname }}</div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="justify-end card-actions">
+      <nav
+        forPagination
+        #pg="forPagination"
+        class="pgn"
+        ariaLabel="Pagination"
+        [(page)]="page"
+        [count]="20"
+        [siblingCount]="1"
+        [boundaryCount]="1"
+      >
+        <button forPaginationPrevious class="pgn-btn pgn-nav" ariaLabel="Previous page">
+          <i class="bx bx-chevron-left"></i>
+        </button>
+
+        @for (item of pg.items(); track item.key) {
+          @if (item.type === 'page') {
+            <button forPaginationItem class="pgn-btn pgn-page" [page]="item.value!">
+              {{ item.value }}
+            </button>
+          } @else {
+            <span class="pgn-gap" aria-hidden="true">…</span>
+          }
+        }
+
+        <button forPaginationNext class="pgn-btn pgn-nav" ariaLabel="Next page">
+          <i class="bx bx-chevron-right"></i>
+        </button>
+      </nav>
+    </div>
   </div>
 </div>
