@@ -27,7 +27,7 @@ layer(base);
 }
 
 @utility daisy-btn {
-  @apply btn btn-md rounded-sm bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
+  @apply btn btn-md bg-gradient-to-r hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all duration-300 overflow-hidden disabled:opacity-60 disabled:cursor-not-allowed;
 }
 
 @utility nav-link {
