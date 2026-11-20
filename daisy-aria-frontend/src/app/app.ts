@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { SignalsService } from './services/signals/signals.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { LayoutService } from './services/layout/layout.service';
+import { ForToastViewport } from 'forty-cdk/toast';
 
 @Component({
-  imports: [RouterOutlet, CommonModule, NgxSpinnerModule],
+  imports: [RouterOutlet, CommonModule, NgxSpinnerModule, ForToastViewport],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

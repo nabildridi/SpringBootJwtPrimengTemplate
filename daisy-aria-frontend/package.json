@@ -24,7 +24,6 @@
     "daisyui": "5.7.50",
     "ngx-spinner": "^22.0.1",
     "lodash": "4.18.1",
-    "ng-hub-ui-toast": "22.12.2",
     "@internationalized/date": "3.12.4",
     "uuid": "14.0.3"
   },

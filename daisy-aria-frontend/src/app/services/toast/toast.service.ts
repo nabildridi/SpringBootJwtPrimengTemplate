@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HubToastService } from 'ng-hub-ui-toast';
+import { DestroyRef, inject, Injectable } from '@angular/core';
+import { ForToastManager, type ForToastRef } from 'forty-cdk/toast';
+
+type Variant = 'info' | 'success' | 'warning' | 'error';
 
 @Injectable({
   providedIn: 'root',
@@ -7,23 +9,45 @@ import { HubToastService } from 'ng-hub-ui-toast';
 export class ToastService {
   private duration: number = 10000;
 
-  constructor(private hubToastService: HubToastService) {}
+  readonly #opened = new Set<ForToastRef>();
+
+  constructor(private forToastManager: ForToastManager) {
+    inject(DestroyRef).onDestroy(() => {
+      for (const ref of this.#opened) {
+        ref.dismiss();
+      }
+    });
+  }
+
+  protected notify(variant: Variant): void {
+    const copy = {
+      info: { title: 'Heads up', description: 'A new version is available.' },
+      success: { title: 'Saved', description: 'Your changes were saved.' },
+      warning: { title: 'Storage almost full', description: 'You have used 90% of your quota.' },
+      error: { title: 'Upload failed', description: 'The file could not be uploaded.' },
+    }[variant];
+    this.#track(
+      this.forToastManager.show({
+        variant,
+        duration: this.duration,
+        region: 'toast-variants',
+        ...copy,
+      }),
+    );
+  }
+
+  #track(ref: ForToastRef): void {
+    this.#opened.add(ref);
+    void ref.closed.then(() => this.#opened.delete(ref));
+  }
 
   public showMesssage(severity: any, title: any, message: any) {
     if (severity == 'success') {
-      this.hubToastService.success(message, title, {
-        timeOut: this.duration,
-        tapToDismiss: false,
-        progressBar: true,
-      });
+      this.notify('info');
     }
 
     if (severity == 'error') {
-      this.hubToastService.error(message, title, {
-        timeOut: this.duration,
-        tapToDismiss: false,
-        progressBar: true,
-      });
+      this.notify('error');
     }
   }
 
