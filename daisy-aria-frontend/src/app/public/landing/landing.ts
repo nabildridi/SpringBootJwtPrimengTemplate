@@ -11,9 +11,16 @@ import { LayoutService } from '../../services/layout/layout.service';
   templateUrl: './landing.html',
 })
 export class Landing {
-  constructor(public layoutService: LayoutService) {}
+  constructor(
+    public layoutService: LayoutService,
+    private toastService: ToastService,
+  ) {}
 
   toggleDarkMode() {
     this.layoutService.toggleDarkMode();
+  }
+
+  showToast() {
+    this.toastService.showSuccess('all wrong');
   }
 }

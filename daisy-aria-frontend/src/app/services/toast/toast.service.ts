@@ -19,19 +19,14 @@ export class ToastService {
     });
   }
 
-  protected notify(variant: Variant): void {
-    const copy = {
-      info: { title: 'Heads up', description: 'A new version is available.' },
-      success: { title: 'Saved', description: 'Your changes were saved.' },
-      warning: { title: 'Storage almost full', description: 'You have used 90% of your quota.' },
-      error: { title: 'Upload failed', description: 'The file could not be uploaded.' },
-    }[variant];
+  protected notify(variant: Variant, title: any, message: any): void {
     this.#track(
       this.forToastManager.show({
-        variant,
+        variant: variant,
+        title: title,
+        description: message,
         duration: this.duration,
-        region: 'toast-variants',
-        ...copy,
+        dismissible: true,
       }),
     );
   }
@@ -43,11 +38,11 @@ export class ToastService {
 
   public showMesssage(severity: any, title: any, message: any) {
     if (severity == 'success') {
-      this.notify('info');
+      this.notify('success', title, message);
     }
 
     if (severity == 'error') {
-      this.notify('error');
+      this.notify('error', title, message);
     }
   }
 
