@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
 import { DaisyCountrySelectInput } from '../../shared/country-select-input';
+import { DaisyFileInput } from '../../shared/file-input';
 
 interface pageData {
   username: string;
@@ -13,10 +14,18 @@ interface pageData {
   color: string;
   colors: string[];
   generated: string;
+  logo: File | null;
 }
 
 @Component({
-  imports: [FormsModule, DaisyTextInput, FormField, DaisyPasswordInput, DaisyCountrySelectInput],
+  imports: [
+    FormsModule,
+    DaisyTextInput,
+    FormField,
+    DaisyPasswordInput,
+    DaisyCountrySelectInput,
+    DaisyFileInput,
+  ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
   templateUrl: './bobo.html',
@@ -28,8 +37,8 @@ export class Bobo {
     country: 'br',
     color: 'val5',
     colors: [],
-
     generated: '',
+    logo: null,
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {

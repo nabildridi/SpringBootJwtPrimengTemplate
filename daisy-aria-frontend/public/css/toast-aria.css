@@ -44,13 +44,42 @@
 
 @keyframes toast-in {
   from {
+    transform: translateX(120%);
     opacity: 0;
-    scale: 0.9;
+  }
+}
+
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+[forToast].toast-out {
+  animation: toast-out 200ms ease forwards;
+}
+
+@keyframes toast-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes toast-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .app-toast-viewport [forToast] {
-    animation-duration: 0.01ms;
+    animation:
+      toast-fade-in 0.3s ease forwards,
+      toast-fade-out 0.3s ease 3s forwards;
   }
 }

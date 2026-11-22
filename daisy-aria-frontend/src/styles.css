@@ -1,19 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap')
-layer(base);
-
 @import 'tailwindcss';
-@import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
 @plugin 'daisyui' {
   themes:
     corporate --default,
     business --prefersdark;
 }
+
+@import '../node_modules/ngx-spinner/animations/ball-grid-pulse.css';
+@import '../public/boxicons/boxicons.min.css';
+@import '../public/flag-icons/css/flag-icons.min.css';
 @import '../public/css/select-aria.css';
 @import '../public/css/table-aria.css';
 @import '../public/css/toast-aria.css';
 
 @custom-variant dark (&:is(.dark *));
+
+/* outfit-regular - latin */
+@font-face {
+  font-display: swap;
+  font-family: 'Outfit';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../public/fonts/outfit-v15-latin-regular.woff2) format('woff2');
+}
 
 * {
   font-family: 'Outfit';

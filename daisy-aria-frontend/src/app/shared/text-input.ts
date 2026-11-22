@@ -13,7 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 
       <input
         [type]="type()"
-        [value]="value()"
+        [value]="value()!"
         (input)="value.set($event.target.value)"
         [ariaInvalid]="invalid()"
         [id]="inputId"

@@ -18,5 +18,17 @@
     <n-country-select-input [formField]="pageForm.country" label="Pays"></n-country-select-input>
   </div>
 
+  <div>
+    <n-file-input
+      [formField]="pageForm.logo"
+      label="Choisir une image pour logo"
+      icon="user"
+    ></n-file-input>
+  </div>
+
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
 </form>
+
+<div class="w-64 h-64 p-2 aspect-video overflow-hidden rounded-lg bg-gray-100">
+  <img src="/pasted-image-0-2-3-1024x950.png" alt="Aperçu" class="h-full w-full object-cover" />
+</div>
