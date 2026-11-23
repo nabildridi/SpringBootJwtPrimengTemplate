@@ -26,7 +26,6 @@ public class UsersController {
 
 	@PostMapping("/paginate")
 	public Page<User> paginate(@Filter Specification<User> spec, @Pagination Pageable page) {
-		logger.debug(page.toString());
 		return usersService.paginate(spec, page);
 	}
 

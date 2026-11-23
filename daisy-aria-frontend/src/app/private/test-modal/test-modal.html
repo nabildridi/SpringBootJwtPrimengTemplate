@@ -1,1 +1,16 @@
-<p>test-modal works!</p>
+<div forDialogBackdrop animate.enter="programmatic-backdrop-in"></div>
+<div class="card bg-base-100 shadow-sm">
+  <div class="card-body">
+    <h2 class="card-title">Xlarge Card</h2>
+    <div class="divider"></div>
+
+    <p>
+      A card component has a figure, a body part, and inside body there are title and actions parts
+    </p>
+
+    <div class="divider"></div>
+    <div class="justify-end card-actions">
+      <button class="btn btn-primary" (click)="close()">Buy Now</button>
+    </div>
+  </div>
+</div>

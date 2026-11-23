@@ -7,10 +7,10 @@ import { DaisyPasswordInput } from '../../shared/password-input';
 import { DaisyCountrySelectInput } from '../../shared/country-select-input';
 import { DaisyFileInput } from '../../shared/file-input';
 import { ForDialogManager } from 'forty-cdk/dialog';
-import { ConfirmData, ConfirmResult, DaisyConfirm } from '../../shared/confirm-dialog';
+import { ConfirmData } from '../../shared/confirm-dialog';
 import { ConfirmService } from '../../services/confirm/confirm-service';
 import { TestModal } from '../test-modal/test-modal';
-import { Users } from '../users/users';
+import { DaisyPasswordGenerator } from '../../shared/password-generator';
 
 interface pageData {
   username: string;
@@ -30,6 +30,7 @@ interface pageData {
     DaisyPasswordInput,
     DaisyCountrySelectInput,
     DaisyFileInput,
+    DaisyPasswordGenerator,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -90,7 +91,7 @@ export class Bobo {
   }
 
   async openModal() {
-    const ref = this.forDialogManager.open(Users, {
+    const ref = this.forDialogManager.open(TestModal, {
       data: {},
       modal: true,
       dismissible: false,

@@ -66,7 +66,7 @@ import { v4 as uuidv4 } from 'uuid';
           class="pointer-events-none absolute start-11 top-4 z-10 origin-[0] -translate-y-3 scale-75 transform text-sm 
              duration-200
              peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100
-             peer-focus:-translate-y-3 peer-focus:scale-75 peer-focus:text-primary"
+             peer-focus:-translate-y-3 peer-focus:scale-75 text-dark dark:text-white"
           [class.requ]="required()"
           >{{ label() }}
         </label>

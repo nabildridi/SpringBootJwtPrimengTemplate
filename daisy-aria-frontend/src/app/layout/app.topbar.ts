@@ -25,8 +25,12 @@ import { StorageService } from '../services/storage/storage-service';
         </div>
         <app-logo-text></app-logo-text>
         <div class="flex gap-x-2">
-          <button class="daisy-btn btn-circle btn-primary" (click)="toggleDarkMode()">
-            <i [class]="layoutService.darkMode() ? 'bx bx-sun' : 'bx bx-moon'"></i>
+          <button
+            class="daisy-btn btn-circle btn-primary swap swap-rotate"
+            (click)="toggleDarkMode()"
+          >
+            <i [class]="layoutService.darkMode() ? 'swap-on' : 'swap-off'" class="bx bx-sun"></i>
+            <i [class]="!layoutService.darkMode() ? 'swap-on' : 'swap-off'" class="bx bx-moon"></i>
           </button>
           <button class="daisy-btn btn-circle btn-accent" (click)="logout()">
             <i class="bx bx-user"></i>
