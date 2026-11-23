@@ -4,7 +4,6 @@ import {
   input,
   model,
   OnInit,
-  output,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -69,25 +68,18 @@ import {
         <div forHoverCardContent class="card w-96 bg-base-100 shadow-sm">
           <div class="card-body">
             <h2 class="card-title">Générer</h2>
-            <div class="w-full max-w-xs">
-              <input
-                type="range"
-                min="8"
-                max="20"
-                [value]="passwordLength"
-                class="range"
-                step="1"
-                (change)="generate($event.target.value)"
-              />
-              <div class="flex justify-between px-2.5 mt-2 text-xs">
-                @for (i of indexes; track $index) {
-                  <span>|</span>
-                }
-              </div>
-              <div class="flex justify-between px-2.5 mt-2 text-xs">
-                @for (i of indexes; track $index) {
-                  <span>{{ i }}</span>
-                }
+            <div class="indicator w-full">
+              <span class="indicator-item badge badge-xs badge-primary">{{ passwordLength }}</span>
+              <div class="w-full">
+                <input
+                  type="range"
+                  min="8"
+                  max="20"
+                  [value]="passwordLength"
+                  class="range"
+                  step="1"
+                  (input)="generate($event.target.value)"
+                />
               </div>
             </div>
           </div>
@@ -133,13 +125,7 @@ export class DaisyPasswordGenerator implements FormValueControl<string | null>, 
 
   inputId: string = uuidv4();
 
-  indexes: number[] = [];
-
-  ngOnInit(): void {
-    for (let i = 8; i < 21; i++) {
-      this.indexes.push(i);
-    }
-  }
+  ngOnInit(): void {}
 
   toggle() {
     this.show.update((value) => !value);
@@ -150,8 +136,6 @@ export class DaisyPasswordGenerator implements FormValueControl<string | null>, 
   }
 
   generate(meter: string) {
-    console.log(meter);
-
     this.passwordLength = Number(meter);
 
     var char = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
