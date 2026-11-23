@@ -6,6 +6,11 @@ import { DaisyTextInput } from '../../shared/text-input';
 import { DaisyPasswordInput } from '../../shared/password-input';
 import { DaisyCountrySelectInput } from '../../shared/country-select-input';
 import { DaisyFileInput } from '../../shared/file-input';
+import { ForDialogManager } from 'forty-cdk/dialog';
+import { ConfirmData, ConfirmResult, DaisyConfirm } from '../../shared/confirm-dialog';
+import { ConfirmService } from '../../services/confirm/confirm-service';
+import { TestModal } from '../test-modal/test-modal';
+import { Users } from '../users/users';
 
 interface pageData {
   username: string;
@@ -51,7 +56,11 @@ export class Bobo {
     required(fieldPath.generated);
   });
 
-  constructor(private toastService: ToastService) {}
+  constructor(
+    private toastService: ToastService,
+    private confirmService: ConfirmService,
+    private forDialogManager: ForDialogManager,
+  ) {}
 
   showToast() {
     this.toastService.showSuccess('all ok');
@@ -61,5 +70,34 @@ export class Bobo {
     event.preventDefault();
     const payload = this.pageModel();
     console.log(payload);
+  }
+
+  openConfirm() {
+    let confirmTexts: ConfirmData = {
+      title: 'Effacer compte?',
+      message: 'cet action is permanent and cannot be undone.',
+      confirmText: 'Confirmer',
+      cancelText: 'Annuler',
+    };
+
+    this.confirmService.open(confirmTexts).subscribe({
+      next: (result: any) => {
+        if (result) {
+          console.log(result);
+        }
+      },
+    });
+  }
+
+  async openModal() {
+    const ref = this.forDialogManager.open(Users, {
+      data: {},
+      modal: true,
+      dismissible: false,
+      class: 'programmatic-dialog programmatic-dialog--pop',
+      animateLeave: 'programmatic-out',
+      backdropAnimateLeave: 'programmatic-backdrop-out',
+    });
+    const { result } = await ref.closed; // result: 'confirm' | 'cancel' | undefined
   }
 }

@@ -19,24 +19,24 @@
 }
 
 .tbl-sort {
-  cursor: pointer;
-  user-select: none;
-  outline: none;
+  @apply cursor-pointer select-none outline-none;
 }
 
 .tbl-sort:focus-visible {
-  outline: 2px solid var(--ex-accent, #0e7c6b);
-  outline-offset: -2px;
+  @apply outline-2 outline-accent -outline-offset-2;
 }
 
 .tbl-sort::after {
-  content: '  ↕' / '';
+  font-family: 'boxicons';
+  @apply content-['__\f154'];
 }
 
 .tbl-sort[data-sorted='ascending']::after {
-  content: '  ▲' / '';
+  font-family: 'boxicons';
+  @apply content-['__\f1b1'];
 }
 
 .tbl-sort[data-sorted='descending']::after {
-  content: '  ▼' / '';
+  font-family: 'boxicons';
+  @apply content-['__\f141'];
 }

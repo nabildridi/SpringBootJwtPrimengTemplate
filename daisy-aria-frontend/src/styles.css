@@ -11,6 +11,7 @@
 @import '../public/css/select-aria.css';
 @import '../public/css/table-aria.css';
 @import '../public/css/toast-aria.css';
+@import '../public/css/dialog-aria.css';
 
 @custom-variant dark (&:is(.dark *));
 

@@ -1,0 +1,68 @@
+.programmatic-dialog {
+  position: fixed;
+  z-index: 51;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  @apply shadow-sm shadow-base-100 w-6/12  max-w-11/12 max-h-11/12 overflow-auto;
+}
+
+[data-for-dialog-backdrop] {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(10, 12, 16, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+@keyframes programmatic-pop {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+@keyframes programmatic-out {
+  to {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@keyframes programmatic-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes programmatic-backdrop-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.programmatic-dialog--pop {
+  animation: programmatic-pop 0.22s var(--ex-ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)) both;
+}
+
+.programmatic-out {
+  animation: programmatic-out 0.15s ease both;
+}
+
+.programmatic-backdrop-in {
+  animation: programmatic-backdrop-in 0.18s ease both;
+}
+
+.programmatic-backdrop-out {
+  animation: programmatic-backdrop-out 0.15s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .programmatic-dialog--pop,
+  .programmatic-out,
+  .programmatic-backdrop-in,
+  .programmatic-backdrop-out {
+    animation-duration: 0.01ms;
+  }
+}
