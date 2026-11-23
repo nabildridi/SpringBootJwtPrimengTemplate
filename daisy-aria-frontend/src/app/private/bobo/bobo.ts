@@ -11,6 +11,8 @@ import { ConfirmData } from '../../shared/confirm-dialog';
 import { ConfirmService } from '../../services/confirm/confirm-service';
 import { TestModal } from '../test-modal/test-modal';
 import { DaisyPasswordGenerator } from '../../shared/password-generator';
+import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
+import { environment } from '../../../environments/environment';
 
 interface pageData {
   username: string;
@@ -31,6 +33,7 @@ interface pageData {
     DaisyCountrySelectInput,
     DaisyFileInput,
     DaisyPasswordGenerator,
+    DaisyMultiButtonSelector,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -57,11 +60,15 @@ export class Bobo {
     required(fieldPath.generated);
   });
 
+  countries: any[] = [];
+
   constructor(
     private toastService: ToastService,
     private confirmService: ConfirmService,
     private forDialogManager: ForDialogManager,
-  ) {}
+  ) {
+    this.countries = environment.countries;
+  }
 
   showToast() {
     this.toastService.showSuccess('all ok');

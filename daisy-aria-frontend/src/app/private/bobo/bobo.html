@@ -30,6 +30,14 @@
     ></n-file-input>
   </div>
 
+  <div>
+    <n-multi-button-selector
+      [listItems]="countries"
+      [formField]="pageForm.colors"
+      label="Choisir plusieurs pays"
+    ></n-multi-button-selector>
+  </div>
+
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
 </form>
 
