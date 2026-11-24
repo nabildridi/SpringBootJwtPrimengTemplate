@@ -23,7 +23,7 @@ import {
         <div class="card bg-base-300 rounded-box grow">
           <ul
             forDropList
-            class="bg-base-100 rounded-box shadow-md grow border-2 border-accent"
+            class="list bg-base-100 rounded-box shadow-md w-full border-2 border-accent"
             [liveSort]="true"
             [animateReorder]="true"
             (dragDrop)="onDrop($event)"
@@ -32,20 +32,21 @@ import {
               <li
                 forDraggable
                 [dragData]="task"
-                class="list-row  m-4 rounded-box border cursor-grab"
+                class="list-row  m-2 p-2 rounded-box border cursor-grabbing"
               >
-                <div class="flex flex-row items-center space-x-5">
+                <div forDragHandle class="flex w-full flex-row item items-center space-x-5">
                   <div class="flex">
-                    <span forDragHandle aria-hidden="true"
-                      ><i class="bx bx-arrow-up-down text-3xl"></i
-                    ></span>
+                    <span aria-hidden="true" class="text-base font-bold">⠿</span>
+                  </div>
+                  <div class="flex">
+                    <span aria-hidden="true" class="text-base font-bold">{{ $index + 1 }}</span>
                   </div>
                   <div class="flex">
                     <span class="text-base font-bold">{{ task.label }}</span>
                   </div>
                   <div class="flex">
                     <ng-template forDragPlaceholder>
-                      <div></div>
+                      <div class="placeholder   m-4"></div>
                     </ng-template>
                   </div>
                 </div>
@@ -55,6 +56,29 @@ import {
         </div>
       </div>
     </fieldset>
+  `,
+  styles: `
+    .placeholder {
+      height: 2.9rem;
+      border: 2px dashed var(--ex-accent, #0e7c6b);
+      border-radius: var(--ex-radius-sm, 14px);
+      background: color-mix(in srgb, var(--ex-accent, #0e7c6b) 10%, transparent);
+    }
+
+    .item[data-drag-animating] {
+      transition: transform 0.2s ease;
+    }
+
+    [data-for-drag-preview][data-settling] {
+      transition: transform 0.2s ease;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .item[data-drag-animating],
+      [data-for-drag-preview][data-settling] {
+        transition: none;
+      }
+    }
   `,
 })
 export class DaisyPickList implements FormValueControl<string[] | null>, OnInit {
