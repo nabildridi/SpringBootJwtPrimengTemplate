@@ -21,11 +21,11 @@
 }
 
 .select-option[data-highlighted] {
-  @apply bg-primary;
+  @apply bg-base-200;
 }
 
 .select-option[data-state='checked'] {
-  @apply text-accent font-semibold;
+  @apply text-primary font-semibold;
 }
 
 .select-option[data-disabled] {
@@ -33,7 +33,7 @@
 }
 
 .select-indicator {
-  @apply flex-none inline-flex items-center justify-center w-4 h-4 text-accent;
+  @apply flex-none inline-flex items-center justify-center w-4 h-4 text-primary;
 }
 
 .select-indicator[hidden] {

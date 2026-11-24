@@ -10,12 +10,12 @@ import { v4 as uuidv4 } from 'uuid';
     <fieldset class="fieldset  rounded-box w-full border-2">
       <legend class="fieldset-legend" [class.requ]="required()">{{ label() }}</legend>
 
-      <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-8 gap-2 p-2">
+      <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-2 p-2">
         @for (option of itemsList(); track $index) {
           <label
-            class="flex cursor-pointer items-center gap-x-2 rounded-lg border-2 border-stone-200 px-4 py-3  has-checked:border-teal-700
-             dark:has-checked:bg-teal-700 has-checked:bg-teal-50 has-disabled:cursor-not-allowed has-disabled:bg-stone-50
-              has-disabled:text-stone-500 hover:border-teal-700 hover:bg-teal-50"
+            class="flex cursor-pointer items-center gap-x-2 rounded-lg border-2 border-stone-200 px-4 py-3  has-checked:border-accent
+             dark:has-checked:bg-accent has-checked:bg-accent has-disabled:cursor-not-allowed has-disabled:bg-stone-50
+              has-disabled:text-stone-500 hover:border-accent hover:bg-accent bg-base-300"
           >
             <input
               type="checkbox"
@@ -29,9 +29,7 @@ import { v4 as uuidv4 } from 'uuid';
            checked:shadow-[0_0_0_2px_theme(colors.blue.600)]
            focus-visible:outline-none focus-visible:ring-offset-2"
             />
-            <span class="text-black dark:text-gray-100 text-base select-none">{{
-              option.label
-            }}</span>
+            <span class="text-base select-none">{{ option.label }}</span>
           </label>
         }
       </div>
