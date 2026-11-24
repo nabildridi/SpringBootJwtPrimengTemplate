@@ -13,6 +13,7 @@ import { TestModal } from '../test-modal/test-modal';
 import { DaisyPasswordGenerator } from '../../shared/password-generator';
 import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
 import { environment } from '../../../environments/environment';
+import { DaisyPickList } from '../../shared/pick-list';
 
 interface pageData {
   username: string;
@@ -33,7 +34,7 @@ interface pageData {
     DaisyCountrySelectInput,
     DaisyFileInput,
     DaisyPasswordGenerator,
-    DaisyMultiButtonSelector,
+    DaisyPickList,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',

@@ -31,11 +31,11 @@
   </div>
 
   <div>
-    <n-multi-button-selector
+    <n-pick-list
       [listItems]="countries"
       [formField]="pageForm.colors"
       label="Choisir plusieurs pays"
-    ></n-multi-button-selector>
+    ></n-pick-list>
   </div>
 
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
