@@ -22,8 +22,8 @@ export class Users implements OnInit {
   ];
 
   actions: ActionsData[] = [
-    { id: 'update', label: 'Modifier', severity: 'btn-primary' },
-    { id: 'delete', label: 'Supprimer', severity: 'btn-error' },
+    { id: 'update', label: 'Modifier', severity: 'btn-primary', icon: 'user' },
+    { id: 'delete', label: 'Supprimer', severity: 'btn-error', icon: 'user' },
   ];
 
   constructor(private appHttpService: AppHttpService) {}

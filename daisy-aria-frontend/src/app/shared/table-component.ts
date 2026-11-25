@@ -38,6 +38,7 @@ export interface ActionsData {
   id: string;
   label: string;
   severity: string;
+  icon: string;
 }
 
 export class Request {
@@ -128,6 +129,7 @@ export class Request {
                         [class]="'daisy-btn ' + action.severity"
                         (click)="sendAction(action.id, item)"
                       >
+                        <i [class]="'bx bx-' + action.icon"></i>
                         {{ action.label }}
                       </button>
                     }
