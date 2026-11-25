@@ -1,6 +1,5 @@
 import { Component, input, model, OnInit, Signal, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
-import { v4 as uuidv4 } from 'uuid';
 import {
   type ForDragDropEvent,
   ForDragHandle,
@@ -14,40 +13,41 @@ import {
   selector: 'n-pick-list',
   imports: [ForDropList, ForDraggable, ForDragHandle, ForDragPlaceholder],
   template: `
-    <fieldset class="fieldset  rounded-box w-full border-2">
+    <fieldset class="fieldset  rounded-box w-full border-2 p-2">
       <legend class="fieldset-legend" [class.requ]="required()">{{ label() }}</legend>
 
       <div class="flex w-full">
-        <div class="card bg-base-300 rounded-box grid  grow place-items-center">content</div>
-        <div class="divider divider-horizontal"><i class="bx bx-arrow-left-right"></i></div>
-        <div class="card bg-base-300 rounded-box grow">
-          <ul
-            forDropList
-            class="list bg-base-100 rounded-box shadow-md w-full border-2 border-accent"
-            [liveSort]="true"
-            [animateReorder]="true"
-            (dragDrop)="onDrop($event)"
-          >
-            @for (task of tasks(); track task.id) {
-              <li
-                forDraggable
-                [dragData]="task"
-                class="list-row  m-2 p-2 rounded-box border cursor-grabbing"
-              >
-                <div forDragHandle class="flex w-full flex-row item items-center space-x-5">
-                  <div class="flex">
+        <div class="card bg-base-300 rounded-box w-6/12 place-items-center">
+          <div class="flex flex-row flex-wrap gap-2 m-1">
+            @for (sourceItem of sourceList(); track $index) {
+              <div class="badge badge-primary cursor-pointer" (click)="addToTarget($index)">
+                <i class="bx bx-finger-touch"></i>
+                {{ sourceItem.label }}
+              </div>
+            }
+          </div>
+        </div>
+        <div class="divider divider-horizontal w-1/12"><i class="bx bx-arrow-left-right"></i></div>
+        <div class="card bg-base-300 rounded-box w-5/12">
+          <ul forDropList [liveSort]="true" [animateReorder]="true" (dragDrop)="onDrop($event)">
+            @for (targetItem of targetList(); track targetItem.value) {
+              <li forDraggable [dragData]="targetItem" class="  m-2 p-2 rounded-box border ">
+                <div class="flex w-full justify-between item ">
+                  <div forDragHandle class="flex items-center space-x-3 cursor-grabbing">
                     <span aria-hidden="true" class="text-base font-bold">⠿</span>
-                  </div>
-                  <div class="flex">
-                    <span aria-hidden="true" class="text-base font-bold">{{ $index + 1 }}</span>
-                  </div>
-                  <div class="flex">
-                    <span class="text-base font-bold">{{ task.label }}</span>
-                  </div>
-                  <div class="flex">
+
+                    <span class="text-base font-bold">{{ $index + 1 }}</span>
+
+                    <span class="text-base font-bold">{{ targetItem.label }}</span>
+
                     <ng-template forDragPlaceholder>
-                      <div class="placeholder   m-4"></div>
+                      <div class="dragPlaceholder   m-4"></div>
                     </ng-template>
+                  </div>
+                  <div class="flex">
+                    <button class="daisy-btn btn-circle" (click)="returnItemToSource($index)">
+                      <i class="bx bx-x"></i>
+                    </button>
                   </div>
                 </div>
               </li>
@@ -58,7 +58,7 @@ import {
     </fieldset>
   `,
   styles: `
-    .placeholder {
+    .dragPlaceholder {
       height: 2.9rem;
       border: 2px dashed var(--ex-accent, #0e7c6b);
       border-radius: var(--ex-radius-sm, 14px);
@@ -88,36 +88,31 @@ export class DaisyPickList implements FormValueControl<string[] | null>, OnInit 
   invalid = input<boolean>(false);
   required = input<boolean>(false);
 
-  itemsList = signal<any[]>([]);
-  inputName: string = uuidv4();
+  sourceList = signal<any[]>([]);
+  targetList = signal<any[]>([]);
 
   constructor() {}
 
-  protected readonly tasks = signal<readonly any[]>([
-    { id: 'a', label: 'Draft the release notes' },
-    { id: 'b', label: 'Review open pull requests' },
-    { id: 'c', label: 'Update the changelog' },
-    { id: 'd', label: 'Publish the npm package' },
-    { id: 'e', label: 'Announce on the forum' },
-  ]);
-
   protected onDrop(event: ForDragDropEvent): void {
-    this.tasks.update((tasks) => moveItemInArray(tasks, event.previousIndex, event.currentIndex));
+    this.targetList.update((targets) =>
+      moveItemInArray(targets, event.previousIndex, event.currentIndex),
+    );
   }
 
   ngOnInit(): void {
-    this.itemsList.set(this.listItems()!);
+    this.sourceList.set(this.listItems()!);
   }
 
-  toggle(event: Event, option: any) {
-    if (this.value() == null) {
-      this.value.set([]);
-    }
+  returnItemToSource(index: number) {
+    let itemToMove = this.targetList()[index];
+    this.targetList.update((list) => list.filter((c, i) => i !== index));
+    this.sourceList.update((list) => [...list, itemToMove]);
+    this.sourceList.update((list) => list.sort((a, b) => a.label.localeCompare(b.label)));
+  }
 
-    if (this.value()?.includes(option.value)) {
-      this.value.update((prev) => prev!.filter((c) => c !== option.value));
-    } else {
-      this.value.update((prev) => [...prev!, option.value]);
-    }
+  addToTarget(index: number) {
+    let itemToMove = this.sourceList()[index];
+    this.sourceList.update((list) => list.filter((c, i) => i !== index));
+    this.targetList.update((list) => [...list, itemToMove]);
   }
 }
