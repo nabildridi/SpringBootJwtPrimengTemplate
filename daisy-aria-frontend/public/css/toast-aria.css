@@ -25,11 +25,11 @@
 }
 
 .app-toast-viewport [forToastTitle] {
-  @apply text-lg font-semibold;
+  @apply text-black dark:text-white;
 }
 
 .app-toast-viewport [forToastDescription] {
-  @apply text-base;
+  @apply font-semibold text-black dark:text-white;
 }
 
 .app-toast-viewport [forToastClose] {
