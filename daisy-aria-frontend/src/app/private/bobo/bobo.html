@@ -31,6 +31,14 @@
   </div>
 
   <div>
+    <n-image-checkox
+      [formField]="pageForm.marque"
+      label="Choisir plusieurs pays"
+      imageSrc="images/images.png"
+    ></n-image-checkox>
+  </div>
+
+  <div>
     <n-pick-list
       [listItems]="countries"
       [formField]="pageForm.colors"

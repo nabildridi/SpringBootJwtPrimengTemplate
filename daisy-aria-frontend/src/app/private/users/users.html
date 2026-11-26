@@ -4,5 +4,7 @@
   [totalRows]="totalRows()"
   [columns]="columns"
   (onUpdate)="sendRequest($event)"
+  [actions]="actions"
+  (onAction)="onAction($event)"
 >
 </n-table>

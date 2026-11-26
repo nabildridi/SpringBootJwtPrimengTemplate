@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/cor
 
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
-import { ColumnData, DaisyTable } from '../../shared/table-component';
+import { ActionsData, ColumnData, DaisyTable } from '../../shared/table-component';
 
 @Component({
   selector: 'app-users',
@@ -19,6 +19,11 @@ export class Users implements OnInit {
     { id: 'id', label: 'Id', sortable: true },
     { id: 'firstname', label: 'Firstname', sortable: true },
     { id: 'lastname', label: 'Lastname', sortable: true },
+  ];
+
+  actions: ActionsData[] = [
+    { id: 'update', label: 'Modifier', severity: 'btn-primary', icon: 'user' },
+    { id: 'delete', label: 'Supprimer', severity: 'btn-error', icon: 'user' },
   ];
 
   constructor(private appHttpService: AppHttpService) {}
@@ -41,6 +46,9 @@ export class Users implements OnInit {
       });
   }
 
+  onAction(event: any) {
+    console.log(event);
+  }
   onEdit(item: any) {}
   onDelete(row: any) {}
 }

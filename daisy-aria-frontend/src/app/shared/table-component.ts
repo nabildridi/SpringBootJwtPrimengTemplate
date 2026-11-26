@@ -6,6 +6,7 @@ import {
   OnInit,
   output,
   signal,
+  TemplateRef,
 } from '@angular/core';
 
 import {
@@ -25,11 +26,19 @@ import {
   ForPaginationNext,
   ForPaginationPrevious,
 } from 'forty-cdk/pagination';
+import { CommonModule } from '@angular/common';
 
 export interface ColumnData {
   id: string;
   label: string;
   sortable: boolean;
+}
+
+export interface ActionsData {
+  id: string;
+  label: string;
+  severity: string;
+  icon: string;
 }
 
 export class Request {
@@ -55,7 +64,9 @@ export class Request {
     ForPaginationItem,
     ForPaginationPrevious,
     ForPaginationNext,
+    CommonModule,
   ],
+
   template: `
     <div class="card w-full bg-base-100 shadow-sm">
       <div class="card-body">
@@ -82,7 +93,6 @@ export class Request {
                   forTableSortHeader
                   [column]="column.id"
                   [name]="column.id"
-                  class="tbl-cell"
                   [direction]="directionFor(column.id)"
                   (sortChange)="onSort($event)"
                   class="tbl-cell tbl-sort"
@@ -91,13 +101,39 @@ export class Request {
                   {{ column.label }}
                 </div>
               }
+              @if (actions() != null && actions()!.length > 0) {
+                <div
+                  forTableHeaderCell
+                  column="actions"
+                  name="actions"
+                  class="tbl-cell"
+                  scope="col"
+                >
+                  Actions
+                </div>
+              }
             </div>
           </div>
+
           <div role="rowgroup" class="w-full">
             @for (item of data(); track $index) {
               <div forTableRow class="tbl-row">
                 @for (column of columns(); track $index) {
                   <div forTableCell [name]="column.id" class="tbl-cell">{{ item[column.id] }}</div>
+                }
+                @if (actions() != null && actions()!.length > 0) {
+                  <div forTableCell name="actions" class="tbl-cell space-x-2">
+                    @for (action of actions(); track $index) {
+                      <button
+                        type="button"
+                        [class]="'daisy-btn ' + action.severity"
+                        (click)="sendAction(action.id, item)"
+                      >
+                        <i [class]="'bx bx-' + action.icon"></i>
+                        {{ action.label }}
+                      </button>
+                    }
+                  </div>
                 }
               </div>
             }
@@ -159,7 +195,9 @@ export class DaisyTable implements OnInit {
   pageSize = input.required<number>();
   totalRows = input.required<number>();
   columns = input.required<ColumnData[]>();
+  actions = input<ActionsData[]>([]);
   onUpdate = output<any>();
+  onAction = output<any>();
 
   totalPages = signal<number>(0);
 
@@ -227,5 +265,9 @@ export class DaisyTable implements OnInit {
   onPagination(currentPage: number) {
     this.request.first = (currentPage - 1) * this.pageSize();
     this.onUpdate.emit(this.request);
+  }
+
+  sendAction(actionId: string, item: any) {
+    this.onAction.emit({ actionId, item });
   }
 }
