@@ -46,7 +46,7 @@ export class Bobo {
     password: '',
     country: 'br',
     color: 'val5',
-    colors: [],
+    colors: ['af', 'fr', 'br'],
     generated: '',
     logo: null,
   });

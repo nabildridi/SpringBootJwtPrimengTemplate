@@ -1,5 +1,6 @@
 import { Component, input, model, OnInit, Signal, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
+import * as lod from 'lodash';
 import {
   type ForDragDropEvent,
   ForDragHandle,
@@ -32,8 +33,8 @@ import {
           <ul forDropList [liveSort]="true" [animateReorder]="true" (dragDrop)="onDrop($event)">
             @for (targetItem of targetList(); track targetItem.value) {
               <li forDraggable [dragData]="targetItem" class="  m-2 p-2 rounded-box border ">
-                <div class="flex w-full justify-between item ">
-                  <div forDragHandle class="flex items-center space-x-3 cursor-grabbing">
+                <div forDragHandle class="flex w-full justify-between item cursor-grabbing">
+                  <div class="flex items-center space-x-3 ">
                     <span aria-hidden="true" class="text-base font-bold">⠿</span>
 
                     <span class="text-base font-bold">{{ $index + 1 }}</span>
@@ -41,11 +42,15 @@ import {
                     <span class="text-base font-bold">{{ targetItem.label }}</span>
 
                     <ng-template forDragPlaceholder>
-                      <div class="dragPlaceholder   m-4"></div>
+                      <div class="h-12 border-2 border-dashed border-accent rounded-sm m-4"></div>
                     </ng-template>
                   </div>
                   <div class="flex">
-                    <button class="daisy-btn btn-circle" (click)="returnItemToSource($index)">
+                    <button
+                      type="button"
+                      class="daisy-btn btn-circle"
+                      (click)="returnItemToSource($index)"
+                    >
                       <i class="bx bx-x"></i>
                     </button>
                   </div>
@@ -58,13 +63,6 @@ import {
     </fieldset>
   `,
   styles: `
-    .dragPlaceholder {
-      height: 2.9rem;
-      border: 2px dashed var(--ex-accent, #0e7c6b);
-      border-radius: var(--ex-radius-sm, 14px);
-      background: color-mix(in srgb, var(--ex-accent, #0e7c6b) 10%, transparent);
-    }
-
     .item[data-drag-animating] {
       transition: transform 0.2s ease;
     }
@@ -101,6 +99,15 @@ export class DaisyPickList implements FormValueControl<string[] | null>, OnInit 
 
   ngOnInit(): void {
     this.sourceList.set(this.listItems()!);
+    if (this.value() != null && this.value()!.length > 0) {
+      for (let selected of this.value()!) {
+        //find item in source
+        let itemToMove = lod.remove(this.sourceList(), function (o) {
+          return o.value === selected;
+        });
+        this.targetList.update((list) => [...list, itemToMove[0]]);
+      }
+    }
   }
 
   returnItemToSource(index: number) {
@@ -108,11 +115,20 @@ export class DaisyPickList implements FormValueControl<string[] | null>, OnInit 
     this.targetList.update((list) => list.filter((c, i) => i !== index));
     this.sourceList.update((list) => [...list, itemToMove]);
     this.sourceList.update((list) => list.sort((a, b) => a.label.localeCompare(b.label)));
+    this.updateModel();
   }
 
   addToTarget(index: number) {
     let itemToMove = this.sourceList()[index];
     this.sourceList.update((list) => list.filter((c, i) => i !== index));
     this.targetList.update((list) => [...list, itemToMove]);
+    this.updateModel();
+  }
+
+  updateModel() {
+    this.value.set([]);
+    for (let item of this.targetList()!) {
+      this.value.update((list) => [...list!, item.value]);
+    }
   }
 }
