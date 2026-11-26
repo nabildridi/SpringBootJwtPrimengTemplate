@@ -2,6 +2,12 @@ import { Component, input, model, OnInit, signal } from '@angular/core';
 import { FormValueControl } from '@angular/forms/signals';
 import { v4 as uuidv4 } from 'uuid';
 
+export interface ImageCheckboxData {
+  label: string;
+  value: string;
+  imageSrc: string;
+}
+
 @Component({
   selector: 'n-image-checkox',
   imports: [],
@@ -87,7 +93,7 @@ import { v4 as uuidv4 } from 'uuid';
         height: 1.25rem;
         border: 2px solid #b5bfd9;
         background-color: #fff;
-        border-radius: 50%;
+        border-radius: 20%;
         top: 0.25rem;
         left: 0.25rem;
         opacity: 0;
@@ -128,22 +134,28 @@ import { v4 as uuidv4 } from 'uuid';
   `,
   template: `
     <div class="checkbox-group">
-      <label class="checkbox-wrapper">
-        <input type="checkbox" class="checkbox-input" />
-        <span class="checkbox-tile">
-          <span class="checkbox-icon">
-            <img [src]="imageSrc()" width="130" height="130" />
+      @for (item of sourceList(); track $index) {
+        <label class="checkbox-wrapper">
+          <input
+            type="checkbox"
+            class="checkbox-input"
+            (change)="toggle($event, item)"
+            [checked]="value()!.includes(item.value)"
+          />
+          <span class="checkbox-tile">
+            <span class="checkbox-icon">
+              <img [src]="item.imageSrc" width="130" height="130" />
+            </span>
+            <span class="checkbox-label">{{ item.label }}</span>
           </span>
-          <span class="checkbox-label">Discord</span>
-        </span>
-      </label>
+        </label>
+      }
     </div>
   `,
 })
-export class DaisyImageCheckbox implements FormValueControl<boolean | null>, OnInit {
-  value = model<boolean | null>(null);
-  label = input<string>('');
-  imageSrc = input<string>('text');
+export class DaisyImageCheckbox implements FormValueControl<string[] | null>, OnInit {
+  value = model<string[] | null>(null);
+  sourceList = input<ImageCheckboxData[]>();
   invalid = input<boolean>(false);
   required = input<boolean>(false);
 
@@ -151,8 +163,15 @@ export class DaisyImageCheckbox implements FormValueControl<boolean | null>, OnI
 
   ngOnInit(): void {}
 
-  toggle() {
-    this.value.update((value) => !value);
-    console.log(this.value());
+  toggle(event: Event, option: ImageCheckboxData) {
+    if (this.value() == null) {
+      this.value.set([]);
+    }
+
+    if (this.value()?.includes(option.value)) {
+      this.value.update((prev) => prev!.filter((c) => c !== option.value));
+    } else {
+      this.value.update((prev) => [...prev!, option.value]);
+    }
   }
 }

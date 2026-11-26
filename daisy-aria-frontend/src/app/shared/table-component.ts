@@ -122,11 +122,11 @@ export class Request {
                   <div forTableCell [name]="column.id" class="tbl-cell">{{ item[column.id] }}</div>
                 }
                 @if (actions() != null && actions()!.length > 0) {
-                  <div forTableCell name="actions" class="tbl-cell space-x-2">
+                  <div forTableCell name="actions" class="tbl-cell space-x-2 flex-row flex-wrap">
                     @for (action of actions(); track $index) {
                       <button
                         type="button"
-                        [class]="'daisy-btn ' + action.severity"
+                        [class]="'daisy-btn btn-sm ' + action.severity"
                         (click)="sendAction(action.id, item)"
                       >
                         <i [class]="'bx bx-' + action.icon"></i>

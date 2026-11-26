@@ -14,7 +14,7 @@ import { DaisyPasswordGenerator } from '../../shared/password-generator';
 import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
 import { environment } from '../../../environments/environment';
 import { DaisyPickList } from '../../shared/pick-list';
-import { DaisyImageCheckbox } from '../../shared/image-checkbox';
+import { DaisyImageCheckbox, ImageCheckboxData } from '../../shared/image-checkbox';
 
 interface pageData {
   username: string;
@@ -24,7 +24,7 @@ interface pageData {
   colors: string[];
   generated: string;
   logo: File | null;
-  marque: boolean | null;
+  marque: string[] | null;
 }
 
 @Component({
@@ -52,7 +52,7 @@ export class Bobo {
     colors: ['af', 'fr', 'br'],
     generated: '',
     logo: null,
-    marque: null,
+    marque: ['val1', 'val2'],
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {
@@ -67,6 +67,11 @@ export class Bobo {
   });
 
   countries: any[] = [];
+
+  sourceList: ImageCheckboxData[] = [
+    { value: 'val1', label: 'Discord', imageSrc: 'images/images.png' },
+    { value: 'val2', label: 'Facebook', imageSrc: 'images/images.png' },
+  ];
 
   constructor(
     private toastService: ToastService,
