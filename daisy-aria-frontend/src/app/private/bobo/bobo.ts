@@ -15,6 +15,9 @@ import { DaisyMultiButtonSelector } from '../../shared/multi-button-selector';
 import { environment } from '../../../environments/environment';
 import { DaisyPickList } from '../../shared/pick-list';
 import { DaisyImageCheckbox, ImageCheckboxData } from '../../shared/image-checkbox';
+import { DaisyStyledLink } from '../../shared/styled-link';
+import { DaisyStyledInfo } from '../../shared/styled-info';
+import { DaisyTristate } from '../../shared/tristate-control';
 
 interface pageData {
   username: string;
@@ -25,6 +28,7 @@ interface pageData {
   generated: string;
   logo: File | null;
   marque: string[] | null;
+  tristate: boolean | null;
 }
 
 @Component({
@@ -38,6 +42,9 @@ interface pageData {
     DaisyPasswordGenerator,
     DaisyPickList,
     DaisyImageCheckbox,
+    DaisyStyledLink,
+    DaisyStyledInfo,
+    DaisyTristate,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -53,6 +60,7 @@ export class Bobo {
     generated: '',
     logo: null,
     marque: ['val1', 'val2'],
+    tristate: null,
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {

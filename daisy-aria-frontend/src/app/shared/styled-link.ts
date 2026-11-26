@@ -1,24 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'n-styled-link',
   imports: [],
   template: `
     <a
-      [href]="link"
-      class="text-xs font-semibold text-orange-500 hover:text-orange-600 transition-colors relative group"
+      [href]="link()"
+      class=" font-semibold text-info hover:text-primary transition-colors relative group"
     >
-      {{ label }}
+      {{ label() }}
       <span
-        class="absolute -bottom-0.5 left-0 w-0 h-px bg-orange-400 group-hover:w-full transition-all duration-300"
+        class="absolute -bottom-0.5 left-0 w-0 h-px bg-primary group-hover:w-full transition-all duration-500"
       ></span>
     </a>
   `,
 })
 export class DaisyStyledLink {
-  @Input()
-  label: string | undefined = '';
-
-  @Input()
-  link!: string;
+  label = input.required<string>();
+  link = input.required<string>();
 }

@@ -6,7 +6,6 @@ import {
   OnInit,
   output,
   signal,
-  TemplateRef,
 } from '@angular/core';
 
 import {

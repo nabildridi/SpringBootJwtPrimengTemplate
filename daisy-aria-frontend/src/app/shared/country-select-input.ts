@@ -125,5 +125,5 @@ export class DaisyCountrySelectInput implements FormValueControl<string | null>,
   }
 
   protected readonly byCode = (a: any, b: any): boolean => a.value === b.value;
-  protected readonly toCode = (country: any): string => country.label;
+  protected readonly toCode = (country: any): string => (country != null ? country.label : '');
 }

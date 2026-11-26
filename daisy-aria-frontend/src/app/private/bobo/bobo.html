@@ -42,6 +42,23 @@
     ></n-pick-list>
   </div>
 
+  <div class="bg-white">
+    <n-styled-link label="this is a styled link" link="google.com" class="text-xs"></n-styled-link>
+  </div>
+
+  <div class="bg-white">
+    <daisy-styled-info label="this is a styled info" icon="qr"></daisy-styled-info>
+  </div>
+
+  <div>
+    <n-tristate
+      [formField]="pageForm.tristate"
+      falseLabel="Non"
+      trueLabel="Oui"
+      nullLabel="Inconnu"
+    ></n-tristate>
+  </div>
+
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
 </form>
 
