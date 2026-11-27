@@ -71,6 +71,10 @@
     ></n-tristate>
   </div>
 
+  <div>
+    <n-date [formField]="pageForm.makeDate" label="Date de création" icon="calendar"></n-date>
+  </div>
+
   <button type="submit" [disabled]="pageForm().invalid()" class="daisy-btn">Submit</button>
 </form>
 

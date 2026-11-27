@@ -12,6 +12,7 @@
 @import '../public/css/table-aria.css';
 @import '../public/css/toast-aria.css';
 @import '../public/css/dialog-aria.css';
+@import '../public/css/date-picker-aria.css';
 
 @custom-variant dark (&:is(.dark *));
 

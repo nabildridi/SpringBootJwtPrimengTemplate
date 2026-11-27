@@ -18,6 +18,7 @@ import { DaisyImageCheckbox, ImageCheckboxData } from '../../shared/image-checkb
 import { DaisyStyledLink } from '../../shared/styled-link';
 import { DaisyStyledInfo } from '../../shared/styled-info';
 import { DaisyTristate } from '../../shared/tristate-control';
+import { DaisyDateInput } from '../../shared/date-input';
 
 interface pageData {
   username: string;
@@ -30,6 +31,7 @@ interface pageData {
   imagesPicks: string[] | null;
   tristate: boolean | null;
   colorsButtons: string[];
+  makeDate: Date | null;
 }
 
 @Component({
@@ -47,6 +49,7 @@ interface pageData {
     DaisyStyledInfo,
     DaisyTristate,
     DaisyMultiButtonSelector,
+    DaisyDateInput,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -64,6 +67,7 @@ export class Bobo {
     imagesPicks: ['val1', 'val2'],
     tristate: null,
     colorsButtons: [],
+    makeDate: null,
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {
@@ -76,6 +80,7 @@ export class Bobo {
     required(fieldPath.generated);
     required(fieldPath.imagesPicks);
     required(fieldPath.colorsButtons);
+    required(fieldPath.makeDate);
   });
 
   countries: any[] = [];
