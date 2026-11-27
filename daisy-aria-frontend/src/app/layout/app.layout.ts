@@ -65,9 +65,15 @@ import { AppTopbar } from './app.topbar';
 export class AppLayout {
   menuItems: any[] = [
     {
-      label: 'Users',
+      label: 'Users - normal table',
       icon: 'user',
       routerLink: '/private/users',
+    },
+
+    {
+      label: 'Presentation Table',
+      icon: 'table',
+      routerLink: '/private/presentation-table',
     },
 
     {

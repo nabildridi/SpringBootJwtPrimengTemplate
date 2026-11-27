@@ -4,12 +4,12 @@ import { Component, input } from '@angular/core';
   selector: 'daisy-styled-info',
   imports: [],
   template: `
-    <div class="border-s-4 border-accent bg-primary p-2">
-      <div class="flex items-center gap-2">
+    <div class="border-s-6 border-accent border-t-2 border-b-2 border-r-2 p-2 bg-base-100">
+      <div class="flex items-center   gap-2">
         @if (icon()) {
           <i [class]="'bx bx-' + icon()"></i>
         }
-        <span class="text-sm">{{ label() }}</span>
+        <span class="text-sm text-black dark:text-white">{{ label() }}</span>
       </div>
     </div>
   `,

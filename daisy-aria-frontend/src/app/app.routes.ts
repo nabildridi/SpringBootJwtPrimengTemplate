@@ -7,15 +7,17 @@ import { AccessDenied } from './public/AccessDenied/AccessDenied';
 import { NotFound } from './public/not-found/not-found';
 import { Bobo } from './private/bobo/bobo';
 import { Users } from './private/users/users';
+import { PresentationTable } from './private/presentation-table/presentation-table';
 
 export const routes: Routes = [
   {
     path: 'private',
     component: AppLayout,
     children: [
-      { path: '', redirectTo: 'users', pathMatch: 'full' },
+      { path: '', redirectTo: 'presentation-table', pathMatch: 'full' },
       { path: 'bobo', component: Bobo },
       { path: 'users', component: Users },
+      { path: 'presentation-table', component: PresentationTable },
     ],
   },
 

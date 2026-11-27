@@ -1,0 +1,81 @@
+<div class="card w-full bg-base-300 shadow-sm">
+  <div class="card-body">
+    <div class="card-title">
+      <div class="input">
+        <i class="bx bx-search text-base-content"></i>
+        <input
+          type="search"
+          class="grow"
+          placeholder="Rechercher"
+          (input)="searchGlobalFilter($any($event.target).value)"
+        />
+      </div>
+    </div>
+
+    <div class="divider mb-2"></div>
+
+    <div forTable mode="table" class="tbl">
+      <div role="rowgroup" class="w-full space-y-4">
+        @for (item of data(); track $index) {
+          <div class="card w-full bg-base-100 card-md shadow-md">
+            <div class="card-body">
+              <h2 class="card-title">{{ item.firstname }}</h2>
+              <p>
+                A card component has a figure, a body part, and inside body there are title and
+                actions parts
+              </p>
+              <div class="justify-end card-actions">
+                <button class="btn btn-primary">Buy Now</button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="divider mb-2"></div>
+
+    <div class="w-full card-actions flex justify-between items-center px-4 py-3">
+      <div class="text-base">
+        Showing
+        <b>{{ (page() - 1) * this.pageSize() + 1 }}-{{ page() * this.pageSize() }}</b>
+        of {{ totalRows() }}
+      </div>
+
+      <div>
+        <nav
+          forPagination
+          #pg="forPagination"
+          ariaLabel="Pagination"
+          [(page)]="page"
+          [count]="totalPages()"
+          [siblingCount]="1"
+          [boundaryCount]="1"
+          (pageChange)="onPagination($event)"
+        >
+          <button forPaginationPrevious class="daisy-btn btn-circle mr-2" ariaLabel="Previous page">
+            <i class="bx bx-chevron-left"></i>
+          </button>
+
+          @for (item of pg.items(); track item.key) {
+            @if (item.type === 'page') {
+              <button
+                forPaginationItem
+                class="daisy-btn btn-circle aria-[current=page]:btn-primary mr-2"
+                [page]="item.value!"
+              >
+                {{ item.value }}
+              </button>
+            } @else {
+              <span class="mr-2" aria-hidden="true">…</span>
+            }
+          }
+
+          <button forPaginationNext class="daisy-btn btn-circle" ariaLabel="Next page">
+            <i class="bx bx-chevron-right"></i>
+          </button>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

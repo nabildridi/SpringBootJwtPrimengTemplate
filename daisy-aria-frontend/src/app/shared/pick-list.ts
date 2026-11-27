@@ -102,10 +102,12 @@ export class DaisyPickList implements FormValueControl<string[] | null>, OnInit 
     if (this.value() != null && this.value()!.length > 0) {
       for (let selected of this.value()!) {
         //find item in source
-        let itemToMove = lod.remove(this.sourceList(), function (o) {
+        let itemsToMove = lod.remove(this.sourceList(), function (o) {
           return o.value === selected;
         });
-        this.targetList.update((list) => [...list, itemToMove[0]]);
+        if (itemsToMove != null && itemsToMove.length > 0) {
+          this.targetList.update((list) => [...list, itemsToMove[0]]);
+        }
       }
     }
   }

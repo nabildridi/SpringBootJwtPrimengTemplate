@@ -31,23 +31,35 @@
   </div>
 
   <div>
-    <n-image-checkox [formField]="pageForm.marque" [sourceList]="sourceList"></n-image-checkox>
+    <n-image-checkox
+      [formField]="pageForm.imagesPicks"
+      [sourceList]="sourceList"
+      label="Choisir une marque"
+    ></n-image-checkox>
   </div>
 
   <div>
     <n-pick-list
-      [listItems]="countries"
-      [formField]="pageForm.colors"
-      label="Choisir plusieurs pays"
+      [listItems]="colorsList"
+      [formField]="pageForm.pickListColors"
+      label="Choisir plusieurs Couleurs"
     ></n-pick-list>
   </div>
 
-  <div class="bg-white">
-    <n-styled-link label="this is a styled link" link="google.com" class="text-xs"></n-styled-link>
+  <div class="bg-base-100">
+    <n-styled-link label="this is a styled link" link="google.com"></n-styled-link>
   </div>
 
-  <div class="bg-white">
+  <div>
     <daisy-styled-info label="this is a styled info" icon="qr"></daisy-styled-info>
+  </div>
+
+  <div>
+    <n-multi-button-selector
+      [listItems]="colorsList"
+      [formField]="pageForm.colorsButtons"
+      label="Choisir plusieurs Couleurs"
+    ></n-multi-button-selector>
   </div>
 
   <div>

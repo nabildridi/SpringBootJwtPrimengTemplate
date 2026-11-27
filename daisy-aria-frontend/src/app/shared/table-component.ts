@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   input,
   OnInit,
@@ -26,28 +27,12 @@ import {
   ForPaginationPrevious,
 } from 'forty-cdk/pagination';
 import { CommonModule } from '@angular/common';
-
-export interface ColumnData {
-  id: string;
-  label: string;
-  sortable: boolean;
-}
-
-export interface ActionsData {
-  id: string;
-  label: string;
-  severity: string;
-  icon: string;
-}
-
-export class Request {
-  first!: number;
-  rows!: number;
-  filters!: any;
-  globalFilter!: string[] | null;
-  sortField?: string;
-  sortOrder?: number;
-}
+import {
+  ActionsData,
+  ColumnData,
+  TableRequest,
+  TableService,
+} from '../services/table/table-service';
 
 @Component({
   selector: 'n-table',
@@ -139,6 +124,8 @@ export class Request {
           </div>
         </div>
 
+        <div class="divider mb-2"></div>
+
         <div class="w-full card-actions flex justify-between items-center px-4 py-3">
           <div class="text-base ">
             Showing
@@ -198,25 +185,21 @@ export class DaisyTable implements OnInit {
   onUpdate = output<any>();
   onAction = output<any>();
 
-  totalPages = signal<number>(0);
+  //totalPages = signal<number>(0);
 
-  request: Request = {
-    first: 0,
-    rows: 0,
-    filters: {},
-    globalFilter: ['id'],
-  };
+  totalPages = computed(() => {
+    return Math.ceil(this.totalRows() / this.pageSize());
+  });
+
+  request!: TableRequest;
 
   protected readonly sort = signal<TableSortDescriptor>({ column: '', direction: 'none' });
   protected readonly page = signal(1);
 
-  constructor() {
-    effect(() => {
-      this.totalPages.set(Math.ceil(this.totalRows() / this.pageSize()));
-    });
-  }
+  constructor(private tableService: TableService) {}
 
   ngOnInit(): void {
+    this.request = this.tableService.getInitialRequest(this.pageSize(), 'id');
     this.request.rows = this.pageSize();
     this.onUpdate.emit(this.request);
   }
@@ -227,37 +210,17 @@ export class DaisyTable implements OnInit {
 
   protected onSort(descriptor: TableSortDescriptor): void {
     this.sort.set(descriptor);
-
-    this.request.first = 0;
     this.page.set(0);
 
-    if (descriptor.direction == 'none') {
-      delete this.request.sortField;
-      delete this.request.sortOrder;
-    }
-
-    if (descriptor.direction == 'ascending') {
-      this.request.sortField = descriptor.column;
-      this.request.sortOrder = 1;
-    }
-
-    if (descriptor.direction == 'descending') {
-      this.request.sortField = descriptor.column;
-      this.request.sortOrder = -1;
-    }
-
+    this.request = this.tableService.getSort(this.request, descriptor);
     this.onUpdate.emit(this.request);
   }
 
   searchGlobalFilter(filterValue: string) {
-    this.request.first = 0;
     this.page.set(0);
 
-    if (filterValue != null || filterValue !== '') {
-      this.request.filters = { global: { value: filterValue, matchMode: 'equals' } };
-    } else {
-      this.request.filters = {};
-    }
+    this.request = this.tableService.getGlobalFilter(this.request, filterValue);
+
     this.onUpdate.emit(this.request);
   }
 

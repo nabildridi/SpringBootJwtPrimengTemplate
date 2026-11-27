@@ -24,11 +24,12 @@ interface pageData {
   password: string;
   country: string;
   color: string;
-  colors: string[];
+  pickListColors: string[];
   generated: string;
   logo: File | null;
-  marque: string[] | null;
+  imagesPicks: string[] | null;
   tristate: boolean | null;
+  colorsButtons: string[];
 }
 
 @Component({
@@ -45,6 +46,7 @@ interface pageData {
     DaisyStyledLink,
     DaisyStyledInfo,
     DaisyTristate,
+    DaisyMultiButtonSelector,
   ],
   selector: 'app-bobo',
   styleUrl: './bobo.css',
@@ -56,11 +58,12 @@ export class Bobo {
     password: '',
     country: 'br',
     color: 'val5',
-    colors: ['af', 'fr', 'br'],
+    pickListColors: ['val1'],
     generated: '',
     logo: null,
-    marque: ['val1', 'val2'],
+    imagesPicks: ['val1', 'val2'],
     tristate: null,
+    colorsButtons: [],
   });
 
   pageForm = form(this.pageModel, (fieldPath) => {
@@ -71,10 +74,13 @@ export class Bobo {
     //required(fieldPath.triholder);
     required(fieldPath.color);
     required(fieldPath.generated);
-    required(fieldPath.marque);
+    required(fieldPath.imagesPicks);
+    required(fieldPath.colorsButtons);
   });
 
   countries: any[] = [];
+
+  colorsList = environment.colors;
 
   sourceList: ImageCheckboxData[] = [
     { value: 'val1', label: 'Discord', imageSrc: 'images/images.png' },

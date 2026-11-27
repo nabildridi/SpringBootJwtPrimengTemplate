@@ -15,8 +15,6 @@ export interface ImageCheckboxData {
     .checkbox-group {
       display: flex;
       flex-wrap: wrap;
-      margin-left: auto;
-      margin-right: auto;
       user-select: none;
       & > * {
         margin: 0.5rem 0.5rem;
@@ -133,28 +131,32 @@ export interface ImageCheckboxData {
     }
   `,
   template: `
-    <div class="checkbox-group">
-      @for (item of sourceList(); track $index) {
-        <label class="checkbox-wrapper">
-          <input
-            type="checkbox"
-            class="checkbox-input"
-            (change)="toggle($event, item)"
-            [checked]="value()!.includes(item.value)"
-          />
-          <span class="checkbox-tile">
-            <span class="checkbox-icon">
-              <img [src]="item.imageSrc" width="130" height="130" />
+    <fieldset class="fieldset  rounded-box w-full border-2">
+      <legend class="fieldset-legend" [class.requ]="required()">{{ label() }}</legend>
+      <div class="checkbox-group">
+        @for (item of sourceList(); track $index) {
+          <label class="checkbox-wrapper">
+            <input
+              type="checkbox"
+              class="checkbox-input"
+              (change)="toggle($event, item)"
+              [checked]="value()!.includes(item.value)"
+            />
+            <span class="checkbox-tile">
+              <span class="checkbox-icon">
+                <img [src]="item.imageSrc" width="130" height="130" />
+              </span>
+              <span class="checkbox-label">{{ item.label }}</span>
             </span>
-            <span class="checkbox-label">{{ item.label }}</span>
-          </span>
-        </label>
-      }
-    </div>
+          </label>
+        }
+      </div>
+    </fieldset>
   `,
 })
 export class DaisyImageCheckbox implements FormValueControl<string[] | null>, OnInit {
   value = model<string[] | null>(null);
+  label = input<string>('');
   sourceList = input<ImageCheckboxData[]>();
   invalid = input<boolean>(false);
   required = input<boolean>(false);

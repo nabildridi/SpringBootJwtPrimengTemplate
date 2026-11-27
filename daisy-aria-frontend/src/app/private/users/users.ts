@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit, signal } from '@angular/cor
 
 import { AppHttpService } from '../../services/http/app-http.service';
 import { HttpTopics } from '../../enums/http-topics';
-import { ActionsData, ColumnData, DaisyTable } from '../../shared/table-component';
+import { DaisyTable } from '../../shared/table-component';
+import { ActionsData, ColumnData } from '../../services/table/table-service';
 
 @Component({
   selector: 'app-users',
